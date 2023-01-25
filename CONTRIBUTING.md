@@ -26,7 +26,7 @@ General announcements are posted to the general mailing list and may be posted t
 
 ### Chat [optional]
 
-The NIEM community uses Slack for ad hoc discussion. If you wish to join the channel, use [this invite]([url to the join link](https://join.slack.com/t/niemopen/shared_invite/zt-1euq4c3a9-dBhPg7k2UTSNllCyEYJU9Q)).
+The NIEM community uses Slack for ad hoc discussion. If you wish to join the channel, use [this invite](https://join.slack.com/t/niemopen/shared_invite/zt-1euq4c3a9-dBhPg7k2UTSNllCyEYJU9Q).
 
 ### About the CLA Bot
 
