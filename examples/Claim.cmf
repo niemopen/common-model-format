@@ -1,0 +1,960 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Model
+  xmlns:structures="http://release.niem.gov/niem/structures/5.0/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://reference.niem.gov/specification/cmf/0.5/">
+  <Namespace structures:uri="claim">
+    <NamespaceURI>http://example.org/claim/1/</NamespaceURI>
+    <NamespacePrefixName>claim</NamespacePrefixName>
+    <DefinitionText>A data model for an insurance claim.</DefinitionText>
+    <NamespaceKindCode>EXTENSION</NamespaceKindCode>      
+  </Namespace>
+  <Namespace structures:uri="iso_4217">
+    <NamespaceURI>http://release.niem.gov/niem/codes/iso_4217/5.0/</NamespaceURI>
+    <NamespacePrefixName>iso_4217</NamespacePrefixName>
+    <DefinitionText>ISO 4217 - Codes for the representation of currencies and funds</DefinitionText>
+    <NamespaceKindCode>OTHERNIEM</NamespaceKindCode>      
+  </Namespace>
+  <Namespace structures:uri="nc">
+    <NamespaceURI>http://release.niem.gov/niem/niem-core/5.0/</NamespaceURI>
+    <NamespacePrefixName>nc</NamespacePrefixName>
+    <DefinitionText>NIEM Core.</DefinitionText>
+    <NamespaceKindCode>CORE</NamespaceKindCode>
+   </Namespace>
+  <Namespace structures:uri="xs">
+    <NamespaceURI>http://www.w3.org/2001/XMLSchema</NamespaceURI>
+    <NamespacePrefixName>xs</NamespacePrefixName>
+    <NamespaceKindCode>XSD</NamespaceKindCode>
+  </Namespace>
+  <Property structures:uri="claim:Claim">
+    <Name>Claim</Name>
+    <Namespace structures:uri="claim" xsi:nil="true"/>
+    <DefinitionText>An insurance claim resulting from an auto crash.</DefinitionText>
+    <Class structures:uri="claim:ClaimType" xsi:nil="true"/>
+  </Property>
+  <Property structures:uri="claim:ClaimAugmentationPoint">
+    <Name>ClaimAugmentationPoint</Name>
+    <Namespace structures:uri="claim" xsi:nil="true"/>
+    <DefinitionText>An augmentation point for claim:ClaimType.</DefinitionText>
+    <AbstractIndicator>true</AbstractIndicator>
+  </Property>
+  <Property structures:uri="claim:DamagedVehicle">
+    <Name>DamagedVehicle</Name>
+    <Namespace structures:uri="claim" xsi:nil="true"/>
+    <DefinitionText>A vehicle that has sustained damage.</DefinitionText>
+    <Class structures:uri="nc:VehicleType" xsi:nil="true"/>
+  </Property>
+  <Property structures:uri="claim:VehicleDamageAmount">
+    <Name>VehicleDamageAmount</Name>
+    <Namespace structures:uri="claim" xsi:nil="true"/>
+    <DefinitionText>An amount of money evaluating the cost of repair of damage to a vehicle.</DefinitionText>
+    <Class structures:uri="nc:AmountType" xsi:nil="true"/>
+  </Property>
+  <Property structures:uri="iso_4217:CurrencyCode">
+    <Name>CurrencyCode</Name>
+    <Namespace structures:uri="iso_4217" xsi:nil="true"/>
+    <DefinitionText>A unit of money or exchange.</DefinitionText>
+    <SubPropertyOf structures:uri="nc:CurrencyAbstract" xsi:nil="true"/>
+    <Datatype structures:uri="iso_4217:CurrencyCodeType" xsi:nil="true"/>
+  </Property>
+  <Property structures:uri="nc:Amount">
+    <Name>Amount</Name>
+    <Namespace structures:uri="nc" xsi:nil="true"/>
+    <DefinitionText>An amount of money.</DefinitionText>
+    <Datatype structures:uri="xs:decimal" xsi:nil="true"/>
+  </Property>
+  <Property structures:uri="nc:CurrencyAbstract">
+    <Name>CurrencyAbstract</Name>
+    <Namespace structures:uri="nc" xsi:nil="true"/>
+    <DefinitionText>A data concept for a unit of money or exchange.</DefinitionText>
+    <AbstractIndicator>true</AbstractIndicator>
+  </Property>
+  <Property structures:uri="nc:IdentificationID">
+    <Name>IdentificationID</Name>
+    <Namespace structures:uri="nc" xsi:nil="true"/>
+    <DefinitionText>An identifier.</DefinitionText>
+    <Datatype structures:uri="xs:string" xsi:nil="true"/>
+  </Property>
+  <Property structures:uri="nc:ItemValue">
+    <Name>ItemValue</Name>
+    <Namespace structures:uri="nc" xsi:nil="true"/>
+    <DefinitionText>An evaluation of the monetary worth of an item.</DefinitionText>
+    <Class structures:uri="nc:ItemValueType" xsi:nil="true"/>
+  </Property>
+  <Property structures:uri="nc:ItemValueAmount">
+    <Name>ItemValueAmount</Name>
+    <Namespace structures:uri="nc" xsi:nil="true"/>
+    <DefinitionText>A monetary value of an item.</DefinitionText>
+    <Class structures:uri="nc:AmountType" xsi:nil="true"/>
+  </Property>
+  <Property structures:uri="nc:VehicleIdentification">
+    <Name>VehicleIdentification</Name>
+    <Namespace structures:uri="nc" xsi:nil="true"/>
+    <DefinitionText>A unique identification for a specific vehicle.</DefinitionText>
+    <Class structures:uri="nc:IdentificationType" xsi:nil="true"/>
+  </Property>
+  <Class structures:uri="claim:ClaimType">
+    <Name>ClaimType</Name>
+    <Namespace structures:uri="claim" xsi:nil="true"/>
+    <DefinitionText>A data type for an insurance claim.</DefinitionText>
+    <HasProperty structures:sequenceID="1">
+      <Property structures:uri="claim:DamagedVehicle" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty structures:sequenceID="2">
+      <Property structures:uri="claim:VehicleDamageAmount" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty structures:sequenceID="3">
+      <Property structures:uri="claim:ClaimAugmentationPoint" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </HasProperty>
+  </Class>
+  <Class structures:uri="nc:AmountType">
+    <Name>AmountType</Name>
+    <Namespace structures:uri="nc" xsi:nil="true"/>
+    <DefinitionText>A data type for an amount of money.</DefinitionText>
+    <HasProperty structures:sequenceID="1">
+      <Property structures:uri="nc:Amount" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty structures:sequenceID="2">
+      <Property structures:uri="nc:CurrencyAbstract" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </HasProperty>
+  </Class>
+  <Class structures:uri="nc:ConveyanceType">
+    <Name>ConveyanceType</Name>
+    <Namespace structures:uri="nc" xsi:nil="true"/>
+    <DefinitionText>A data type for a means of transport from place to place.</DefinitionText>
+    <ExtensionOfClass structures:uri="nc:ItemType" xsi:nil="true"/>
+  </Class>
+  <Class structures:uri="nc:IdentificationType">
+    <Name>IdentificationType</Name>
+    <Namespace structures:uri="nc" xsi:nil="true"/>
+    <DefinitionText>A data type for a representation of an identity.</DefinitionText>
+    <HasProperty structures:sequenceID="1">
+      <Property structures:uri="nc:IdentificationID" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </HasProperty>
+  </Class>
+  <Class structures:uri="nc:ItemType">
+    <Name>ItemType</Name>
+    <Namespace structures:uri="nc" xsi:nil="true"/>
+    <DefinitionText>A data type for an article or thing.</DefinitionText>
+    <HasProperty structures:sequenceID="1">
+      <Property structures:uri="nc:ItemValue" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </HasProperty>
+  </Class>
+  <Class structures:uri="nc:ItemValueType">
+    <Name>ItemValueType</Name>
+    <Namespace structures:uri="nc" xsi:nil="true"/>
+    <DefinitionText>A data type for an evaluation of the monetary worth of an item.</DefinitionText>
+    <HasProperty structures:sequenceID="1">
+      <Property structures:uri="nc:ItemValueAmount" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </HasProperty>
+  </Class>
+  <Class structures:uri="nc:VehicleType">
+    <Name>VehicleType</Name>
+    <Namespace structures:uri="nc" xsi:nil="true"/>
+    <DefinitionText>A data type for a conveyance designed to carry an operator, passengers and/or cargo, over land.</DefinitionText>
+    <ExtensionOfClass structures:uri="nc:ConveyanceType" xsi:nil="true"/>
+    <HasProperty structures:sequenceID="1">
+      <Property structures:uri="nc:VehicleIdentification" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </HasProperty>
+  </Class>
+  <Datatype structures:uri="iso_4217:CurrencyCodeType">
+    <Name>CurrencyCodeType</Name>
+    <Namespace structures:uri="iso_4217" xsi:nil="true"/>
+    <DefinitionText>A data type for a currency that qualifies a monetary amount.</DefinitionText>
+    <RestrictionOf>
+      <Datatype structures:uri="xs:token" xsi:nil="true"/>
+      <Enumeration>
+        <StringValue>AED</StringValue>
+        <DefinitionText>UAE Dirham</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>AFN</StringValue>
+        <DefinitionText>Afghani</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>ALL</StringValue>
+        <DefinitionText>Lek</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>AMD</StringValue>
+        <DefinitionText>Armenian Dram</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>ANG</StringValue>
+        <DefinitionText>Netherlands Antillean Guilder</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>AOA</StringValue>
+        <DefinitionText>Kwanza</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>ARS</StringValue>
+        <DefinitionText>Argentine Peso</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>AUD</StringValue>
+        <DefinitionText>Australian Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>AWG</StringValue>
+        <DefinitionText>Aruban Florin</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>AZN</StringValue>
+        <DefinitionText>Azerbaijan Manat</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BAM</StringValue>
+        <DefinitionText>Convertible Mark</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BBD</StringValue>
+        <DefinitionText>Barbados Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BDT</StringValue>
+        <DefinitionText>Taka</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BGN</StringValue>
+        <DefinitionText>Bulgarian Lev</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BHD</StringValue>
+        <DefinitionText>Bahraini Dinar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BIF</StringValue>
+        <DefinitionText>Burundi Franc</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BMD</StringValue>
+        <DefinitionText>Bermudian Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BND</StringValue>
+        <DefinitionText>Brunei Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BOB</StringValue>
+        <DefinitionText>Boliviano</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BOV</StringValue>
+        <DefinitionText>Mvdol</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BRL</StringValue>
+        <DefinitionText>Brazilian Real</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BSD</StringValue>
+        <DefinitionText>Bahamian Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BTN</StringValue>
+        <DefinitionText>Ngultrum</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BWP</StringValue>
+        <DefinitionText>Pula</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BYN</StringValue>
+        <DefinitionText>Belarusian Ruble</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>BZD</StringValue>
+        <DefinitionText>Belize Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>CAD</StringValue>
+        <DefinitionText>Canadian Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>CDF</StringValue>
+        <DefinitionText>Congolese Franc</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>CHE</StringValue>
+        <DefinitionText>WIR Euro</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>CHF</StringValue>
+        <DefinitionText>Swiss Franc</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>CHW</StringValue>
+        <DefinitionText>WIR Franc</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>CLF</StringValue>
+        <DefinitionText>Unidad de Fomento</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>CLP</StringValue>
+        <DefinitionText>Chilean Peso</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>CNY</StringValue>
+        <DefinitionText>Yuan Renminbi</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>COP</StringValue>
+        <DefinitionText>Colombian Peso</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>COU</StringValue>
+        <DefinitionText>Unidad de Valor Real</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>CRC</StringValue>
+        <DefinitionText>Costa Rican Colon</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>CUC</StringValue>
+        <DefinitionText>Peso Convertible</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>CUP</StringValue>
+        <DefinitionText>Cuban Peso</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>CVE</StringValue>
+        <DefinitionText>Cabo Verde Escudo</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>CZK</StringValue>
+        <DefinitionText>Czech Koruna</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>DJF</StringValue>
+        <DefinitionText>Djibouti Franc</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>DKK</StringValue>
+        <DefinitionText>Danish Krone</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>DOP</StringValue>
+        <DefinitionText>Dominican Peso</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>DZD</StringValue>
+        <DefinitionText>Algerian Dinar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>EGP</StringValue>
+        <DefinitionText>Egyptian Pound</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>ERN</StringValue>
+        <DefinitionText>Nakfa</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>ETB</StringValue>
+        <DefinitionText>Ethiopian Birr</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>EUR</StringValue>
+        <DefinitionText>Euro</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>FJD</StringValue>
+        <DefinitionText>Fiji Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>FKP</StringValue>
+        <DefinitionText>Falkland Islands Pound</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>GBP</StringValue>
+        <DefinitionText>Pound Sterling</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>GEL</StringValue>
+        <DefinitionText>Lari</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>GHS</StringValue>
+        <DefinitionText>Ghana Cedi</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>GIP</StringValue>
+        <DefinitionText>Gibraltar Pound</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>GMD</StringValue>
+        <DefinitionText>Dalasi</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>GNF</StringValue>
+        <DefinitionText>Guinean Franc</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>GTQ</StringValue>
+        <DefinitionText>Quetzal</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>GYD</StringValue>
+        <DefinitionText>Guyana Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>HKD</StringValue>
+        <DefinitionText>Hong Kong Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>HNL</StringValue>
+        <DefinitionText>Lempira</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>HRK</StringValue>
+        <DefinitionText>Kuna</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>HTG</StringValue>
+        <DefinitionText>Gourde</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>HUF</StringValue>
+        <DefinitionText>Forint</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>IDR</StringValue>
+        <DefinitionText>Rupiah</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>ILS</StringValue>
+        <DefinitionText>New Israeli Sheqel</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>INR</StringValue>
+        <DefinitionText>Indian Rupee</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>IQD</StringValue>
+        <DefinitionText>Iraqi Dinar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>IRR</StringValue>
+        <DefinitionText>Iranian Rial</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>ISK</StringValue>
+        <DefinitionText>Iceland Krona</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>JMD</StringValue>
+        <DefinitionText>Jamaican Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>JOD</StringValue>
+        <DefinitionText>Jordanian Dinar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>JPY</StringValue>
+        <DefinitionText>Yen</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>KES</StringValue>
+        <DefinitionText>Kenyan Shilling</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>KGS</StringValue>
+        <DefinitionText>Som</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>KHR</StringValue>
+        <DefinitionText>Riel</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>KMF</StringValue>
+        <DefinitionText>Comorian Franc</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>KPW</StringValue>
+        <DefinitionText>North Korean Won</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>KRW</StringValue>
+        <DefinitionText>Won</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>KWD</StringValue>
+        <DefinitionText>Kuwaiti Dinar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>KYD</StringValue>
+        <DefinitionText>Cayman Islands Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>KZT</StringValue>
+        <DefinitionText>Tenge</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>LAK</StringValue>
+        <DefinitionText>Lao Kip</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>LBP</StringValue>
+        <DefinitionText>Lebanese Pound</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>LKR</StringValue>
+        <DefinitionText>Sri Lanka Rupee</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>LRD</StringValue>
+        <DefinitionText>Liberian Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>LSL</StringValue>
+        <DefinitionText>Loti</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>LYD</StringValue>
+        <DefinitionText>Libyan Dinar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MAD</StringValue>
+        <DefinitionText>Moroccan Dirham</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MDL</StringValue>
+        <DefinitionText>Moldovan Leu</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MGA</StringValue>
+        <DefinitionText>Malagasy Ariary</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MKD</StringValue>
+        <DefinitionText>Denar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MMK</StringValue>
+        <DefinitionText>Kyat</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MNT</StringValue>
+        <DefinitionText>Tugrik</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MOP</StringValue>
+        <DefinitionText>Pataca</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MRU</StringValue>
+        <DefinitionText>Ouguiya</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MUR</StringValue>
+        <DefinitionText>Mauritius Rupee</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MVR</StringValue>
+        <DefinitionText>Rufiyaa</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MWK</StringValue>
+        <DefinitionText>Malawi Kwacha</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MXN</StringValue>
+        <DefinitionText>Mexican Peso</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MXV</StringValue>
+        <DefinitionText>Mexican Unidad de Inversion (UDI)</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MYR</StringValue>
+        <DefinitionText>Malaysian Ringgit</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>MZN</StringValue>
+        <DefinitionText>Mozambique Metical</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>NAD</StringValue>
+        <DefinitionText>Namibia Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>NGN</StringValue>
+        <DefinitionText>Naira</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>NIO</StringValue>
+        <DefinitionText>Cordoba Oro</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>NOK</StringValue>
+        <DefinitionText>Norwegian Krone</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>NPR</StringValue>
+        <DefinitionText>Nepalese Rupee</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>NZD</StringValue>
+        <DefinitionText>New Zealand Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>OMR</StringValue>
+        <DefinitionText>Rial Omani</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>PAB</StringValue>
+        <DefinitionText>Balboa</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>PEN</StringValue>
+        <DefinitionText>Sol</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>PGK</StringValue>
+        <DefinitionText>Kina</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>PHP</StringValue>
+        <DefinitionText>Philippine Peso</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>PKR</StringValue>
+        <DefinitionText>Pakistan Rupee</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>PLN</StringValue>
+        <DefinitionText>Zloty</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>PYG</StringValue>
+        <DefinitionText>Guarani</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>QAR</StringValue>
+        <DefinitionText>Qatari Rial</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>RON</StringValue>
+        <DefinitionText>Romanian Leu</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>RSD</StringValue>
+        <DefinitionText>Serbian Dinar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>RUB</StringValue>
+        <DefinitionText>Russian Ruble</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>RWF</StringValue>
+        <DefinitionText>Rwanda Franc</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SAR</StringValue>
+        <DefinitionText>Saudi Riyal</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SBD</StringValue>
+        <DefinitionText>Solomon Islands Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SCR</StringValue>
+        <DefinitionText>Seychelles Rupee</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SDG</StringValue>
+        <DefinitionText>Sudanese Pound</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SEK</StringValue>
+        <DefinitionText>Swedish Krona</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SGD</StringValue>
+        <DefinitionText>Singapore Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SHP</StringValue>
+        <DefinitionText>Saint Helena Pound</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SLL</StringValue>
+        <DefinitionText>Leone</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SOS</StringValue>
+        <DefinitionText>Somali Shilling</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SRD</StringValue>
+        <DefinitionText>Surinam Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SSP</StringValue>
+        <DefinitionText>South Sudanese Pound</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>STN</StringValue>
+        <DefinitionText>Dobra</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SVC</StringValue>
+        <DefinitionText>El Salvador Colon</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SYP</StringValue>
+        <DefinitionText>Syrian Pound</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>SZL</StringValue>
+        <DefinitionText>Lilangeni</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>THB</StringValue>
+        <DefinitionText>Baht</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>TJS</StringValue>
+        <DefinitionText>Somoni</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>TMT</StringValue>
+        <DefinitionText>Turkmenistan New Manat</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>TND</StringValue>
+        <DefinitionText>Tunisian Dinar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>TOP</StringValue>
+        <DefinitionText>Pa’anga</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>TRY</StringValue>
+        <DefinitionText>Turkish Lira</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>TTD</StringValue>
+        <DefinitionText>Trinidad and Tobago Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>TWD</StringValue>
+        <DefinitionText>New Taiwan Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>TZS</StringValue>
+        <DefinitionText>Tanzanian Shilling</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>UAH</StringValue>
+        <DefinitionText>Hryvnia</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>UGX</StringValue>
+        <DefinitionText>Uganda Shilling</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>USD</StringValue>
+        <DefinitionText>US Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>USN</StringValue>
+        <DefinitionText>US Dollar (Next day)</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>UYI</StringValue>
+        <DefinitionText>Uruguay Peso en Unidades Indexadas (UI)</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>UYU</StringValue>
+        <DefinitionText>Peso Uruguayo</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>UYW</StringValue>
+        <DefinitionText>Unidad Previsional</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>UZS</StringValue>
+        <DefinitionText>Uzbekistan Sum</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>VES</StringValue>
+        <DefinitionText>Bolívar Soberano</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>VND</StringValue>
+        <DefinitionText>Dong</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>VUV</StringValue>
+        <DefinitionText>Vatu</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>WST</StringValue>
+        <DefinitionText>Tala</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XAF</StringValue>
+        <DefinitionText>CFA Franc BEAC</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XAG</StringValue>
+        <DefinitionText>Silver</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XAU</StringValue>
+        <DefinitionText>Gold</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XBA</StringValue>
+        <DefinitionText>Bond Markets Unit European Composite Unit (EURCO)</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XBB</StringValue>
+        <DefinitionText>Bond Markets Unit European Monetary Unit (E.M.U.-6)</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XBC</StringValue>
+        <DefinitionText>Bond Markets Unit European Unit of Account 9 (E.U.A.-9)</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XBD</StringValue>
+        <DefinitionText>Bond Markets Unit European Unit of Account 17 (E.U.A.-17)</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XCD</StringValue>
+        <DefinitionText>East Caribbean Dollar</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XDR</StringValue>
+        <DefinitionText>SDR (Special Drawing Right)</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XOF</StringValue>
+        <DefinitionText>CFA Franc BCEAO</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XPD</StringValue>
+        <DefinitionText>Palladium</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XPF</StringValue>
+        <DefinitionText>CFP Franc</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XPT</StringValue>
+        <DefinitionText>Platinum</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XSU</StringValue>
+        <DefinitionText>Sucre</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XTS</StringValue>
+        <DefinitionText>Codes specifically reserved for testing purposes</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XUA</StringValue>
+        <DefinitionText>ADB Unit of Account</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>XXX</StringValue>
+        <DefinitionText>The codes assigned for transactions where no currency is involved</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>YER</StringValue>
+        <DefinitionText>Yemeni Rial</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>ZAR</StringValue>
+        <DefinitionText>Rand</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>ZMW</StringValue>
+        <DefinitionText>Zambian Kwacha</DefinitionText>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>ZWL</StringValue>
+        <DefinitionText>Zimbabwe Dollar</DefinitionText>
+      </Enumeration>
+    </RestrictionOf>
+  </Datatype>
+  <Datatype structures:uri="xs:decimal">
+    <Name>decimal</Name>
+    <Namespace structures:uri="xs" xsi:nil="true"/>
+  </Datatype>
+  <Datatype structures:uri="xs:string">
+    <Name>string</Name>
+    <Namespace structures:uri="xs" xsi:nil="true"/>
+  </Datatype>
+  <Datatype structures:uri="xs:token">
+    <Name>token</Name>
+    <Namespace structures:uri="xs" xsi:nil="true"/>
+  </Datatype>
+  <SchemaDocument>
+      <NamespacePrefixName>claim</NamespacePrefixName>
+      <NamespaceURI>http://example.org/claim/1/</NamespaceURI>
+      <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
+      <DocumentFilePathText>extension/claim.xsd</DocumentFilePathText>
+      <NIEMVersionText>5.0</NIEMVersionText>
+      <SchemaVersionText>1</SchemaVersionText>
+  </SchemaDocument>
+  <SchemaDocument>
+      <NamespacePrefixName>appinfo</NamespacePrefixName>
+      <NamespaceURI>http://release.niem.gov/niem/appinfo/5.0/</NamespaceURI>
+      <NIEMVersionText>5.0</NIEMVersionText>
+  </SchemaDocument>
+  <SchemaDocument>
+      <NamespacePrefixName>iso_4217</NamespacePrefixName>
+      <NamespaceURI>http://release.niem.gov/niem/codes/iso_4217/5.0/</NamespaceURI>
+      <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
+      <DocumentFilePathText>niem/codes/iso_4217.xsd</DocumentFilePathText>
+      <NIEMVersionText>5.0</NIEMVersionText>
+      <SchemaVersionText>1</SchemaVersionText>
+  </SchemaDocument>
+  <SchemaDocument>
+      <NamespacePrefixName>ct</NamespacePrefixName>
+      <NamespaceURI>http://release.niem.gov/niem/conformanceTargets/3.0/</NamespaceURI>
+      <NIEMVersionText>3.0</NIEMVersionText>
+  </SchemaDocument>
+  <SchemaDocument>
+      <NamespacePrefixName>nc</NamespacePrefixName>
+      <NamespaceURI>http://release.niem.gov/niem/niem-core/5.0/</NamespaceURI>
+      <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
+      <DocumentFilePathText>niem/niem-core.xsd</DocumentFilePathText>
+      <NIEMVersionText>5.0</NIEMVersionText>
+      <SchemaVersionText>1</SchemaVersionText>
+  </SchemaDocument>
+  <SchemaDocument>
+      <NamespacePrefixName>niem-xs</NamespacePrefixName>
+      <NamespaceURI>http://release.niem.gov/niem/proxy/niem-xs/5.0/</NamespaceURI>
+      <DocumentFilePathText>niem/adapters/niem-xs.xsd</DocumentFilePathText>
+      <NIEMVersionText>5.0</NIEMVersionText>
+  </SchemaDocument>
+  <SchemaDocument>
+      <NamespacePrefixName>structures</NamespacePrefixName>
+      <NamespaceURI>http://release.niem.gov/niem/structures/5.0/</NamespaceURI>
+      <DocumentFilePathText>niem/utility/structures.xsd</DocumentFilePathText>
+      <NIEMVersionText>5.0</NIEMVersionText>
+  </SchemaDocument>    
+</Model>

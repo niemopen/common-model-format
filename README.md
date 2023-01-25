@@ -2,11 +2,25 @@
 
 # Common Model Format Specification
 
-This repository is part of the NIEM Open Project.  It contains the NIEMOpen Common Model Format Specification (CMF), a data model that can be expressed as XML or JSON or any other data serialization that NIEM supports. The data described by the CMF data model can also be expressed in any supported serialization.
+This repository is part of the NIEM Open Project.  It contains the NIEMOpen Common Model Format Specification (CMF).  CMF is a NIEM message specification for data models,  In all versions of NIEM through version 5, data models are expressed in XML Schema (XSD).  CMF offers an equivalent expression, one that is more suitable for developers not working in XML and is easier to support with developer tools.  Using CMF, a data model can be expressed as XML or JSON or any other data serialization that NIEM supports, and the data described by the CMF data model can also be expressed in any supported serialization.  More documentation on CMF is available [here](doc/README.md).
 
 For more information on NIEMOpen, see the project's website at [www.niemopen.org](www.niemopen.org).
 
 General questions about OASIS Open Projects may be directed to OASIS staff at project-admin@lists.oasis-open-projects.org
+
+# What's new in version 0.6
+
+* DefinitionText in CMF is now repeatable
+* DefinitionText now has nc:TextType with xml:lang attribute
+* HasProperty element in ClassType now has orderedPropertyIndicator="true"
+* Added SchemaLanguageName property (xml:lang) to SchemaDocumentType in CMF
+* Removed cmf:HasValue property
+* All schema documents canonicalized
+* Added CMF and XSD documentation
+
+# Where are the older versions of CMF?
+
+The pre-OASIS history of CMF is at [NIEM/CMF-MessageSpec (github.com)](https://github.com/NIEM/CMF-MessageSpec) 
 
 # Other assets
 

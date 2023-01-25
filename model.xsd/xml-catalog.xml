@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <uri name="http://reference.niem.gov/specification/cmf/0.4/" uri="cmf.xsd"/>
+  <uri name="http://reference.niem.gov/specification/cmf/xsd/0.4/" uri="cmf-xsd.xsd"/>
+  <nextCatalog catalog="niem/xml-catalog.xml"/>
+</catalog>

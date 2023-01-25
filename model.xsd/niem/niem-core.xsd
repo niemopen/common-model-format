@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  targetNamespace="http://release.niem.gov/niem/niem-core/5.0/"
+  xmlns:appinfo="http://release.niem.gov/niem/appinfo/5.0/"
+  xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/"
+  xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/"
+  xmlns:niem-xs="http://release.niem.gov/niem/proxy/niem-xs/5.0/"
+  xmlns:structures="http://release.niem.gov/niem/structures/5.0/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ReferenceSchemaDocument"
+  version="1"
+  xml:lang="en-US"
+  xsi:schemaLocation="http://release.niem.gov/niem/appinfo/5.0/ utility/appinfo.xsd http://release.niem.gov/niem/conformanceTargets/3.0/ utility/conformanceTargets.xsd">
+  <xs:annotation>
+    <xs:documentation>NIEM Core.</xs:documentation>
+    <xs:appinfo>
+      <appinfo:LocalTerm literal="Two-dimensional" term="2D"/>
+      <appinfo:LocalTerm literal="Three-dimensional" term="3D"/>
+      <appinfo:LocalTerm definition="Two-letter" term="Alpha2"/>
+      <appinfo:LocalTerm definition="Three-letter" term="Alpha3"/>
+      <appinfo:LocalTerm literal="Commercial Motor Vehicle" term="CMV"/>
+      <appinfo:LocalTerm literal="Drug Enforcement Administration" term="DEA"/>
+      <appinfo:LocalTerm literal="electronic serial number" term="ESN"/>
+      <appinfo:LocalTerm literal="Foreign Account Tax Compliance Act" term="FATCA"/>
+      <appinfo:LocalTerm literal="Federal Information Processing Standards" term="FIPS"/>
+      <appinfo:LocalTerm literal="Geopolitical Entities, Names, and Codes" term="GENC"/>
+      <appinfo:LocalTerm literal="Global System for Mobile communication" term="GSM"/>
+      <appinfo:LocalTerm literal="International Mobile Equipment Identity" term="IMEI"/>
+      <appinfo:LocalTerm literal="Internet Protocol version 4" term="IPv4"/>
+      <appinfo:LocalTerm literal="Internet Protocol version 6" term="IPv6"/>
+      <appinfo:LocalTerm literal="International Organization for Standardization" term="ISO"/>
+      <appinfo:LocalTerm definition="ISO 3166 is a standard published by the International Organization for Standardization (ISO) that defines codes for the names of countries, dependent territories, special areas of geographical interest, and their principal subdivisions (e.g., provinces or states). The official name of the standard is Codes for the representation of names of countries and their subdivisions." term="ISO3166"/>
+      <appinfo:LocalTerm literal="International Standard Serial Number" term="ISSN"/>
+      <appinfo:LocalTerm literal="media access control address" term="MAC"/>
+      <appinfo:LocalTerm literal="Multipurpose Internet Mail Extensions" term="MIME"/>
+      <appinfo:LocalTerm literal="Manufacturer's suggested retail price" term="MSRP"/>
+      <appinfo:LocalTerm literal="North American Numbering Plan" term="NANP"/>
+      <appinfo:LocalTerm definition="A word following a street name that indicates the directional taken by the thoroughfare from an arbitrary starting point or line, or the sector where it is located." term="Postdirectional"/>
+      <appinfo:LocalTerm definition="A word preceding a street name that indicates the directional taken by the thoroughfare from an arbitrary starting point or line, or the sector where it is located." term="Predirectional"/>
+      <appinfo:LocalTerm literal="Radio-frequency identification" term="RFID"/>
+      <appinfo:LocalTerm definition="Rhesus (Rh) factor is an inherited protein found on the surface of red blood cells." term="RH"/>
+      <appinfo:LocalTerm literal="Social Security Number" term="SSN"/>
+      <appinfo:LocalTerm literal="Transmission Control Protocol" term="TCP"/>
+      <appinfo:LocalTerm literal="Universal Mobile Telecommunications Service" term="UMTS"/>
+      <appinfo:LocalTerm literal="Coordinated Universal Time" term="UTC"/>
+      <appinfo:LocalTerm literal="Universal Transverse Mercator" term="UTM"/>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:import namespace="http://release.niem.gov/niem/proxy/niem-xs/5.0/" schemaLocation="adapters/niem-xs.xsd"/>
+  <xs:import namespace="http://release.niem.gov/niem/structures/5.0/" schemaLocation="utility/structures.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="external/xml.xsd"/>
+  <xs:complexType name="TextType">
+    <xs:annotation>
+      <xs:documentation>A data type for a character string.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="niem-xs:string">
+        <xs:attribute ref="nc:truncationIndicator" use="optional"/>
+        <xs:attribute ref="xml:lang" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:attribute name="truncationIndicator" type="xs:boolean">
+    <xs:annotation>
+      <xs:documentation>True if the length of a string is greater than the length of the field within which the string was stored in the exporting system; false otherwise.</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:schema>
