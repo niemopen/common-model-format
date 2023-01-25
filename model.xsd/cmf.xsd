@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  targetNamespace="http://reference.niem.gov/specification/cmf/0.6/"
+  xmlns:appinfo="http://release.niem.gov/niem/appinfo/5.0/"
+  xmlns:cmf="http://reference.niem.gov/specification/cmf/0.6/"
+  xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/"
+  xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/"
+  xmlns:structures="http://release.niem.gov/niem/structures/5.0/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xs-proxy="http://release.niem.gov/niem/proxy/niem-xs/5.0/"
+  ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument"
+  version="1"
+  xml:lang="en-US">
+  <xs:annotation>
+    <xs:documentation>A data model for the NIEM Common Model Format (CMF).</xs:documentation>
+  </xs:annotation>
+  <xs:import namespace="http://release.niem.gov/niem/niem-core/5.0/" schemaLocation="niem/niem-core.xsd"/>
+  <xs:import namespace="http://release.niem.gov/niem/proxy/niem-xs/5.0/" schemaLocation="niem/adapters/niem-xs.xsd"/>
+  <xs:import namespace="http://release.niem.gov/niem/structures/5.0/" schemaLocation="niem/utility/structures.xsd"/>
+  <xs:complexType name="AnyValueFacetType">
+    <xs:annotation>
+      <xs:documentation>A data type for a facet that can have any value type.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:AnyValueAbstract" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:DefinitionText" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:AnyValueFacetAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ClassType">
+    <xs:annotation>
+      <xs:documentation>A data type for a class.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="cmf:ComponentType">
+        <xs:sequence>
+          <xs:element ref="cmf:AugmentableIndicator" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:ExternalAdapterTypeIndicator" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:ExtensionOfClass" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:HasProperty" minOccurs="0" maxOccurs="unbounded" appinfo:orderedPropertyIndicator="true"/>
+          <xs:element ref="cmf:MetadataIndicator" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:ClassAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ComponentType" abstract="true">
+    <xs:annotation>
+      <xs:documentation>A data type for common properties of a data component in NIEM.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:Name" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:Namespace" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:DefinitionText" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:AbstractIndicator" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:DeprecatedIndicator" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:ComponentAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DatatypeType">
+    <xs:annotation>
+      <xs:documentation>A data type for a data type.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="cmf:ComponentType">
+        <xs:sequence>
+          <xs:element ref="cmf:RestrictionOf" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:UnionOf" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:ListOf" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:DatatypeAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="HasPropertyType">
+    <xs:annotation>
+      <xs:documentation>A data type for an occurrence of a property as content of a class.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:Property" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:MinOccursQuantity" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:MaxOccursQuantity" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:OrderedPropertyIndicator" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:AugmentationElementNamespace" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:AugmentationTypeNamespace" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:HasPropertyAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="MaxOccursSimpleType">
+    <xs:annotation>
+      <xs:documentation>A data type for the maximum number of times a property may occur within a class.</xs:documentation>
+    </xs:annotation>
+    <xs:union memberTypes="xs:nonNegativeInteger cmf:MaxOccursUnboundedCodeSimpleType"/>
+  </xs:simpleType>
+  <xs:complexType name="MaxOccursType">
+    <xs:annotation>
+      <xs:documentation>A data type for the maximum number of times a property may occur within a class.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="cmf:MaxOccursSimpleType">
+        <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="MaxOccursUnboundedCodeSimpleType">
+    <xs:annotation>
+      <xs:documentation>A data type for identifying that there is no maximum number of times that a property may occur within a class.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="unbounded">
+        <xs:annotation>
+          <xs:documentation>There is no maximum number of times that a property may occur.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ModelType">
+    <xs:annotation>
+      <xs:documentation>A data type for a CMF data model.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:ModelItemAbstract" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:SchemaDocument" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:ModelAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NCName">
+    <xs:annotation>
+      <xs:documentation>A data type for XML names that exclude a colon character.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:NCName">
+        <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="NamespaceKindCodeType">
+    <xs:annotation>
+      <xs:documentation>A data type for a kind of namespace in a CMF model.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base="xs-proxy:token">
+        <xs:enumeration value="EXTENSION">
+          <xs:annotation>
+            <xs:documentation>An extension namespace.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="DOMAIN">
+          <xs:annotation>
+            <xs:documentation>A namespace for a NIEM domain.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="CORE">
+          <xs:annotation>
+            <xs:documentation>The namespace for the NIEM core.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="OTHERNIEM">
+          <xs:annotation>
+            <xs:documentation>A namespace in the publication or release domain, but not core, domain, or builtin.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="BUILTIN">
+          <xs:annotation>
+            <xs:documentation>A builtin namespace (appinfo, code-lists, conformance, proxy, structures).</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="XSD">
+          <xs:annotation>
+            <xs:documentation>http://www.w3.org/2001/XMLSchema</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="XML">
+          <xs:annotation>
+            <xs:documentation>http://www.w3.org/XML/1998/namespace</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="EXTERNAL">
+          <xs:annotation>
+            <xs:documentation>A non-conforming namespace.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="UNKNOWN">
+          <xs:annotation>
+            <xs:documentation>A namespace of an unknown kind.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="NamespaceType">
+    <xs:annotation>
+      <xs:documentation>A data type for a namespace</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:NamespaceURI" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:NamespacePrefixName" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:DefinitionText" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:NamespaceKindCode" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:NamespaceAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="NonNegativeValueFacetType">
+    <xs:annotation>
+      <xs:documentation>A data type for a facet that carries a value that is either zero or a positive integer.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:NonNegativeValue" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:DefinitionText" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:NonNegativeValueFacetAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PatternFacetType">
+    <xs:annotation>
+      <xs:documentation>A data type for restricting the content of a datatype to values that match a specific pattern, provided as a regular expression.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:StringValue" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:DefinitionText" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:PatternFacetAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PositiveValueFacetType">
+    <xs:annotation>
+      <xs:documentation>A data type for a facet that carries a value that is a positive integer.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:PositiveValue" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:DefinitionText" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:PositiveValueFacetAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PropertyType">
+    <xs:annotation>
+      <xs:documentation>A data type for an object property</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="cmf:ComponentType">
+        <xs:sequence>
+          <xs:element ref="cmf:SubPropertyOf" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:Class" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:Datatype" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:AttributeIndicator" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:MetadataIndicator" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:ReferenceableIndicator" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:PropertyAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="RestrictionOfType">
+    <xs:annotation>
+      <xs:documentation>A data type for a restriction of a data type.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:Datatype" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:FacetAbstract" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:RestrictionOfAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="SchemaDocumentType">
+    <xs:annotation>
+      <xs:documentation>A data type for an XML schema document.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:NamespacePrefixName" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:NamespaceURI" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:ConformanceTargetURIList" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:DocumentFilePathText" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:NIEMVersionText" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:SchemaVersionText" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:SchemaLanguageName" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="URIListSimpleType">
+    <xs:annotation>
+      <xs:documentation>A data type for a white space-delimited list of URIs.</xs:documentation>
+    </xs:annotation>
+    <xs:list itemType="xs:anyURI"/>
+  </xs:simpleType>
+  <xs:complexType name="URIListType">
+    <xs:annotation>
+      <xs:documentation>A data type for a white space-delimited list of URIs.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="cmf:URIListSimpleType">
+        <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="UnionOfType">
+    <xs:annotation>
+      <xs:documentation>A data type for a union of data types.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:Datatype" minOccurs="1" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:UnionOfAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="WhiteSpaceFacetCodeSimpleType">
+    <xs:annotation>
+      <xs:documentation>A data type for a specification of white space for a data type.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="collapse">
+        <xs:annotation>
+          <xs:documentation>After the processing implied by replace, contiguous sequences of #x20's are collapsed to a single #x20, and leading and trailing #x20's are removed.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="preserve">
+        <xs:annotation>
+          <xs:documentation>No normalization is done, the value is not changed (this is the behavior required by [XML 1.0 (Second Edition)] for element content)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="replace">
+        <xs:annotation>
+          <xs:documentation>All occurrences of #x9 (tab), #xA (line feed) and #xD (carriage return) are replaced with #x20 (space)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="WhiteSpaceFacetType">
+    <xs:annotation>
+      <xs:documentation>A data type constraining how white space within data values is handled.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:WhiteSpaceValueCode" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:DefinitionText" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:WhiteSpaceFacetAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="WhiteSpaceValueCodeType">
+    <xs:annotation>
+      <xs:documentation>A data type for a specification of white space for a data type.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="cmf:WhiteSpaceFacetCodeSimpleType">
+        <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="AbstractIndicator" type="xs-proxy:boolean">
+    <xs:annotation>
+      <xs:documentation>True if a component is a base for extension, and must be specialized to be used directly; false if a component may be used directly.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AnyValueAbstract" abstract="true">
+    <xs:annotation>
+      <xs:documentation>A data concept for a value of a facet.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AnyValueFacetAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:AnyValueFacetType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AttributeIndicator" type="xs-proxy:boolean">
+    <xs:annotation>
+      <xs:documentation>True for properties represented as attributes in XML.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AugmentableIndicator" type="xs-proxy:boolean">
+    <xs:annotation>
+      <xs:documentation>True if the class can be augmented with additional properties.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AugmentationElementNamespace" type="cmf:NamespaceType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A namespace of an augmentation that is an augmentation type.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AugmentationTypeNamespace" type="cmf:NamespaceType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A namespace of an augmentation type containing this augmentation.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Class" type="cmf:ClassType" substitutionGroup="cmf:ModelItemAbstract" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A class.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ClassAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:ClassType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ComponentAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:ComponentType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ConformanceTargetURIList" type="cmf:URIListType">
+    <xs:annotation>
+      <xs:documentation>A list of conformance target identifiers.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Datatype" type="cmf:DatatypeType" substitutionGroup="cmf:ModelItemAbstract" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data type.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DatatypeAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:DatatypeType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DefinitionText" type="nc:TextType">
+    <xs:annotation>
+      <xs:documentation>A human-readable text definition of a data model component.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DeprecatedIndicator" type="xs-proxy:boolean">
+    <xs:annotation>
+      <xs:documentation>The deprecated attribute provides a method for identifying schema components as being deprecated. A deprecated component is one that is provided, but the use of which is not recommended.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DocumentFilePathText" type="xs-proxy:string">
+    <xs:annotation>
+      <xs:documentation>A relative file path to a document.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Enumeration" type="cmf:AnyValueFacetType" substitutionGroup="cmf:FacetAbstract">
+    <xs:annotation>
+      <xs:documentation>A restriction of the length of a data type.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ExtensionOfClass" type="cmf:ClassType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A extension of a class.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ExternalAdapterTypeIndicator" type="xs-proxy:boolean">
+    <xs:annotation>
+      <xs:documentation>True if the type is an external adapter type.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="FacetAbstract" abstract="true">
+    <xs:annotation>
+      <xs:documentation>A data concept for a facet that restricts an aspect of a data type.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="FractionDigits" type="cmf:NonNegativeValueFacetType" substitutionGroup="cmf:FacetAbstract">
+    <xs:annotation>
+      <xs:documentation>A restriction on the precision of a decimal data type, via a restriction on the number of digits allowed to the right of the decimal point of its decimal representation.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="HasProperty" type="cmf:HasPropertyType">
+    <xs:annotation>
+      <xs:documentation>An occurrence of a property as content of a class.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="HasPropertyAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:HasPropertyType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Length" type="cmf:NonNegativeValueFacetType" substitutionGroup="cmf:FacetAbstract">
+    <xs:annotation>
+      <xs:documentation>A restriction of the length of a data type. Unit of length varies depending on the type that is being derived from.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ListOf" type="cmf:DatatypeType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data type for a list of values.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MaxExclusive" type="cmf:AnyValueFacetType" substitutionGroup="cmf:FacetAbstract">
+    <xs:annotation>
+      <xs:documentation>An exclusive upper bound of a data type.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MaxInclusive" type="cmf:AnyValueFacetType" substitutionGroup="cmf:FacetAbstract">
+    <xs:annotation>
+      <xs:documentation>An inclusive upper bound of a data type.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MaxLength" type="cmf:NonNegativeValueFacetType" substitutionGroup="cmf:FacetAbstract">
+    <xs:annotation>
+      <xs:documentation>A maximum length of a data type. Unit of length varies depending on the type that is being derived from.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MaxOccursQuantity" type="cmf:MaxOccursType">
+    <xs:annotation>
+      <xs:documentation>A maximum number of times a property may occur within a class.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MetadataIndicator" type="xs-proxy:boolean">
+    <xs:annotation>
+      <xs:documentation>True for a component with simple content that can have metadata.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MinExclusive" type="cmf:AnyValueFacetType" substitutionGroup="cmf:FacetAbstract">
+    <xs:annotation>
+      <xs:documentation>An exclusive lower bound of a data type.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MinInclusive" type="cmf:AnyValueFacetType" substitutionGroup="cmf:FacetAbstract">
+    <xs:annotation>
+      <xs:documentation>An inclusive lower bound of a data type.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MinLength" type="cmf:NonNegativeValueFacetType" substitutionGroup="cmf:FacetAbstract">
+    <xs:annotation>
+      <xs:documentation>A minimum length of a data type. Unit of length varies depending on the type that is being derived from.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="MinOccursQuantity" type="xs-proxy:nonNegativeInteger">
+    <xs:annotation>
+      <xs:documentation>A minimum number of times a property may occur within a class.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Model" type="cmf:ModelType">
+    <xs:annotation>
+      <xs:documentation>A data model.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ModelAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:ModelType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ModelItemAbstract" abstract="true">
+    <xs:annotation>
+      <xs:documentation>A data concept for an item in a data model.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NIEMVersionText" type="xs-proxy:token">
+    <xs:annotation>
+      <xs:documentation>A NIEM version number.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Name" type="cmf:NCName">
+    <xs:annotation>
+      <xs:documentation>A name of a data model component.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Namespace" type="cmf:NamespaceType" substitutionGroup="cmf:ModelItemAbstract" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A namespace of a data model component.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NamespaceAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:NamespaceType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NamespaceKindCode" type="cmf:NamespaceKindCodeType">
+    <xs:annotation>
+      <xs:documentation>A kind of namespace in a CMF model (external, core, domain, etc.).</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NamespacePrefixName" type="cmf:NCName">
+    <xs:annotation>
+      <xs:documentation>A namespace prefix name for a namespace.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NamespaceURI" type="xs-proxy:anyURI">
+    <xs:annotation>
+      <xs:documentation>A namespace name URI for a namespace.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NonNegativeValue" type="xs-proxy:nonNegativeInteger" substitutionGroup="cmf:AnyValueAbstract">
+    <xs:annotation>
+      <xs:documentation>A value of a facet, with an integer value zero or greater.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NonNegativeValueFacetAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:NonNegativeValueFacetType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="OrderedPropertyIndicator" type="xs-proxy:boolean">
+    <xs:annotation>
+      <xs:documentation>True if the order of a repeated property is significant.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Pattern" type="cmf:PatternFacetType" substitutionGroup="cmf:FacetAbstract">
+    <xs:annotation>
+      <xs:documentation>A restriction of the content of a datatype to values that match a specific pattern, provided as a regular expression.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="PatternFacetAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:PatternFacetType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="PositiveValue" type="xs-proxy:positiveInteger" substitutionGroup="cmf:AnyValueAbstract">
+    <xs:annotation>
+      <xs:documentation>A value of a facet, with an integer value greater than zero.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="PositiveValueFacetAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:PositiveValueFacetType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Property" type="cmf:PropertyType" substitutionGroup="cmf:ModelItemAbstract" nillable="true">
+    <xs:annotation>
+      <xs:documentation>An object property.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="PropertyAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:ObjectPropertyType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ReferenceableIndicator" type="xs-proxy:boolean">
+    <xs:annotation>
+      <xs:documentation>True when objects of a class may be referenced instead of inline.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RestrictionOf" type="cmf:RestrictionOfType">
+    <xs:annotation>
+      <xs:documentation>A restriction of a data type.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RestrictionOfAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:RestrictionOfType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SchemaDocument" type="cmf:SchemaDocumentType">
+    <xs:annotation>
+      <xs:documentation>An XML schema document.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SchemaLanguageName" type="xs-proxy:language">
+    <xs:annotation>
+      <xs:documentation>A language attribute of an XML schema document (xml:lang attribute).</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SchemaVersionText" type="xs-proxy:token">
+    <xs:annotation>
+      <xs:documentation>A version attribute of an XML schema document.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="StringValue" type="xs-proxy:string" substitutionGroup="cmf:AnyValueAbstract">
+    <xs:annotation>
+      <xs:documentation>A value of a facet, with a string value.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SubPropertyOf" type="cmf:PropertyType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>An object property of which an object property is a subproperty.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="TotalDigits" type="cmf:PositiveValueFacetType" substitutionGroup="cmf:FacetAbstract">
+    <xs:annotation>
+      <xs:documentation>A restriction on the size and precision of a decimal data type, via a restriction on the number of digits required to represent its value.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="UnionOf" type="cmf:UnionOfType">
+    <xs:annotation>
+      <xs:documentation>A union of data types.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="UnionOfAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:UnionOfType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="WhiteSpace" type="cmf:WhiteSpaceFacetType" substitutionGroup="cmf:FacetAbstract">
+    <xs:annotation>
+      <xs:documentation>A constraint on how white space within data values is handled.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="WhiteSpaceFacetAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for cmf:WhiteSpaceFacetType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="WhiteSpaceValueCode" type="cmf:WhiteSpaceValueCodeType">
+    <xs:annotation>
+      <xs:documentation>A value of a specification of white space for a data type.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>
