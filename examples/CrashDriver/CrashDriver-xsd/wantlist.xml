@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<w:WantList w:release="5.0" w:product="NIEM" w:nillableDefault="true"
+  xmlns:aamva_d20="http://release.niem.gov/niem/codes/aamva_d20/5.0/"
+  xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/"
+  xmlns:w="http://niem.gov/niem/wantlist/2.2"
+  xmlns:geo="http://release.niem.gov/niem/adapters/geospatial/5.0/"
+  xmlns:j="http://release.niem.gov/niem/domains/jxdm/7.0/" xmlns:gml="http://www.opengis.net/gml/3.2">
+  <w:Element w:name="geo:LocationGeospatialPoint" w:isReference="false" w:nillable="true"/>
+  <w:Element w:name="j:Charge" w:isReference="false" w:nillable="true"/>
+  <w:Element w:name="j:Crash" w:isReference="false" w:nillable="false"/>
+  <w:Element w:name="j:InjurySeverityCode" w:isReference="false" w:nillable="false"/>
+  <w:Element w:name="j:Metadata" w:isReference="false" w:nillable="false"/>
+  <w:Element w:name="j:PersonChargeAssociation" w:isReference="false" w:nillable="false"/>
+  <w:Element w:name="j:PersonChargeAssociationAugmentationPoint"
+    w:isReference="false" w:nillable="true"/>
+  <w:Element w:name="nc:ContactEmailID" w:isReference="false" w:nillable="false"/>
+  <w:Element w:name="nc:ContactInformation" w:isReference="false" w:nillable="false"/>
+  <w:Element w:name="nc:Date" w:isReference="false" w:nillable="false"/>
+  <w:Element w:name="nc:Location2DGeospatialCoordinate"
+    w:isReference="false" w:nillable="true"/>
+  <w:Type w:name="aamva_d20:AccidentSeverityCodeSimpleType" w:isRequested="false">
+    <w:Facet w:facet="enumeration" w:value="1"/>
+    <w:Facet w:facet="enumeration" w:value="2"/>
+    <w:Facet w:facet="enumeration" w:value="3"/>
+    <w:Facet w:facet="enumeration" w:value="4"/>
+    <w:Facet w:facet="enumeration" w:value="5"/>
+    <w:Facet w:facet="enumeration" w:value="9"/>
+  </w:Type>
+  <w:Type w:name="geo:PointType" w:isRequested="false">
+    <w:ElementInType w:name="gml:Point" w:isReference="false"
+      w:minOccurs="1" w:maxOccurs="1"/>
+  </w:Type>
+  <w:Type w:name="j:ChargeType" w:isRequested="false">
+    <w:ElementInType w:name="j:ChargeDescriptionText"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="j:ChargeFelonyIndicator"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="j:CrashDriverType" w:isRequested="false">
+    <w:ElementInType w:name="nc:RoleOfPerson" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="j:DriverLicense" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="j:CrashPassengerType" w:isRequested="false">
+    <w:ElementInType w:name="nc:RoleOfPerson" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="j:CrashPersonType" w:isRequested="false">
+    <w:ElementInType w:name="nc:RoleOfPerson" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="j:CrashPersonInjury" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="j:CrashPersonAugmentationPoint"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="j:CrashType" w:isRequested="false">
+    <w:ElementInType w:name="j:CrashVehicle" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="j:CrashPerson" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="nc:Location" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="j:CrashVehicleType" w:isRequested="false">
+    <w:ElementInType w:name="j:CrashDriver" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="j:CrashPassenger" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="j:DriverLicenseType" w:isRequested="false">
+    <w:ElementInType w:name="j:DriverLicenseCardIdentification"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="j:DriverLicenseAugmentationPoint"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="j:MetadataType" w:isRequested="false">
+    <w:ElementInType w:name="j:CriminalInformationIndicator"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="j:IntelligenceInformationIndicator"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="j:PersonChargeAssociationType" w:isRequested="false">
+    <w:ElementInType w:name="nc:Person" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="j:Charge" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="j:JuvenileAsAdultIndicator"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="j:PersonChargeAssociationAugmentationPoint"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="nc:ActivityType" w:isRequested="false">
+    <w:ElementInType w:name="nc:ActivityDate" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="nc:ContactInformationType" w:isRequested="false">
+    <w:ElementInType w:name="nc:ContactMeansAbstract"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="nc:DateType" w:isRequested="false">
+    <w:ElementInType w:name="nc:DateRepresentation"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="nc:IdentificationType" w:isRequested="false">
+    <w:ElementInType w:name="nc:IdentificationID" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="nc:InjuryType" w:isRequested="false">
+    <w:ElementInType w:name="nc:InjuryDescriptionText"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="nc:InjurySeverityAbstract"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="nc:LatitudeCoordinateType" w:isRequested="false">
+    <w:ElementInType w:name="nc:LatitudeDegreeValue"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="nc:LatitudeMinuteValue"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="nc:LatitudeSecondValue"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="nc:Location2DGeospatialCoordinateType" w:isRequested="false">
+    <w:ElementInType w:name="nc:GeographicCoordinateLatitude"
+      w:isReference="false" w:minOccurs="1" w:maxOccurs="1"/>
+    <w:ElementInType w:name="nc:GeographicCoordinateLongitude"
+      w:isReference="false" w:minOccurs="1" w:maxOccurs="1"/>
+  </w:Type>
+  <w:Type w:name="nc:LocationType" w:isRequested="false">
+    <w:ElementInType w:name="nc:LocationGeospatialCoordinateAbstract"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="nc:LongitudeCoordinateType" w:isRequested="false">
+    <w:ElementInType w:name="nc:LongitudeDegreeValue"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="nc:LongitudeMinuteValue"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="nc:LongitudeSecondValue"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="nc:PersonNameType" w:isRequested="false">
+    <w:AttributeInType w:name="nc:personNameCommentText" w:minOccurs="0" w:maxOccurs="1"/>
+    <w:ElementInType w:name="nc:PersonGivenName" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="nc:PersonMiddleName" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="nc:PersonSurName" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+  <w:Type w:name="nc:PersonType" w:isRequested="false">
+    <w:ElementInType w:name="nc:PersonBirthDate" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="nc:PersonName" w:isReference="false"
+      w:minOccurs="0" w:maxOccurs="unbounded"/>
+    <w:ElementInType w:name="nc:PersonAugmentationPoint"
+      w:isReference="false" w:minOccurs="0" w:maxOccurs="unbounded"/>
+  </w:Type>
+</w:WantList>
