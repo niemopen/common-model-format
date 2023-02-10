@@ -75,14 +75,12 @@
     <Namespace structures:ref="j" xsi:nil="true"/>
     <DefinitionText>A plain language description of a charge.</DefinitionText>
     <Datatype structures:ref="nc.TextType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="j.ChargeFelonyIndicator">
     <Name>ChargeFelonyIndicator</Name>
     <Namespace structures:ref="j" xsi:nil="true"/>
     <DefinitionText>True if a charge refers to a felony offense; false otherwise.</DefinitionText>
     <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="j.Crash">
     <Name>Crash</Name>
@@ -95,56 +93,48 @@
     <Namespace structures:ref="j" xsi:nil="true"/>
     <DefinitionText>A motor vehicle driver involved into a traffic accident.</DefinitionText>
     <Class structures:ref="j.CrashDriverType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="j.CrashPassenger">
     <Name>CrashPassenger</Name>
     <Namespace structures:ref="j" xsi:nil="true"/>
     <DefinitionText>A motor vehicle passenger involved in a traffic accident.</DefinitionText>
     <Class structures:ref="j.CrashPassengerType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="j.CrashPerson">
     <Name>CrashPerson</Name>
     <Namespace structures:ref="j" xsi:nil="true"/>
     <DefinitionText>A person involved in a traffic accident.</DefinitionText>
     <Class structures:ref="j.CrashPersonType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="j.CrashPersonInjury">
     <Name>CrashPersonInjury</Name>
     <Namespace structures:ref="j" xsi:nil="true"/>
     <DefinitionText>An injury received by a person involved in a traffic accident.</DefinitionText>
     <Class structures:ref="nc.InjuryType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="j.CrashVehicle">
     <Name>CrashVehicle</Name>
     <Namespace structures:ref="j" xsi:nil="true"/>
     <DefinitionText>A motor vehicle involved in a traffic accident.</DefinitionText>
     <Class structures:ref="j.CrashVehicleType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="j.CriminalInformationIndicator">
     <Name>CriminalInformationIndicator</Name>
     <Namespace structures:ref="j" xsi:nil="true"/>
     <DefinitionText>True if the information specified is classified as criminal information; false if it is not classified as criminal information.</DefinitionText>
     <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="j.DriverLicense">
     <Name>DriverLicense</Name>
     <Namespace structures:ref="j" xsi:nil="true"/>
     <DefinitionText>A license issued to a person granting driving privileges.</DefinitionText>
     <Class structures:ref="j.DriverLicenseType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="j.DriverLicenseCardIdentification">
     <Name>DriverLicenseCardIdentification</Name>
     <Namespace structures:ref="j" xsi:nil="true"/>
     <DefinitionText>An identification that is affixed to the raw materials (card stock, laminate, etc.) used in producing driver licenses and ID cards. The numbers are issued by the material's manufacturer and provide a unique reference to a card within a jurisdiction.</DefinitionText>
     <Class structures:ref="nc.IdentificationType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="j.InjurySeverityCode">
     <Name>InjurySeverityCode</Name>
@@ -158,14 +148,12 @@
     <Namespace structures:ref="j" xsi:nil="true"/>
     <DefinitionText>True if the information specified is intelligence information; false otherwise.</DefinitionText>
     <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="j.JuvenileAsAdultIndicator">
     <Name>JuvenileAsAdultIndicator</Name>
     <Namespace structures:ref="j" xsi:nil="true"/>
     <DefinitionText>True if a juvenile is to be processed as an adult; false otherwise.</DefinitionText>
     <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="j.Metadata">
     <Name>Metadata</Name>
@@ -184,7 +172,6 @@
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A date of an activity.</DefinitionText>
     <Class structures:ref="nc.DateType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.ContactEmailID">
     <Name>ContactEmailID</Name>
@@ -223,28 +210,24 @@
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A measurement of the angular distance between a point on the Earth and the Equator.</DefinitionText>
     <Class structures:ref="nc.LatitudeCoordinateType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.GeographicCoordinateLongitude">
     <Name>GeographicCoordinateLongitude</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A measurement of the angular distance between a point on the Earth and the Prime Meridian.</DefinitionText>
     <Class structures:ref="nc.LongitudeCoordinateType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.IdentificationID">
     <Name>IdentificationID</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>An identifier.</DefinitionText>
     <Datatype structures:ref="xs.string" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.InjuryDescriptionText">
     <Name>InjuryDescriptionText</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A description of an injury.</DefinitionText>
     <Datatype structures:ref="nc.TextType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.InjurySeverityAbstract">
     <Name>InjurySeverityAbstract</Name>
@@ -257,28 +240,24 @@
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A value that specifies the degree of a latitude. The value comes from a restricted range between -90 (inclusive) and +90 (inclusive).</DefinitionText>
     <Datatype structures:ref="nc.LatitudeDegreeType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.LatitudeMinuteValue">
     <Name>LatitudeMinuteValue</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A latitude value that specifies a minute of a degree. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).</DefinitionText>
     <Datatype structures:ref="nc.AngularMinuteType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.LatitudeSecondValue">
     <Name>LatitudeSecondValue</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A latitude value that specifies a second of a minute. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).</DefinitionText>
     <Datatype structures:ref="nc.AngularSecondType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.Location">
     <Name>Location</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A geospatial location.</DefinitionText>
     <Class structures:ref="nc.LocationType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.Location2DGeospatialCoordinate">
     <Name>Location2DGeospatialCoordinate</Name>
@@ -286,7 +265,6 @@
     <DefinitionText>A location identified by a latitude and longitude.</DefinitionText>
     <SubPropertyOf structures:ref="nc.LocationGeospatialCoordinateAbstract" xsi:nil="true"/>
     <Class structures:ref="nc.Location2DGeospatialCoordinateType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.LocationGeospatialCoordinateAbstract">
     <Name>LocationGeospatialCoordinateAbstract</Name>
@@ -299,21 +277,18 @@
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A value that specifies the degree of a longitude. The value comes from a restricted range between -180 (inclusive) and +180 (inclusive).</DefinitionText>
     <Datatype structures:ref="nc.LongitudeDegreeType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.LongitudeMinuteValue">
     <Name>LongitudeMinuteValue</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A longitude value that specifies a minute of a degree. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).</DefinitionText>
     <Datatype structures:ref="nc.AngularMinuteType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.LongitudeSecondValue">
     <Name>LongitudeSecondValue</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A longitude value that specifies a second of a minute. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).</DefinitionText>
     <Datatype structures:ref="nc.AngularSecondType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.Person">
     <Name>Person</Name>
@@ -327,35 +302,30 @@
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A date a person was born.</DefinitionText>
     <Class structures:ref="nc.DateType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.PersonGivenName">
     <Name>PersonGivenName</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A first name of a person.</DefinitionText>
     <Datatype structures:ref="nc.PersonNameTextType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.PersonMiddleName">
     <Name>PersonMiddleName</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A middle name of a person.</DefinitionText>
     <Datatype structures:ref="nc.PersonNameTextType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.PersonName">
     <Name>PersonName</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A combination of names and/or titles by which a person is known.</DefinitionText>
     <Class structures:ref="nc.PersonNameType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.PersonSurName">
     <Name>PersonSurName</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A last name or family name of a person.</DefinitionText>
     <Datatype structures:ref="nc.PersonNameTextType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </Property>
   <Property structures:id="nc.RoleOfAbstract">
     <Name>RoleOfAbstract</Name>
