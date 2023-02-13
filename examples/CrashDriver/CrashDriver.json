@@ -10,50 +10,35 @@
         "nc:Person": [
             {
                 "@id": "#P01",
-                "nc:PersonBirthDate": [
-                    {
-                        "nc:Date": ["1890-05-04"]
-                    }
-                ],
+                "nc:PersonBirthDate": {"nc:Date": "1890-05-04"},
                 "nc:PersonName": [
                     {
-                        "nc:PersonGivenName": ["Peter"],
+                        "nc:PersonGivenName": "Peter",
                         "nc:PersonMiddleName": [
                             "Death",
                             "Bredon"
                         ],
-                        "nc:PersonSurName": ["Wimsey"]
+                        "nc:PersonSurName": "Wimsey"
                     }
                 ]
             }
         ],
         "j:Crash": {
-            "nc:ActivityDate": [
-                {
-                    "nc:Date": ["1900-05-04"]
-                }
-            ],
-            "j:CrashVehicle": [
-                {
-                    "j:CrashDriver": [
-                        {
-                            "nc:RoleOfPerson": {"@id": "#P01"},
-                            "j:DriverLicense": [
-                                {
-                                    "j:DriverLicenseCardIdentification": [
-                                        {
-                                            "nc:IdentificationID": ["A1234567"]
-                                        }
-                                    ],
-                                    "nc:ContactInformation": {
-                                        "nc:ContactEmailID": ["peter@wimsey.org"]
-                                    }
-                                }
+            "nc:ActivityDate": {"nc:Date": "1900-05-04"},
+            "j:CrashVehicle": {
+                "j:CrashDriver": {
+                    "nc:RoleOfPerson": {"@id": "#P01"},
+                    "j:DriverLicense": {
+                        "j:DriverLicenseCardIdentification": {"nc:IdentificationID": "A1234567"},
+                        "nc:ContactInformation": {
+                            "nc:ContactEmailID": [
+                                "peter@wimsey.org",
+                                "peter@somewhereelse.com"
                             ]
                         }
-                    ]
+                    }
                 }
-            ],
+            },
             "j:CrashPerson": [
                 {
                     "nc:RoleOfPerson": {"@id": "#P01"},
@@ -63,50 +48,53 @@
                                 {"@id": "#PMD01"},
                                 {"@id": "#PMD02"}
                             ],
-                            "nc:InjuryDescriptionText": ["Broken Arm"],
-                            "j:InjurySeverityCode": ["3"]
+                            "nc:InjuryDescriptionText": "Broken Arm",
+                            "j:InjurySeverityCode": "3"
                         }
                     ],
-                    "ext:PersonDefenestrationIndicator": [false]
+                    "ext:PersonDefenestrationIndicator": false
                 }
             ],
-            "nc:Location": [
-                {
-                    "nc:Location2DGeospatialCoordinate": {
-                        "nc:GeographicCoordinateLatitude": {
-                            "nc:LatitudeDegreeValue": [51],
-                            "nc:LatitudeMinuteValue": [52]
-                        },
-                        "nc:GeographicCoordinateLongitude": {
-                            "nc:LongitudeDegreeValue": [-1],
-                            "nc:LongitudeMinuteValue": [17]
-                        }
+            "nc:Location": {
+                "nc:Location2DGeospatialCoordinate": {
+                    "nc:GeographicCoordinateLatitude": {
+                        "nc:LatitudeDegreeValue": 51,
+                        "nc:LatitudeMinuteValue": 52
+                    },
+                    "nc:GeographicCoordinateLongitude": {
+                        "nc:LongitudeDegreeValue": -1,
+                        "nc:LongitudeMinuteValue": 17
                     }
                 }
-            ]
+            }
         },
         "j:PersonChargeAssociation": [
             {
                 "@id": "#JMD01",
                 "nc:Person": {"@id": "#P01"},
-                "j:Charge": {"@id": "#CH01"}
+                "j:Charge": {"@id": "#CH01"},
+                "j:JuvenileAsAdultIndicator": false
             }
         ],
         "j:Charge": [
             {
                 "@id": "#CH01",
-                "j:ChargeDescriptionText": ["Furious Driving"],
-                "j:ChargeFelonyIndicator": [false]
+                "j:ChargeDescriptionText": "Furious Driving",
+                "j:ChargeFelonyIndicator": false
             }
         ],
         "j:Metadata": {
             "@id": "#JMD01",
-            "j:CriminalInformationIndicator": [true]
+            "j:CriminalInformationIndicator": true,
+            "j:IntelligenceInformationIndicator": false
         },
         "ext:PrivacyMetadata": [
             {
                 "@id": "#PDM01",
-                "ext:PrivacyCode": ["PII"]
+                "ext:PrivacyCode": [
+                    "PII",
+                    "MEDICAL"
+                ]
             },
             {
                 "@id": "#PDM02",
