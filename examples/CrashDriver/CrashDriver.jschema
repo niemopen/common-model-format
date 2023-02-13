@@ -10,13 +10,13 @@
         },
         "ext:PersonDefenestrationIndicator": {
             "description": "True if this person was thrown through a window; false otherwise.",
-            "type": "array",
-            "items": {"type": "boolean"}
+            "type": "boolean"
         },
         "ext:PrivacyCode": {
             "description": "A code representing a kind of property.",
             "type": "array",
-            "items": {"$ref": "#/definitions/ext:PrivacyCodeType"}
+            "items": {"$ref": "#/definitions/ext:PrivacyCodeType"},
+            "maxItems": 2
         },
         "ext:PrivacyMetadata": {
             "description": "Metadata about Privacy.",
@@ -40,13 +40,11 @@
         },
         "j:ChargeDescriptionText": {
             "description": "A plain language description of a charge.",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:TextType"}
+            "$ref": "#/definitions/nc:TextType"
         },
         "j:ChargeFelonyIndicator": {
             "description": "True if a charge refers to a felony offense; false otherwise.",
-            "type": "array",
-            "items": {"type": "boolean"}
+            "type": "boolean"
         },
         "j:Crash": {
             "description": "A traffic accident.",
@@ -54,8 +52,7 @@
         },
         "j:CrashDriver": {
             "description": "A motor vehicle driver involved into a traffic accident.",
-            "type": "array",
-            "items": {"$ref": "#/definitions/j:CrashDriverType"}
+            "$ref": "#/definitions/j:CrashDriverType"
         },
         "j:CrashPassenger": {
             "description": "A motor vehicle passenger involved in a traffic accident.",
@@ -74,38 +71,31 @@
         },
         "j:CrashVehicle": {
             "description": "A motor vehicle involved in a traffic accident.",
-            "type": "array",
-            "items": {"$ref": "#/definitions/j:CrashVehicleType"}
+            "$ref": "#/definitions/j:CrashVehicleType"
         },
         "j:CriminalInformationIndicator": {
             "description": "True if the information specified is classified as criminal information; false if it is not classified as criminal information.",
-            "type": "array",
-            "items": {"type": "boolean"}
+            "type": "boolean"
         },
         "j:DriverLicense": {
             "description": "A license issued to a person granting driving privileges.",
-            "type": "array",
-            "items": {"$ref": "#/definitions/j:DriverLicenseType"}
+            "$ref": "#/definitions/j:DriverLicenseType"
         },
         "j:DriverLicenseCardIdentification": {
             "description": "An identification that is affixed to the raw materials (card stock, laminate, etc.) used in producing driver licenses and ID cards. The numbers are issued by the material&apos;s manufacturer and provide a unique reference to a card within a jurisdiction.",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:IdentificationType"}
+            "$ref": "#/definitions/nc:IdentificationType"
         },
         "j:InjurySeverityCode": {
             "description": "A severity of an injury received by a person, such as in a traffic accident or crash.",
-            "type": "array",
-            "items": {"$ref": "#/definitions/aamva_d20:AccidentSeverityCodeType"}
+            "$ref": "#/definitions/aamva_d20:AccidentSeverityCodeType"
         },
         "j:IntelligenceInformationIndicator": {
             "description": "True if the information specified is intelligence information; false otherwise.",
-            "type": "array",
-            "items": {"type": "boolean"}
+            "type": "boolean"
         },
         "j:JuvenileAsAdultIndicator": {
             "description": "True if a juvenile is to be processed as an adult; false otherwise.",
-            "type": "array",
-            "items": {"type": "boolean"}
+            "type": "boolean"
         },
         "j:Metadata": {
             "description": "Information that further qualifies the kind of data represented.",
@@ -118,8 +108,7 @@
         },
         "nc:ActivityDate": {
             "description": "A date of an activity.",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:DateType"}
+            "$ref": "#/definitions/nc:DateType"
         },
         "nc:ContactEmailID": {
             "description": "An electronic mailing address by which a person or organization may be contacted.",
@@ -132,8 +121,7 @@
         },
         "nc:Date": {
             "description": "A full date.",
-            "type": "array",
-            "items": {"type": "string"}
+            "type": "string"
         },
         "nc:GeographicCoordinateLatitude": {
             "description": "A measurement of the angular distance between a point on the Earth and the Equator.",
@@ -145,33 +133,27 @@
         },
         "nc:IdentificationID": {
             "description": "An identifier.",
-            "type": "array",
-            "items": {"type": "string"}
+            "type": "string"
         },
         "nc:InjuryDescriptionText": {
             "description": "A description of an injury.",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:TextType"}
+            "$ref": "#/definitions/nc:TextType"
         },
         "nc:LatitudeDegreeValue": {
             "description": "A value that specifies the degree of a latitude. The value comes from a restricted range between -90 (inclusive) and +90 (inclusive).",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:LatitudeDegreeType"}
+            "$ref": "#/definitions/nc:LatitudeDegreeType"
         },
         "nc:LatitudeMinuteValue": {
             "description": "A latitude value that specifies a minute of a degree. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:AngularMinuteType"}
+            "$ref": "#/definitions/nc:AngularMinuteType"
         },
         "nc:LatitudeSecondValue": {
             "description": "A latitude value that specifies a second of a minute. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:AngularSecondType"}
+            "$ref": "#/definitions/nc:AngularSecondType"
         },
         "nc:Location": {
             "description": "A location identified by a latitude and longitude.",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:LocationType"}
+            "$ref": "#/definitions/nc:LocationType"
         },
         "nc:Location2DGeospatialCoordinate": {
             "description": "A location identified by a latitude and longitude.",
@@ -179,18 +161,15 @@
         },
         "nc:LongitudeDegreeValue": {
             "description": "A value that specifies the degree of a longitude. The value comes from a restricted range between -180 (inclusive) and +180 (inclusive).",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:LongitudeDegreeType"}
+            "$ref": "#/definitions/nc:LongitudeDegreeType"
         },
         "nc:LongitudeMinuteValue": {
             "description": "A longitude value that specifies a minute of a degree. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:AngularMinuteType"}
+            "$ref": "#/definitions/nc:AngularMinuteType"
         },
         "nc:LongitudeSecondValue": {
             "description": "A longitude value that specifies a second of a minute. The value comes from a restricted range of 0 (inclusive) to 60 (exclusive).",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:AngularSecondType"}
+            "$ref": "#/definitions/nc:AngularSecondType"
         },
         "nc:Person": {
             "description": "A human being.",
@@ -209,19 +188,16 @@
         },
         "nc:PersonBirthDate": {
             "description": "A date a person was born.",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:DateType"}
+            "$ref": "#/definitions/nc:DateType"
         },
         "nc:PersonGivenName": {
             "description": "A first name of a person.",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:PersonNameTextType"}
+            "$ref": "#/definitions/nc:PersonNameTextType"
         },
         "nc:PersonMiddleName": {
             "description": "A middle name of a person.",
             "type": "array",
-            "items": {"$ref": "#/definitions/nc:PersonNameTextType"},
-            "minItems": 1
+            "items": {"$ref": "#/definitions/nc:PersonNameTextType"}
         },
         "nc:PersonName": {
             "description": "A combination of names and/or titles by which a person is known.",
@@ -230,8 +206,7 @@
         },
         "nc:PersonSurName": {
             "description": "A last name or family name of a person.",
-            "type": "array",
-            "items": {"$ref": "#/definitions/nc:PersonNameTextType"}
+            "$ref": "#/definitions/nc:PersonNameTextType"
         },
         "nc:RoleOfPerson": {
             "description": "A person of whom the role object is a function.",
@@ -240,6 +215,7 @@
                     "type": "array",
                     "items": {"$ref": "#/definitions/nc:PersonType"}
                 },
+                {"$ref": "#/definitions/nc:PersonType"},
                 {
                     "type": "object",
                     "properties": {
