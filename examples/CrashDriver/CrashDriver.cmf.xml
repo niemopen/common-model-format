@@ -451,7 +451,7 @@
     <HasProperty structures:sequenceID="3">
       <Property structures:ref="ext.PersonDefenestrationIndicator" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
       <AugmentationElementNamespace structures:ref="ext" xsi:nil="true"/>
     </HasProperty>
   </Class>
@@ -720,7 +720,7 @@
     <HasProperty structures:sequenceID="1">
       <Property structures:ref="nc.PersonBirthDate" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
     <HasProperty structures:sequenceID="2">
       <Property structures:ref="nc.PersonName" xsi:nil="true"/>
