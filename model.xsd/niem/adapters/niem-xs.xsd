@@ -27,6 +27,16 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+  <xs:complexType name="integer">
+    <xs:annotation>
+      <xs:documentation>A data type for binary-valued logic (true/false).</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:integer">
+        <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name="language">
     <xs:annotation>
       <xs:documentation>A data type that represents natural language identifiers as defined by by [RFC 3066].</xs:documentation>

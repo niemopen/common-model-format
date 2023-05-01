@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
-  targetNamespace="http://reference.niem.gov/specification/cmf/0.6/"
+  targetNamespace="http://reference.niem.gov/specification/cmf/0.7/"
   xmlns:appinfo="http://release.niem.gov/niem/appinfo/5.0/"
-  xmlns:cmf="http://reference.niem.gov/specification/cmf/0.6/"
+  xmlns:cmf="http://reference.niem.gov/specification/cmf/0.7/"
   xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/"
   xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/"
   xmlns:structures="http://release.niem.gov/niem/structures/5.0/"
@@ -31,6 +31,22 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  <xs:complexType name="AugmentRecordType">
+    <xs:annotation>
+      <xs:documentation>A data type for a class that is augmented with a property by a namespace.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:Class" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:Property" minOccurs="1" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:AugmentationIndex" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:MinOccursQuantity" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:MaxOccursQuantity" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType> 
   <xs:complexType name="ClassType">
     <xs:annotation>
       <xs:documentation>A data type for a class.</xs:documentation>
@@ -44,6 +60,20 @@
           <xs:element ref="cmf:HasProperty" minOccurs="0" maxOccurs="unbounded" appinfo:orderedPropertyIndicator="true"/>
           <xs:element ref="cmf:MetadataIndicator" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:ClassAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="CodeListBindingType">
+    <xs:annotation>
+      <xs:documentation>A data type for connecting simple content defined by an XML Schema component to a a column of a code list.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:CodeListURI" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:CodeListColumnName" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:CodeListConstrainingIndicator" minOccurs="0" maxOccurs="1"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -75,6 +105,7 @@
           <xs:element ref="cmf:RestrictionOf" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:UnionOf" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:ListOf" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:CodeListBinding" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:DatatypeAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -91,8 +122,7 @@
           <xs:element ref="cmf:MinOccursQuantity" minOccurs="1" maxOccurs="1"/>
           <xs:element ref="cmf:MaxOccursQuantity" minOccurs="1" maxOccurs="1"/>
           <xs:element ref="cmf:OrderedPropertyIndicator" minOccurs="0" maxOccurs="1"/>
-          <xs:element ref="cmf:AugmentationElementNamespace" minOccurs="0" maxOccurs="1"/>
-          <xs:element ref="cmf:AugmentationTypeNamespace" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:AugmentationNamespace" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:HasPropertyAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -212,9 +242,10 @@
       <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:NamespaceURI" minOccurs="1" maxOccurs="1"/>
-          <xs:element ref="cmf:NamespacePrefixName" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="cmf:NamespacePrefixText" minOccurs="1" maxOccurs="1"/>
           <xs:element ref="cmf:DefinitionText" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:NamespaceKindCode" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:AugmentRecord" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:NamespaceAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -301,7 +332,7 @@
     <xs:complexContent>
       <xs:extension base="structures:ObjectType">
         <xs:sequence>
-          <xs:element ref="cmf:NamespacePrefixName" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:NamespacePrefixText" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:NamespaceURI" minOccurs="1" maxOccurs="1"/>
           <xs:element ref="cmf:ConformanceTargetURIList" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:DocumentFilePathText" minOccurs="0" maxOccurs="1"/>
@@ -407,21 +438,30 @@
       <xs:documentation>True for properties represented as attributes in XML.</xs:documentation>
     </xs:annotation>
   </xs:element>
+
   <xs:element name="AugmentableIndicator" type="xs-proxy:boolean">
     <xs:annotation>
       <xs:documentation>True if the class can be augmented with additional properties.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AugmentationElementNamespace" type="cmf:NamespaceType" nillable="true">
+  <xs:element name="AugmentationIndex" type="xs-proxy:integer">
     <xs:annotation>
-      <xs:documentation>A namespace of an augmentation that is an augmentation type.</xs:documentation>
+      <xs:documentation>
+        An index of an augmentation property within an augmentation type.
+        Negative (-1) for augmentation property not within an augmentation type.
+      </xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AugmentationTypeNamespace" type="cmf:NamespaceType" nillable="true">
+  <xs:element name="AugmentationNamespace" type="cmf:NamespaceType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A namespace of an augmentation type containing this augmentation.</xs:documentation>
+      <xs:documentation>A namespace responsible for augmenting a class with a property.</xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:element name="AugmentRecord" type="cmf:AugmentRecordType">
+    <xs:annotation>
+      <xs:documentation>An augmentation of a class that is augmented with a property by a namespace.</xs:documentation>
+    </xs:annotation>
+  </xs:element>  
   <xs:element name="Class" type="cmf:ClassType" substitutionGroup="cmf:ModelItemAbstract" nillable="true">
     <xs:annotation>
       <xs:documentation>A class.</xs:documentation>
@@ -430,6 +470,26 @@
   <xs:element name="ClassAugmentationPoint" abstract="true">
     <xs:annotation>
       <xs:documentation>An augmentation point for cmf:ClassType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="CodeListBinding" type="cmf:CodeListBindingType">
+    <xs:annotation>
+      <xs:documentation>An element for connecting simple content defined by an XML Schema component to a a column of a code list.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="CodeListColumnName" type="xs-proxy:string">
+    <xs:annotation>
+      <xs:documentation>A local name for a code list column within a code list.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="CodeListConstrainingIndicator" type="xs-proxy:boolean">
+    <xs:annotation>
+      <xs:documentation>True when a code list binding constrains the validity of a code list value, false otherwise.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="CodeListURI" type="xs-proxy:anyURI">
+    <xs:annotation>
+      <xs:documentation>A universal identifier for a code list.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="ComponentAugmentationPoint" abstract="true">
@@ -587,6 +647,7 @@
       <xs:documentation>A namespace of a data model component.</xs:documentation>
     </xs:annotation>
   </xs:element>
+
   <xs:element name="NamespaceAugmentationPoint" abstract="true">
     <xs:annotation>
       <xs:documentation>An augmentation point for cmf:NamespaceType.</xs:documentation>
@@ -597,7 +658,7 @@
       <xs:documentation>A kind of namespace in a CMF model (external, core, domain, etc.).</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NamespacePrefixName" type="cmf:NCName">
+  <xs:element name="NamespacePrefixText" type="cmf:NCName">
     <xs:annotation>
       <xs:documentation>A namespace prefix name for a namespace.</xs:documentation>
     </xs:annotation>
