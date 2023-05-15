@@ -58,7 +58,6 @@
           <xs:element ref="cmf:ExternalAdapterTypeIndicator" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:ExtensionOfClass" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:HasProperty" minOccurs="0" maxOccurs="unbounded" appinfo:orderedPropertyIndicator="true"/>
-          <xs:element ref="cmf:MetadataIndicator" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:ClassAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -304,8 +303,9 @@
           <xs:element ref="cmf:Class" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:Datatype" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:AttributeIndicator" minOccurs="0" maxOccurs="1"/>
-          <xs:element ref="cmf:MetadataIndicator" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:RefAttributeIndicator" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:ReferenceableIndicator" minOccurs="0" maxOccurs="1"/>
+          <xs:element ref="cmf:RelationshipPropertyIndicator" minOccurs="0" maxOccurs="1"/>
           <xs:element ref="cmf:PropertyAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -438,7 +438,6 @@
       <xs:documentation>True for properties represented as attributes in XML.</xs:documentation>
     </xs:annotation>
   </xs:element>
-
   <xs:element name="AugmentableIndicator" type="xs-proxy:boolean">
     <xs:annotation>
       <xs:documentation>True if the class can be augmented with additional properties.</xs:documentation>
@@ -592,11 +591,6 @@
       <xs:documentation>A maximum number of times a property may occur within a class.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="MetadataIndicator" type="xs-proxy:boolean">
-    <xs:annotation>
-      <xs:documentation>True for a component with simple content that can have metadata.</xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:element name="MinExclusive" type="cmf:AnyValueFacetType" substitutionGroup="cmf:FacetAbstract">
     <xs:annotation>
       <xs:documentation>An exclusive lower bound of a data type.</xs:documentation>
@@ -713,9 +707,19 @@
       <xs:documentation>An augmentation point for cmf:ObjectPropertyType.</xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:element name="RefAttributeIndicator" type="xs-proxy:boolean">
+    <xs:annotation>
+      <xs:documentation>True for a property that is an object reference attribute.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:element name="ReferenceableIndicator" type="xs-proxy:boolean">
     <xs:annotation>
       <xs:documentation>True when objects of a class may be referenced instead of inline.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RelationshipPropertyIndicator" type="xs-proxy:boolean">
+    <xs:annotation>
+      <xs:documentation>True for a property that applies to an object relationship.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="RestrictionOf" type="cmf:RestrictionOfType">
