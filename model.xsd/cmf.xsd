@@ -169,7 +169,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="NCName">
+  <xs:complexType name="NCNameType">
     <xs:annotation>
       <xs:documentation>A data type for XML names that exclude a colon character.</xs:documentation>
     </xs:annotation>
@@ -631,7 +631,7 @@
       <xs:documentation>A NIEM version number.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="Name" type="cmf:NCName">
+  <xs:element name="Name" type="cmf:NCNameType">
     <xs:annotation>
       <xs:documentation>A name of a data model component.</xs:documentation>
     </xs:annotation>
@@ -652,7 +652,7 @@
       <xs:documentation>A kind of namespace in a CMF model (external, core, domain, etc.).</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NamespacePrefixText" type="cmf:NCName">
+  <xs:element name="NamespacePrefixText" type="cmf:NCNameType">
     <xs:annotation>
       <xs:documentation>A namespace prefix name for a namespace.</xs:documentation>
     </xs:annotation>
