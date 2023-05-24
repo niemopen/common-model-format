@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  targetNamespace="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/#"
+  xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/#"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  version="6.0"
+  xml:lang="en-US">
+  <xs:annotation>
+    <xs:documentation>The structures namespace provides base types and other components for definition of NIEM-conformant XML schemas.</xs:documentation>
+  </xs:annotation>
+  <xs:complexType name="AssociationType" abstract="true">
+    <xs:annotation>
+      <xs:documentation>A data type for a relationship between two or more objects, including any properties of that relationship.</xs:documentation>
+    </xs:annotation>
+    <xs:anyAttribute processContents="lax"/>
+  </xs:complexType>
+  <xs:complexType name="AugmentationType" abstract="true">
+    <xs:annotation>
+      <xs:documentation>A data type for a set of properties to be applied to a base type.</xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
+  <xs:complexType name="ObjectType" abstract="true">
+    <xs:annotation>
+      <xs:documentation>A data type for a thing with its own lifespan that has some existence.</xs:documentation>
+    </xs:annotation>
+    <xs:anyAttribute processContents="lax"/>
+  </xs:complexType>
+  <xs:attribute name="id" type="xs:ID">
+    <xs:annotation>
+      <xs:documentation>A document-relative identifier for an XML element.</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="onlyRef" type="xs:boolean">
+    <xs:annotation>
+      <xs:documentation>True if this element is not a property of its parent.</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="ref" type="xs:IDREF">
+    <xs:annotation>
+      <xs:documentation>A document-relative reference to an XML element.</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="uri" type="xs:anyURI">
+    <xs:annotation>
+      <xs:documentation>An internationalized resource identifier or uniform resource identifier for a node or object.</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attributeGroup name="ReferenceableObjectAttributeGroup">
+    <xs:annotation>
+      <xs:documentation>A group of attributes for objects that may be referenced or inline.</xs:documentation>
+    </xs:annotation>
+  </xs:attributeGroup>
+</xs:schema>

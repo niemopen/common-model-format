@@ -12,14 +12,23 @@ For more information on NIEMOpen, see the project's website at [www.niemopen.org
 
 General questions about OASIS Open Projects may be directed to OASIS staff at project-admin@lists.oasis-open-projects.org
 
-# What's new in version 0.7
+## What's new in version 0.8
+
+* CMF is now a NIEM 6 message specification
+* Namespace URIs start with `https://docs.open-oasis.org`
+* `NCName` becomes `NCNameType` for NDR conformance
+* *model5.xsd* is the NIEM 5 XSD for CMF version 0.7
+* *model6.xsd* is the NIEM 6 reference XSD for CMF version 0.8
+  (don't yet have the message XSD for CMF 0.8)
+
+## What's new in version 0.7
 
 * New `AugmentRecord` child in `NamespaceType`
 * New `CodeListBinding` child in `ComponentType`
 * Augmentation properties in `HasPropertyType were revised
 * `NamespacePrefixText` put back into `SchemaDocumentType`
 
-# What's new in version 0.6
+## What's new in version 0.6
 
 * DefinitionText in CMF is now repeatable
 * DefinitionText now has nc:TextType with xml:lang attribute
@@ -29,11 +38,11 @@ General questions about OASIS Open Projects may be directed to OASIS staff at pr
 * All schema documents canonicalized
 * Added CMF and XSD documentation
 
-# Where are the older versions of CMF?
+## Where are the older versions of CMF?
 
 The pre-OASIS history of CMF is at [NIEM/CMF-MessageSpec (github.com)](https://github.com/NIEM/CMF-MessageSpec) 
 
-# Other assets
+## Other assets
 
 In addition to this GitHub repository, this project also makes use of other assets. 
 
