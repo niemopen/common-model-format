@@ -15,7 +15,7 @@ General questions about OASIS Open Projects may be directed to OASIS staff at pr
 ## What's new in version 0.8
 
 * CMF is now a NIEM 6 message specification
-* Namespace URIs start with `https://docs.open-oasis.org`
+* Namespace URIs start with `http://docs.open-oasis.org`
 * `NCName` becomes `NCNameType` for NDR conformance
 * *model5.xsd* is the NIEM 5 XSD for CMF version 0.7
 * *model6.xsd* is the NIEM 6 reference XSD for CMF version 0.8

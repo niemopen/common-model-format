@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Model
-  xmlns:cmf="https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/#"
-  xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/#"
+  xmlns:cmf="http://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/"
+  xmlns:structures="http://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/#">
+  xmlns="http://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/">
   <Namespace structures:id="cmf">
     <NamespaceURI>http://reference.niem.gov/specification/cmf/0.7/</NamespaceURI>
     <NamespacePrefixText>cmf</NamespacePrefixText>
