@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
-  targetNamespace="http://docs.oasis-open.org/niemopen/ns/model/proxy/niem-xs/6.0/"
-  xmlns:appinfo="http://docs.oasis-open.org/niemopen/ns/model/appinfo/6.0/"
-  xmlns:ct="http://docs.oasis-open.org/niemopen/ns/specification/conformanceTargets/3.0/"
-  xmlns:xs-proxy="http://docs.oasis-open.org/niemopen/ns/model/proxy/niem-xs/6.0/"
-  xmlns:structures="http://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
+  targetNamespace="https://docs.oasis-open.org/niemopen/ns/model/proxy/niem-xs/6.0/"
+  xmlns:appinfo="https://docs.oasis-open.org/niemopen/ns/model/appinfo/6.0/"
+  xmlns:ct="https://docs.oasis-open.org/niemopen/ns/specification/conformanceTargets/3.0/"
+  xmlns:xs-proxy="https://docs.oasis-open.org/niemopen/ns/model/proxy/niem-xs/6.0/"
+  xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  ct:conformanceTargets="http://docs.oasis-open.org/niemopen/ns/specification/naming-and-design-rules/3.0/#ReferenceSchemaDocument"
-  version="1"
+  ct:conformanceTargets="https://docs.oasis-open.org/niemopen/ns/specification/naming-and-design-rules/3.0/#ReferenceSchemaDocument"
+  version="6.0-source"
   xml:lang="en-US">
   <xs:annotation>
     <xs:documentation>Proxy types that carry dictionary metadata and have XML data type simple contents.</xs:documentation>
@@ -16,14 +15,14 @@
       <appinfo:LocalTerm definition="An inclusive maximum value. To be valid, a value must be less than or equal to the value of xs:maxInclusive." term="maxInclusive"/>
     </xs:appinfo>
   </xs:annotation>
-  <xs:import namespace="http://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" schemaLocation="../utility/structures.xsd"/>
+  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" schemaLocation="../utility/structures.xsd"/>
   <xs:complexType name="anyURI">
     <xs:annotation>
       <xs:documentation>A data type for a Uniform Resource Identifier Reference (URI).  A value can be absolute or relative, and may have an optional fragment identifier (i.e., it may be a URI Reference).</xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:anyURI">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -33,7 +32,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:base64Binary">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -43,7 +42,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:boolean">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -53,7 +52,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:byte">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -63,7 +62,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:date">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -73,7 +72,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:dateTime">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -83,7 +82,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:decimal">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -93,7 +92,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:double">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -103,7 +102,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:duration">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -113,7 +112,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:float">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -123,7 +122,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:gDay">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -133,7 +132,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:gMonth">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -143,7 +142,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:gMonthDay">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -153,7 +152,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:gYear">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -163,7 +162,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:gYearMonth">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -173,7 +172,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:hexBinary">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -183,7 +182,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:int">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -193,7 +192,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:integer">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -203,7 +202,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:language">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -213,7 +212,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:long">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -223,7 +222,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:negativeInteger">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -233,7 +232,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:nonNegativeInteger">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -243,7 +242,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:nonPositiveInteger">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -253,7 +252,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:normalizedString">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -263,7 +262,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:positiveInteger">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -273,7 +272,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:short">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -283,7 +282,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -293,7 +292,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:time">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -303,7 +302,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:token">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -313,7 +312,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:unsignedByte">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -323,7 +322,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:unsignedInt">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -333,7 +332,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:unsignedLong">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -343,7 +342,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:unsignedShort">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:anyAttribute processContents="strict"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

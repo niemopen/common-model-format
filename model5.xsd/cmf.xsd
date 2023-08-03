@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
-  targetNamespace="http://reference.niem.gov/specification/cmf/0.7/"
+  targetNamespace="http://reference.niem.gov/niem/specification/cmf/0.8/"
   xmlns:appinfo="http://release.niem.gov/niem/appinfo/5.0/"
-  xmlns:cmf="http://reference.niem.gov/specification/cmf/0.7/"
+  xmlns:cmf="http://reference.niem.gov/niem/specification/cmf/0.8/"
   xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/"
   xmlns:nc="http://release.niem.gov/niem/niem-core/5.0/"
   xmlns:structures="http://release.niem.gov/niem/structures/5.0/"

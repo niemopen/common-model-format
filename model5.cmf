@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Model
-  xmlns:cmf="http://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/"
-  xmlns:structures="http://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
+  xmlns:cmf="https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/"
+  xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/">
+  xmlns="https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/">
   <Namespace structures:id="cmf">
-    <NamespaceURI>http://reference.niem.gov/specification/cmf/0.7/</NamespaceURI>
+    <NamespaceURI>http://reference.niem.gov/niem/specification/cmf/0.8/</NamespaceURI>
     <NamespacePrefixText>cmf</NamespacePrefixText>
     <DefinitionText>A data model for the NIEM Common Model Format (CMF).</DefinitionText>
     <NamespaceKindCode>EXTENSION</NamespaceKindCode>
@@ -497,6 +497,7 @@
       <Property structures:ref="cmf.HasProperty" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+      <OrderedPropertyIndicator>true</OrderedPropertyIndicator>
     </HasProperty>
   </Class>
   <Class structures:id="cmf.CodeListBindingType">
@@ -1015,20 +1016,20 @@
     <SchemaLanguageName>en-US</SchemaLanguageName>
   </SchemaDocument>
   <SchemaDocument>
-    <NamespacePrefixText>cmf</NamespacePrefixText>
-    <NamespaceURI>http://reference.niem.gov/specification/cmf/0.7/</NamespaceURI>
-    <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument</ConformanceTargetURIList>
-    <DocumentFilePathText>cmf.xsd</DocumentFilePathText>
-    <NIEMVersionText>5</NIEMVersionText>
-    <SchemaVersionText>1</SchemaVersionText>
-    <SchemaLanguageName>en-US</SchemaLanguageName>
-  </SchemaDocument>
-  <SchemaDocument>
     <NamespacePrefixText>xml</NamespacePrefixText>
     <NamespaceURI>http://www.w3.org/XML/1998/namespace</NamespaceURI>
     <DocumentFilePathText>niem/external/xml.xsd</DocumentFilePathText>
     <NIEMVersionText/>
     <SchemaLanguageName>en</SchemaLanguageName>
+  </SchemaDocument>
+  <SchemaDocument>
+    <NamespacePrefixText>cmf</NamespacePrefixText>
+    <NamespaceURI>http://reference.niem.gov/niem/specification/cmf/0.8/</NamespaceURI>
+    <ConformanceTargetURIList>http://reference.niem.gov/niem/specification/naming-and-design-rules/5.0/#ExtensionSchemaDocument</ConformanceTargetURIList>
+    <DocumentFilePathText>cmf.xsd</DocumentFilePathText>
+    <NIEMVersionText>5</NIEMVersionText>
+    <SchemaVersionText>1</SchemaVersionText>
+    <SchemaLanguageName>en-US</SchemaLanguageName>
   </SchemaDocument>
   <SchemaDocument>
     <NamespacePrefixText>structures</NamespacePrefixText>

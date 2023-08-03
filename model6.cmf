@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Model
-  xmlns:cmf="http://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/"
-  xmlns:structures="http://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
+  xmlns:cmf="https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/"
+  xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/">
+  xmlns="https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/">
   <Namespace structures:id="cmf">
-    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/#</NamespaceURI>
+    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/</NamespaceURI>
     <NamespacePrefixText>cmf</NamespacePrefixText>
     <DefinitionText>A data model for the NIEM Common Model Format (CMF).</DefinitionText>
     <NamespaceKindCode>EXTENSION</NamespaceKindCode>
   </Namespace>
   <Namespace structures:id="nc">
-    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/#</NamespaceURI>
+    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/</NamespaceURI>
     <NamespacePrefixText>nc</NamespacePrefixText>
     <DefinitionText>NIEM Core.</DefinitionText>
     <NamespaceKindCode>CORE</NamespaceKindCode>
@@ -431,7 +431,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DefinitionText>A data type for a facet that can have any value type.</DefinitionText>
     <AugmentableIndicator>true</AugmentableIndicator>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.AnyValueAbstract" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -447,7 +446,6 @@
     <Name>AugmentRecordType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DefinitionText>A data type for a class that is augmented with a property by a namespace.</DefinitionText>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.Class" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -506,7 +504,6 @@
     <Name>CodeListBindingType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DefinitionText>A data type for connecting simple content defined by an XML Schema component to a a column of a code list.</DefinitionText>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.CodeListURI" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -529,7 +526,6 @@
     <DefinitionText>A data type for common properties of a data component in NIEM.</DefinitionText>
     <AbstractIndicator>true</AbstractIndicator>
     <AugmentableIndicator>true</AugmentableIndicator>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.Name" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -588,7 +584,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DefinitionText>A data type for an occurrence of a property as content of a class.</DefinitionText>
     <AugmentableIndicator>true</AugmentableIndicator>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.Property" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -620,7 +615,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DefinitionText>A data type for a CMF data model.</DefinitionText>
     <AugmentableIndicator>true</AugmentableIndicator>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.ModelItemAbstract" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
@@ -637,7 +631,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DefinitionText>A data type for a namespace</DefinitionText>
     <AugmentableIndicator>true</AugmentableIndicator>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.NamespaceURI" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -669,7 +662,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DefinitionText>A data type for a facet that carries a value that is either zero or a positive integer.</DefinitionText>
     <AugmentableIndicator>true</AugmentableIndicator>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.NonNegativeValue" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -686,7 +678,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DefinitionText>A data type for restricting the content of a datatype to values that match a specific pattern, provided as a regular expression.</DefinitionText>
     <AugmentableIndicator>true</AugmentableIndicator>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.StringValue" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -703,7 +694,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DefinitionText>A data type for a facet that carries a value that is a positive integer.</DefinitionText>
     <AugmentableIndicator>true</AugmentableIndicator>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.PositiveValue" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -762,7 +752,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DefinitionText>A data type for a restriction of a data type.</DefinitionText>
     <AugmentableIndicator>true</AugmentableIndicator>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.Datatype" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -778,7 +767,6 @@
     <Name>SchemaDocumentType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DefinitionText>A data type for an XML schema document.</DefinitionText>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.NamespacePrefixText" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
@@ -820,7 +808,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DefinitionText>A data type for a union of data types.</DefinitionText>
     <AugmentableIndicator>true</AugmentableIndicator>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.Datatype" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -832,7 +819,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DefinitionText>A data type constraining how white space within data values is handled.</DefinitionText>
     <AugmentableIndicator>true</AugmentableIndicator>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="cmf.WhiteSpaceValueCode" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -844,21 +830,10 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
   </Class>
-  <Class structures:id="nc.AssociationType">
-    <Name>AssociationType</Name>
-    <Namespace structures:ref="nc" xsi:nil="true"/>
-    <DefinitionText>A data type for a relationship between two or more objects, including any properties of that relationship.</DefinitionText>
-  </Class>
-  <Class structures:id="nc.ObjectType">
-    <Name>ObjectType</Name>
-    <Namespace structures:ref="nc" xsi:nil="true"/>
-    <DefinitionText>a data type for a thing with its own lifespan that has some existence.</DefinitionText>
-  </Class>
   <Class structures:id="nc.TextType">
     <Name>TextType</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DefinitionText>A data type for a character string.</DefinitionText>
-    <ExtensionOfClass structures:ref="nc.ObjectType" xsi:nil="true"/>
     <HasProperty>
       <Property structures:ref="nc.TextLiteral" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -1033,8 +1008,8 @@
   </Datatype>
   <SchemaDocument>
     <NamespacePrefixText>cmf</NamespacePrefixText>
-    <NamespaceURI>http://reference.niem.gov/specification/cmf/0.7/</NamespaceURI>
-    <ConformanceTargetURIList>https://docs.oasis-open.org/niemopen/ns/model/specification/naming-and-design-rules/6.0/#ExtensionSchemaDocument</ConformanceTargetURIList>
+    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/</NamespaceURI>
+    <ConformanceTargetURIList>https://docs.oasis-open.org/niemopen/ns/specification/naming-and-design-rules/6.0/#ExtensionSchemaDocument</ConformanceTargetURIList>
     <DocumentFilePathText>cmf.xsd</DocumentFilePathText>
     <NIEMVersionText>6</NIEMVersionText>
     <SchemaVersionText>1</SchemaVersionText>
@@ -1049,26 +1024,26 @@
   </SchemaDocument>
   <SchemaDocument>
     <NamespacePrefixText>structures</NamespacePrefixText>
-    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/#</NamespaceURI>
+    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/</NamespaceURI>
     <DocumentFilePathText>niem/utility/structures.xsd</DocumentFilePathText>
     <NIEMVersionText>6</NIEMVersionText>
     <SchemaVersionText>5.0</SchemaVersionText>
     <SchemaLanguageName>en-US</SchemaLanguageName>
   </SchemaDocument>
   <SchemaDocument>
-    <NamespacePrefixText>xs-proxy</NamespacePrefixText>
-    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/proxy/niem-xs/6.0/#</NamespaceURI>
-    <ConformanceTargetURIList>https://docs.oasis-open.org/niemopen/ns/model/specification/naming-and-design-rules/6.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
-    <DocumentFilePathText>niem/adapters/niem-xs.xsd</DocumentFilePathText>
+    <NamespacePrefixText>nc</NamespacePrefixText>
+    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/</NamespaceURI>
+    <ConformanceTargetURIList>https://docs.oasis-open.org/niemopen/ns/specification/naming-and-design-rules/6.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
+    <DocumentFilePathText>niem/niem-core.xsd</DocumentFilePathText>
     <NIEMVersionText>6</NIEMVersionText>
     <SchemaVersionText>1</SchemaVersionText>
     <SchemaLanguageName>en-US</SchemaLanguageName>
   </SchemaDocument>
   <SchemaDocument>
-    <NamespacePrefixText>nc</NamespacePrefixText>
-    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/#</NamespaceURI>
-    <ConformanceTargetURIList>https://docs.oasis-open.org/niemopen/ns/model/specification/naming-and-design-rules/6.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
-    <DocumentFilePathText>niem/niem-core.xsd</DocumentFilePathText>
+    <NamespacePrefixText>xs-proxy</NamespacePrefixText>
+    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/proxy/niem-xs/6.0/</NamespaceURI>
+    <ConformanceTargetURIList>https://docs.oasis-open.org/niemopen/ns/specification/naming-and-design-rules/6.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
+    <DocumentFilePathText>niem/adapters/niem-xs.xsd</DocumentFilePathText>
     <NIEMVersionText>6</NIEMVersionText>
     <SchemaVersionText>1</SchemaVersionText>
     <SchemaLanguageName>en-US</SchemaLanguageName>

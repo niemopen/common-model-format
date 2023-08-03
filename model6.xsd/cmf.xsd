@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
-  targetNamespace="http://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/"
-  xmlns:appinfo="http://docs.oasis-open.org/niemopen/ns/model/appinfo/6.0/"
-  xmlns:cmf="http://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/"
-  xmlns:nc="http://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/"
-  xmlns:structures="http://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
+  targetNamespace="https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/"
+  xmlns:appinfo="https://docs.oasis-open.org/niemopen/ns/model/appinfo/6.0/"
+  xmlns:cmf="https://docs.oasis-open.org/niemopen/ns/specification/cmf/0.8/"
+  xmlns:ct="https://docs.oasis-open.org/niemopen/ns/specification/conformanceTargets/3.0/"
+  xmlns:nc="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/"
+  xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:xs-proxy="http://docs.oasis-open.org/niemopen/ns/model/proxy/niem-xs/6.0/"
+  xmlns:xs-proxy="https://docs.oasis-open.org/niemopen/ns/model/proxy/niem-xs/6.0/"
+  ct:conformanceTargets="https://docs.oasis-open.org/niemopen/ns/specification/naming-and-design-rules/6.0/#ExtensionSchemaDocument"
+  version="1"
   xml:lang="en-US">
   <xs:annotation>
     <xs:documentation>A data model for the NIEM Common Model Format (CMF).</xs:documentation>
   </xs:annotation>
-  <xs:import namespace="http://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/" schemaLocation="niem/niem-core.xsd"/>
-  <xs:import namespace="http://docs.oasis-open.org/niemopen/ns/model/proxy/niem-xs/6.0/" schemaLocation="niem/adapters/niem-xs.xsd"/>
-  <xs:import namespace="http://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" schemaLocation="niem/utility/structures.xsd"/>
+  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/" schemaLocation="niem/niem-core.xsd"/>
+  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/proxy/niem-xs/6.0/" schemaLocation="niem/adapters/niem-xs.xsd"/>
+  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" schemaLocation="niem/utility/structures.xsd"/>
   <xs:complexType name="AnyValueFacetType">
     <xs:annotation>
       <xs:documentation>A data type for a facet that can have any value type.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:AnyValueAbstract"/>
           <xs:element ref="cmf:DefinitionText" minOccurs="0"/>
@@ -33,7 +36,7 @@
       <xs:documentation>A data type for a class that is augmented with a property by a namespace.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:Class"/>
           <xs:element ref="cmf:Property" maxOccurs="unbounded"/>
@@ -65,7 +68,7 @@
       <xs:documentation>A data type for connecting simple content defined by an XML Schema component to a a column of a code list.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:CodeListURI"/>
           <xs:element ref="cmf:CodeListColumnName" minOccurs="0"/>
@@ -79,7 +82,7 @@
       <xs:documentation>A data type for common properties of a data component in NIEM.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:Name"/>
           <xs:element ref="cmf:Namespace"/>
@@ -112,7 +115,7 @@
       <xs:documentation>A data type for an occurrence of a property as content of a class.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:Property"/>
           <xs:element ref="cmf:MinOccursQuantity"/>
@@ -167,7 +170,7 @@
       <xs:documentation>A data type for a CMF data model.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:ModelItemAbstract" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:SchemaDocument" minOccurs="0" maxOccurs="unbounded"/>
@@ -249,7 +252,7 @@
       <xs:documentation>A data type for a namespace</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:NamespaceURI"/>
           <xs:element ref="cmf:NamespacePrefixText"/>
@@ -266,7 +269,7 @@
       <xs:documentation>A data type for a facet that carries a value that is either zero or a positive integer.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:NonNegativeValue"/>
           <xs:element ref="cmf:DefinitionText" minOccurs="0"/>
@@ -280,7 +283,7 @@
       <xs:documentation>A data type for restricting the content of a datatype to values that match a specific pattern, provided as a regular expression.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:StringValue"/>
           <xs:element ref="cmf:DefinitionText" minOccurs="0"/>
@@ -294,7 +297,7 @@
       <xs:documentation>A data type for a facet that carries a value that is a positive integer.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:PositiveValue"/>
           <xs:element ref="cmf:DefinitionText" minOccurs="0"/>
@@ -327,7 +330,7 @@
       <xs:documentation>A data type for a restriction of a data type.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:Datatype"/>
           <xs:element ref="cmf:FacetAbstract" minOccurs="0" maxOccurs="unbounded"/>
@@ -341,7 +344,7 @@
       <xs:documentation>A data type for an XML schema document.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:NamespacePrefixText" minOccurs="0"/>
           <xs:element ref="cmf:NamespaceURI"/>
@@ -375,7 +378,7 @@
       <xs:documentation>A data type for a union of data types.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:Datatype" maxOccurs="unbounded"/>
           <xs:element ref="cmf:UnionOfAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
@@ -420,7 +423,7 @@
       <xs:documentation>A data type constraining how white space within data values is handled.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
-      <xs:extension base="nc:ObjectType">
+      <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:WhiteSpaceValueCode"/>
           <xs:element ref="cmf:DefinitionText" minOccurs="0"/>
