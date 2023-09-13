@@ -38,8 +38,8 @@
     <xs:complexContent>
       <xs:extension base="structures:ObjectType">
         <xs:sequence>
-          <xs:element ref="cmf:Class"/>
-          <xs:element ref="cmf:Property" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:Class" minOccurs="0"/>
+          <xs:element ref="cmf:Property"/>
           <xs:element ref="cmf:AugmentationIndex"/>
           <xs:element ref="cmf:MinOccursQuantity"/>
           <xs:element ref="cmf:MaxOccursQuantity"/>
@@ -172,6 +172,7 @@
     <xs:complexContent>
       <xs:extension base="structures:ObjectType">
         <xs:sequence>
+          <xs:element ref="cmf:AugmentRecord" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:ModelItemAbstract" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:SchemaDocument" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:ModelAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
