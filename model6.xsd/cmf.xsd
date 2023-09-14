@@ -133,6 +133,22 @@
     </xs:annotation>
     <xs:union memberTypes="xs:nonNegativeInteger cmf:MaxOccursUnboundedCodeSimpleType"/>
   </xs:simpleType>
+  <xs:complexType name="LocalTermType">
+    <xs:annotation>
+      <xs:documentation>A data type for the meaning of a term that may appear within the name of a model component.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:TermName"/>
+          <xs:element ref="cmf:DefinitionText" minOccurs="0"/>
+          <xs:element ref="cmf:TermLiteralText" minOccurs="0"/>
+          <xs:element ref="cmf:SourceURIList" minOccurs="0"/>
+          <xs:element ref="cmf:SourceCitationText" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:complexType name="MaxOccursType">
     <xs:annotation>
       <xs:documentation>A data type for the maximum number of times a property may occur within a class.</xs:documentation>
@@ -260,6 +276,7 @@
           <xs:element ref="cmf:DefinitionText" minOccurs="0"/>
           <xs:element ref="cmf:NamespaceKindCode" minOccurs="0"/>
           <xs:element ref="cmf:AugmentRecord" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:LocalTerm" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:NamespaceAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -557,7 +574,7 @@
   </xs:element>
   <xs:element name="DefinitionText" type="nc:TextType">
     <xs:annotation>
-      <xs:documentation>A human-readable text definition of a data model component.</xs:documentation>
+      <xs:documentation>A human-readable text definition of a data model component or term.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="DeprecatedIndicator" type="xs-proxy:boolean">
@@ -613,6 +630,11 @@
   <xs:element name="ListOf" type="cmf:DatatypeType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data type for a list of values.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="LocalTerm" type="cmf:LocalTermType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data type for the meaning of a term that may appear within the name of a model component.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="MaxExclusive" type="cmf:AnyValueFacetType" substitutionGroup="cmf:FacetAbstract">
@@ -790,6 +812,16 @@
       <xs:documentation>A version attribute of an XML schema document.</xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:element name="SourceCitationText" type="xs-proxy:string">
+    <xs:annotation>
+      <xs:documentation>A plain text citation of, reference to, or bibliographic entry for an originating or authoritative document defining a local term</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SourceURIList" type="cmf:URIListType">
+    <xs:annotation>
+      <xs:documentation>A list of URIs, each of which is an identifier or locator for an originating or authoritative document defining a local term.</xs:documentation>
+    </xs:annotation>
+  </xs:element>    
   <xs:element name="StringValue" type="xs-proxy:string" substitutionGroup="cmf:AnyValueAbstract">
     <xs:annotation>
       <xs:documentation>A value of a facet, with a string value.</xs:documentation>
@@ -798,6 +830,16 @@
   <xs:element name="SubPropertyOf" type="cmf:PropertyType" nillable="true">
     <xs:annotation>
       <xs:documentation>An object property of which an object property is a subproperty.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="TermLiteralText" type="xs-proxy:string">
+    <xs:annotation>
+      <xs:documentation>A meaning of a local term provided as a full, plain-text form.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="TermName" type="xs-proxy:token">
+    <xs:annotation>
+      <xs:documentation>A name for a local term.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="TotalDigits" type="cmf:PositiveValueFacetType" substitutionGroup="cmf:FacetAbstract">
