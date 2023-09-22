@@ -120,6 +120,7 @@
           <xs:element ref="cmf:Property"/>
           <xs:element ref="cmf:MinOccursQuantity"/>
           <xs:element ref="cmf:MaxOccursQuantity"/>
+          <xs:element ref="cmf:DefinitionText" minOccurs="0"/>
           <xs:element ref="cmf:OrderedPropertyIndicator" minOccurs="0"/>
           <xs:element ref="cmf:AugmentationNamespace" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:HasPropertyAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
