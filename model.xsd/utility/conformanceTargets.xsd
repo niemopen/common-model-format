@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  targetNamespace="https://docs.oasis-open.org/niemopen/ns/specification/conformanceTargets/6.0/"
+  xmlns:ct="https://docs.oasis-open.org/niemopen/ns/specification/conformanceTargets/6.0/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  version="psd01"
+  xml:lang="en-US">
+  <xs:attribute name="conformanceTargets">
+    <xs:simpleType>
+      <xs:list itemType="xs:anyURI"/>
+    </xs:simpleType>
+  </xs:attribute>
+</xs:schema>
