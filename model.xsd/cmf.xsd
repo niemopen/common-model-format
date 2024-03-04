@@ -191,7 +191,6 @@
         <xs:sequence>
           <xs:element ref="cmf:AugmentRecord" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:ModelItemAbstract" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element ref="cmf:SchemaDocument" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:ModelAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -276,8 +275,14 @@
           <xs:element ref="cmf:NamespacePrefixText"/>
           <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
           <xs:element ref="cmf:NamespaceKindCode" minOccurs="0"/>
+          <xs:element ref="cmf:ConformanceTargetURIList" minOccurs="0"/>
+          <xs:element ref="cmf:DocumentFilePathText" minOccurs="0"/>
+          <xs:element ref="cmf:NIEMVersionText" minOccurs="0"/>
+          <xs:element ref="cmf:SchemaVersionText" minOccurs="0"/>
+          <xs:element ref="cmf:SchemaLanguageName" minOccurs="0"/>
+          <xs:element ref="cmf:ImportDocumentationText" minOccurs="0"/>
           <xs:element ref="cmf:AugmentRecord" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element ref="cmf:LocalTerm" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:LocalTerm" minOccurs="0" maxOccurs="unbounded"/>          
           <xs:element ref="cmf:NamespaceAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -354,24 +359,6 @@
           <xs:element ref="cmf:Datatype"/>
           <xs:element ref="cmf:FacetAbstract" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:RestrictionOfAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="SchemaDocumentType">
-    <xs:annotation>
-      <xs:documentation>A data type for an XML schema document.</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="structures:ObjectType">
-        <xs:sequence>
-          <xs:element ref="cmf:NamespacePrefixText" minOccurs="0"/>
-          <xs:element ref="cmf:NamespaceURI"/>
-          <xs:element ref="cmf:ConformanceTargetURIList" minOccurs="0"/>
-          <xs:element ref="cmf:DocumentFilePathText" minOccurs="0"/>
-          <xs:element ref="cmf:NIEMVersionText" minOccurs="0"/>
-          <xs:element ref="cmf:SchemaVersionText" minOccurs="0"/>
-          <xs:element ref="cmf:SchemaLanguageName" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -585,7 +572,7 @@
   </xs:element>
   <xs:element name="DocumentationText" type="nc:TextType">
     <xs:annotation>
-      <xs:documentation>A human-readable text definition of a data model component or term.</xs:documentation>
+      <xs:documentation>A human-readable text definition of a data model component or term, or documentation of a namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Enumeration" type="cmf:AnyValueFacetType" substitutionGroup="cmf:FacetAbstract">
@@ -623,6 +610,11 @@
       <xs:documentation>An augmentation point for HasPropertyType.</xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:element name="ImportDocumentationText" type="nc:TextType">
+    <xs:annotation>
+      <xs:documentation>Human-readable documentation of an import element importing this nameespace</xs:documentation>
+    </xs:annotation>
+  </xs:element>    
   <xs:element name="Length" type="cmf:NonNegativeValueFacetType" substitutionGroup="cmf:FacetAbstract">
     <xs:annotation>
       <xs:documentation>A restriction of the length of a data type. Unit of length varies depending on the type that is being derived from.</xs:documentation>
@@ -796,11 +788,6 @@
   <xs:element name="RestrictionOfAugmentationPoint" abstract="true">
     <xs:annotation>
       <xs:documentation>An augmentation point for RestrictionOfType.</xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:element name="SchemaDocument" type="cmf:SchemaDocumentType">
-    <xs:annotation>
-      <xs:documentation>An XML schema document.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="SchemaLanguageName" type="niem-xs:language">

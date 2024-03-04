@@ -9,12 +9,47 @@
     <NamespacePrefixText>cmf</NamespacePrefixText>
     <DocumentationText>The NIEM Common Model Format (CMF).</DocumentationText>
     <NamespaceKindCode>EXTENSION</NamespaceKindCode>
+    <ConformanceTargetURIList>https://docs.oasis-open.org/niemopen/ns/specification/XNDR/6.0/#ExtensionSchemaDocument</ConformanceTargetURIList>
+    <DocumentFilePathText>cmf.xsd</DocumentFilePathText>
+    <NIEMVersionText>6.0</NIEMVersionText>
+    <SchemaVersionText>alpha-1</SchemaVersionText>
+    <SchemaLanguageName>en-US</SchemaLanguageName>
   </Namespace>
   <Namespace structures:id="nc">
     <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/</NamespaceURI>
     <NamespacePrefixText>nc</NamespacePrefixText>
     <DocumentationText>NIEM Core.</DocumentationText>
     <NamespaceKindCode>CORE</NamespaceKindCode>
+    <ConformanceTargetURIList>https://docs.oasis-open.org/niemopen/ns/specification/XNDR/6.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
+    <DocumentFilePathText>niem-core.xsd</DocumentFilePathText>
+    <NIEMVersionText>6.0</NIEMVersionText>
+    <SchemaVersionText>psd01</SchemaVersionText>
+    <SchemaLanguageName>en-US</SchemaLanguageName>
+  </Namespace>
+  <Namespace structures:id="niem-xs">
+    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/</NamespaceURI>
+    <NamespacePrefixText>niem-xs</NamespacePrefixText>
+    <DocumentationText>Proxy types that carry dictionary metadata and have XML data type simple contents.</DocumentationText>
+    <NamespaceKindCode>BUILTIN</NamespaceKindCode>
+    <ConformanceTargetURIList>https://docs.oasis-open.org/niemopen/ns/specification/XNDR/6.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
+    <DocumentFilePathText>adapters/niem-xs.xsd</DocumentFilePathText>
+    <NIEMVersionText>6</NIEMVersionText>
+    <SchemaVersionText>psd01</SchemaVersionText>
+    <SchemaLanguageName>en-US</SchemaLanguageName>
+    <LocalTerm>
+      <TermName>maxInclusive</TermName>
+      <DocumentationText>An inclusive maximum value. To be valid, a value must be less than or equal to the value of xs:maxInclusive.</DocumentationText>
+    </LocalTerm>
+  </Namespace>
+  <Namespace structures:id="structures">
+    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/</NamespaceURI>
+    <NamespacePrefixText>structures</NamespacePrefixText>
+    <DocumentationText>The structures namespace provides base types and other components for definition of NIEM-conformant XML schemas.</DocumentationText>
+    <NamespaceKindCode>BUILTIN</NamespaceKindCode>
+    <DocumentFilePathText>utility/structures.xsd</DocumentFilePathText>
+    <NIEMVersionText>6</NIEMVersionText>
+    <SchemaVersionText>psd01</SchemaVersionText>
+    <SchemaLanguageName>en-US</SchemaLanguageName>
   </Namespace>
   <Namespace structures:id="xml">
     <NamespaceURI>http://www.w3.org/XML/1998/namespace</NamespaceURI>
@@ -124,7 +159,7 @@
   <Property structures:id="cmf.DocumentationText">
     <Name>DocumentationText</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A human-readable text definition of a data model component or term.</DocumentationText>
+    <DocumentationText>A human-readable text definition of a data model component or term, or documentation of a namespace.</DocumentationText>
     <Class structures:ref="nc.TextType" xsi:nil="true"/>
   </Property>
   <Property structures:id="cmf.DocumentFilePathText">
@@ -171,6 +206,12 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>An occurrence of a property as content of a class.</DocumentationText>
     <Class structures:ref="cmf.HasPropertyType" xsi:nil="true"/>
+  </Property>
+  <Property structures:id="cmf.ImportDocumentationText">
+    <Name>ImportDocumentationText</Name>
+    <Namespace structures:ref="cmf" xsi:nil="true"/>
+    <DocumentationText>Human-readable documentation of an import element importing this nameespace</DocumentationText>
+    <Class structures:ref="nc.TextType" xsi:nil="true"/>
   </Property>
   <Property structures:id="cmf.Length">
     <Name>Length</Name>
@@ -355,12 +396,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A restriction of a data type.</DocumentationText>
     <Class structures:ref="cmf.RestrictionOfType" xsi:nil="true"/>
-  </Property>
-  <Property structures:id="cmf.SchemaDocument">
-    <Name>SchemaDocument</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>An XML schema document.</DocumentationText>
-    <Class structures:ref="cmf.SchemaDocumentType" xsi:nil="true"/>
   </Property>
   <Property structures:id="cmf.SchemaLanguageName">
     <Name>SchemaLanguageName</Name>
@@ -684,11 +719,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
-    <HasProperty>
-      <Property structures:ref="cmf.SchemaDocument" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
-    </HasProperty>
   </Class>
   <Class structures:id="cmf.NamespaceType">
     <Name>NamespaceType</Name>
@@ -712,6 +742,36 @@
     </HasProperty>
     <HasProperty>
       <Property structures:ref="cmf.NamespaceKindCode" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty>
+      <Property structures:ref="cmf.ConformanceTargetURIList" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty>
+      <Property structures:ref="cmf.DocumentFilePathText" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty>
+      <Property structures:ref="cmf.NIEMVersionText" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty>
+      <Property structures:ref="cmf.SchemaVersionText" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty>
+      <Property structures:ref="cmf.SchemaLanguageName" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty>
+      <Property structures:ref="cmf.ImportDocumentationText" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
@@ -830,46 +890,6 @@
       <Property structures:ref="cmf.FacetAbstract" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
-    </HasProperty>
-  </Class>
-  <Class structures:id="cmf.SchemaDocumentType">
-    <Name>SchemaDocumentType</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data type for an XML schema document.</DocumentationText>
-    <HasProperty>
-      <Property structures:ref="cmf.NamespacePrefixText" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-    <HasProperty>
-      <Property structures:ref="cmf.NamespaceURI" xsi:nil="true"/>
-      <MinOccursQuantity>1</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-    <HasProperty>
-      <Property structures:ref="cmf.ConformanceTargetURIList" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-    <HasProperty>
-      <Property structures:ref="cmf.DocumentFilePathText" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-    <HasProperty>
-      <Property structures:ref="cmf.NIEMVersionText" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-    <HasProperty>
-      <Property structures:ref="cmf.SchemaVersionText" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-    <HasProperty>
-      <Property structures:ref="cmf.SchemaLanguageName" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
   </Class>
   <Class structures:id="cmf.UnionOfType">
@@ -1071,46 +1091,4 @@
     <Name>token</Name>
     <Namespace structures:ref="xs" xsi:nil="true"/>
   </Datatype>
-  <SchemaDocument>
-    <NamespacePrefixText>niem-xs</NamespacePrefixText>
-    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/</NamespaceURI>
-    <ConformanceTargetURIList>https://docs.oasis-open.org/niemopen/ns/specification/XNDR/6.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
-    <DocumentFilePathText>adapters/niem-xs.xsd</DocumentFilePathText>
-    <NIEMVersionText>6</NIEMVersionText>
-    <SchemaVersionText>psd01</SchemaVersionText>
-    <SchemaLanguageName>en-US</SchemaLanguageName>
-  </SchemaDocument>
-  <SchemaDocument>
-    <NamespacePrefixText>xml</NamespacePrefixText>
-    <NamespaceURI>http://www.w3.org/XML/1998/namespace</NamespaceURI>
-    <DocumentFilePathText>external/xml.xsd</DocumentFilePathText>
-    <NIEMVersionText/>
-    <SchemaLanguageName>en</SchemaLanguageName>
-  </SchemaDocument>
-  <SchemaDocument>
-    <NamespacePrefixText>structures</NamespacePrefixText>
-    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/</NamespaceURI>
-    <DocumentFilePathText>utility/structures.xsd</DocumentFilePathText>
-    <NIEMVersionText>6</NIEMVersionText>
-    <SchemaVersionText>psd01</SchemaVersionText>
-    <SchemaLanguageName>en-US</SchemaLanguageName>
-  </SchemaDocument>
-  <SchemaDocument>
-    <NamespacePrefixText>cmf</NamespacePrefixText>
-    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/specification/cmf/1.0/</NamespaceURI>
-    <ConformanceTargetURIList>https://docs.oasis-open.org/niemopen/ns/specification/XNDR/6.0/#ExtensionSchemaDocument</ConformanceTargetURIList>
-    <DocumentFilePathText>cmf.xsd</DocumentFilePathText>
-    <NIEMVersionText>6</NIEMVersionText>
-    <SchemaVersionText>alpha-1</SchemaVersionText>
-    <SchemaLanguageName>en-US</SchemaLanguageName>
-  </SchemaDocument>
-  <SchemaDocument>
-    <NamespacePrefixText>nc</NamespacePrefixText>
-    <NamespaceURI>https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/</NamespaceURI>
-    <ConformanceTargetURIList>https://docs.oasis-open.org/niemopen/ns/specification/XNDR/6.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
-    <DocumentFilePathText>niem-core.xsd</DocumentFilePathText>
-    <NIEMVersionText>6</NIEMVersionText>
-    <SchemaVersionText>psd01</SchemaVersionText>
-    <SchemaLanguageName>en-US</SchemaLanguageName>
-  </SchemaDocument>
 </Model>
