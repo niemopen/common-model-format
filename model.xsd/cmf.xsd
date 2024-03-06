@@ -9,7 +9,7 @@
   xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   ct:conformanceTargets="https://docs.oasis-open.org/niemopen/ns/specification/XNDR/6.0/#ExtensionSchemaDocument"
-  version="alpha-1"
+  version="1.0-alpha.2"
   xml:lang="en-US">
   <xs:annotation>
     <xs:documentation>The NIEM Common Model Format (CMF).</xs:documentation>
@@ -38,8 +38,8 @@
     <xs:complexContent>
       <xs:extension base="structures:ObjectType">
         <xs:sequence>
-          <xs:element ref="cmf:Class" minOccurs="0"/>
-          <xs:element ref="cmf:Property"/>
+          <xs:element ref="cmf:Class"/>
+          <xs:element ref="cmf:PropertyAbstract"/>
           <xs:element ref="cmf:AugmentationIndex"/>
           <xs:element ref="cmf:MinOccursQuantity"/>
           <xs:element ref="cmf:MaxOccursQuantity"/>
@@ -94,6 +94,21 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  <xs:complexType name="DataPropertyType">
+    <xs:annotation>
+      <xs:documentation>A data type for a data property</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="cmf:PropertyType">
+        <xs:sequence>
+          <xs:element ref="cmf:Datatype" minOccurs="0"/> <!-- could be abstract -->
+          <xs:element ref="cmf:AttributeIndicator" minOccurs="0"/>
+          <xs:element ref="cmf:RefAttributeIndicator" minOccurs="0"/>
+          <xs:element ref="cmf:DataPropertyAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:complexType name="DatatypeType">
     <xs:annotation>
       <xs:documentation>A data type for a data type.</xs:documentation>
@@ -117,7 +132,7 @@
     <xs:complexContent>
       <xs:extension base="structures:ObjectType">
         <xs:sequence>
-          <xs:element ref="cmf:Property"/>
+          <xs:element ref="cmf:PropertyAbstract"/>
           <xs:element ref="cmf:MinOccursQuantity"/>
           <xs:element ref="cmf:MaxOccursQuantity"/>
           <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
@@ -302,6 +317,20 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  <xs:complexType name="ObjectPropertyType">
+    <xs:annotation>
+      <xs:documentation>A data type for an object property</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="cmf:PropertyType">
+        <xs:sequence>
+          <xs:element ref="cmf:Class"/>
+          <xs:element ref="cmf:ReferenceableIndicator" minOccurs="0"/>
+          <xs:element ref="cmf:ObjectPropertyAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:complexType name="PatternFacetType">
     <xs:annotation>
       <xs:documentation>A data type for restricting the content of a datatype to values that match a specific pattern, provided as a regular expression.</xs:documentation>
@@ -332,17 +361,12 @@
   </xs:complexType>
   <xs:complexType name="PropertyType">
     <xs:annotation>
-      <xs:documentation>A data type for an object property</xs:documentation>
+      <xs:documentation>An abstract data type for a property</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="cmf:ComponentType">
         <xs:sequence>
           <xs:element ref="cmf:SubPropertyOf" minOccurs="0"/>
-          <xs:element ref="cmf:Class" minOccurs="0"/>
-          <xs:element ref="cmf:Datatype" minOccurs="0"/>
-          <xs:element ref="cmf:AttributeIndicator" minOccurs="0"/>
-          <xs:element ref="cmf:RefAttributeIndicator" minOccurs="0"/>
-          <xs:element ref="cmf:ReferenceableIndicator" minOccurs="0"/>
           <xs:element ref="cmf:RelationshipPropertyIndicator" minOccurs="0"/>
           <xs:element ref="cmf:PropertyAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
@@ -550,6 +574,16 @@
       <xs:documentation>A list of conformance target identifiers.</xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:element name="DataProperty" type="cmf:DataPropertyType" substitutionGroup="cmf:PropertyAbstract" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data property.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DataPropertyAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for DataPropertyType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:element name="Datatype" type="cmf:DatatypeType" substitutionGroup="cmf:ModelItemAbstract" nillable="true">
     <xs:annotation>
       <xs:documentation>A data type.</xs:documentation>
@@ -730,6 +764,16 @@
       <xs:documentation>An augmentation point for NonNegativeValueFacetType.</xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:element name="ObjectProperty" type="cmf:ObjectPropertyType" substitutionGroup="cmf:PropertyAbstract" nillable="true">
+    <xs:annotation>
+      <xs:documentation>An object property.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ObjectPropertyAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for ObjectPropertyType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:element name="OrderedPropertyIndicator" type="niem-xs:boolean">
     <xs:annotation>
       <xs:documentation>True if the order of a repeated property is significant.</xs:documentation>
@@ -755,9 +799,9 @@
       <xs:documentation>An augmentation point for PositiveValueFacetType.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="Property" type="cmf:PropertyType" substitutionGroup="cmf:ModelItemAbstract" nillable="true">
+  <xs:element name="PropertyAbstract" type="cmf:PropertyType" abstract="true" substitutionGroup="cmf:ModelItemAbstract" nillable="true">
     <xs:annotation>
-      <xs:documentation>An object property.</xs:documentation>
+      <xs:documentation>A property.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="PropertyAugmentationPoint" abstract="true">
