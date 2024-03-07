@@ -96,7 +96,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A namespace responsible for augmenting a class with a property.</DocumentationText>
     <Class structures:ref="cmf.NamespaceType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </ObjectProperty>
   <ObjectProperty structures:id="cmf.AugmentRecord">
     <Name>AugmentRecord</Name>
@@ -110,7 +109,6 @@
     <DocumentationText>A class.</DocumentationText>
     <SubPropertyOf structures:ref="cmf.ModelItemAbstract" xsi:nil="true"/>
     <Class structures:ref="cmf.ClassType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </ObjectProperty>
   <ObjectProperty structures:id="cmf.CodeListBinding">
     <Name>CodeListBinding</Name>
@@ -148,7 +146,6 @@
     <DocumentationText>A data property.</DocumentationText>
     <SubPropertyOf structures:ref="cmf.PropertyAbstract" xsi:nil="true"/>
     <Class structures:ref="cmf.DataPropertyType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </ObjectProperty>
   <ObjectProperty structures:id="cmf.Datatype">
     <Name>Datatype</Name>
@@ -156,7 +153,6 @@
     <DocumentationText>A data type.</DocumentationText>
     <SubPropertyOf structures:ref="cmf.ModelItemAbstract" xsi:nil="true"/>
     <Class structures:ref="cmf.DatatypeType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </ObjectProperty>
   <DataProperty structures:id="cmf.DeprecatedIndicator">
     <Name>DeprecatedIndicator</Name>
@@ -188,7 +184,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A extension of a class.</DocumentationText>
     <Class structures:ref="cmf.ClassType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </ObjectProperty>
   <DataProperty structures:id="cmf.ExternalAdapterTypeIndicator">
     <Name>ExternalAdapterTypeIndicator</Name>
@@ -233,14 +228,12 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A data type for a list of values.</DocumentationText>
     <Class structures:ref="cmf.DatatypeType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </ObjectProperty>
   <ObjectProperty structures:id="cmf.LocalTerm">
     <Name>LocalTerm</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A data type for the meaning of a term that may appear within the name of a model component.</DocumentationText>
     <Class structures:ref="cmf.LocalTermType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </ObjectProperty>
   <ObjectProperty structures:id="cmf.MaxExclusive">
     <Name>MaxExclusive</Name>
@@ -320,7 +313,6 @@
     <DocumentationText>A namespace of a data model component.</DocumentationText>
     <SubPropertyOf structures:ref="cmf.ModelItemAbstract" xsi:nil="true"/>
     <Class structures:ref="cmf.NamespaceType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </ObjectProperty>
   <DataProperty structures:id="cmf.NamespaceKindCode">
     <Name>NamespaceKindCode</Name>
@@ -359,7 +351,6 @@
     <DocumentationText>An object property.</DocumentationText>
     <SubPropertyOf structures:ref="cmf.PropertyAbstract" xsi:nil="true"/>
     <Class structures:ref="cmf.ObjectPropertyType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </ObjectProperty>
   <DataProperty structures:id="cmf.OrderedPropertyIndicator">
     <Name>OrderedPropertyIndicator</Name>
@@ -388,7 +379,6 @@
     <AbstractIndicator>true</AbstractIndicator>
     <SubPropertyOf structures:ref="cmf.ModelItemAbstract" xsi:nil="true"/>
     <Class structures:ref="cmf.PropertyType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </ObjectProperty>
   <DataProperty structures:id="cmf.RefAttributeIndicator">
     <Name>RefAttributeIndicator</Name>
@@ -396,11 +386,11 @@
     <DocumentationText>True for a property that is an object reference attribute.</DocumentationText>
     <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
   </DataProperty>
-  <DataProperty structures:id="cmf.ReferenceableIndicator">
-    <Name>ReferenceableIndicator</Name>
+  <DataProperty structures:id="cmf.ReferenceCode">
+    <Name>ReferenceCode</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>True when objects of a class may be referenced instead of inline.</DocumentationText>
-    <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
+    <DocumentationText>A code describing how a property may be referenced (or must appear inline).</DocumentationText>
+    <Datatype structures:ref="cmf.ReferenceCodeType" xsi:nil="true"/>
   </DataProperty>
   <DataProperty structures:id="cmf.RelationshipPropertyIndicator">
     <Name>RelationshipPropertyIndicator</Name>
@@ -450,7 +440,6 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>An object property of which an object property is a subproperty.</DocumentationText>
     <Class structures:ref="cmf.PropertyType" xsi:nil="true"/>
-    <ReferenceableIndicator>true</ReferenceableIndicator>
   </ObjectProperty>
   <DataProperty structures:id="cmf.TermLiteralText">
     <Name>TermLiteralText</Name>
@@ -517,6 +506,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.AugmentRecordType">
     <Name>AugmentRecordType</Name>
@@ -547,6 +537,7 @@
       <MinOccursQuantity>1</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.ClassType">
     <Name>ClassType</Name>
@@ -575,6 +566,12 @@
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
       <OrderedPropertyIndicator>true</OrderedPropertyIndicator>
     </HasProperty>
+    <HasProperty>
+      <DataProperty structures:ref="cmf.ReferenceCode" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.CodeListBindingType">
     <Name>CodeListBindingType</Name>
@@ -595,6 +592,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.ComponentType">
     <Name>ComponentType</Name>
@@ -627,6 +625,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.DataPropertyType">
     <Name>DataPropertyType</Name>
@@ -649,6 +648,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.DatatypeType">
     <Name>DatatypeType</Name>
@@ -676,6 +676,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.HasPropertyType">
     <Name>HasPropertyType</Name>
@@ -712,6 +713,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.LocalTermType">
     <Name>LocalTermType</Name>
@@ -742,6 +744,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.ModelType">
     <Name>ModelType</Name>
@@ -758,6 +761,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.NamespaceType">
     <Name>NamespaceType</Name>
@@ -824,6 +828,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.NonNegativeValueFacetType">
     <Name>NonNegativeValueFacetType</Name>
@@ -840,6 +845,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.ObjectPropertyType">
     <Name>ObjectPropertyType</Name>
@@ -853,10 +859,11 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
     <HasProperty>
-      <DataProperty structures:ref="cmf.ReferenceableIndicator" xsi:nil="true"/>
+      <DataProperty structures:ref="cmf.ReferenceCode" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.PatternFacetType">
     <Name>PatternFacetType</Name>
@@ -873,6 +880,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.PositiveValueFacetType">
     <Name>PositiveValueFacetType</Name>
@@ -889,6 +897,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.PropertyType">
     <Name>PropertyType</Name>
@@ -906,6 +915,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.RestrictionOfType">
     <Name>RestrictionOfType</Name>
@@ -922,6 +932,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.UnionOfType">
     <Name>UnionOfType</Name>
@@ -933,6 +944,7 @@
       <MinOccursQuantity>1</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.WhiteSpaceFacetType">
     <Name>WhiteSpaceFacetType</Name>
@@ -949,6 +961,7 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="nc.TextType">
     <Name>TextType</Name>
@@ -965,6 +978,7 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
       <DocumentationText>lang (as an attribute name) denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification. Notes Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility. See BCP 47 at http://www.rfc-editor.org/rfc/bcp/bcp47.txt and the IANA language subtag registry at http://www.iana.org/assignments/language-subtag-registry for further information. The union allows for the 'un-declaration' of xml:lang with the empty string.</DocumentationText>
     </HasProperty>
+    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Datatype structures:id="cmf.MaxOccursType">
     <Name>MaxOccursType</Name>
@@ -1038,6 +1052,26 @@
       <Pattern>
         <StringValue>[\i-[:]][\c-[:]]*</StringValue>
       </Pattern>
+    </RestrictionOf>
+  </Datatype>
+  <Datatype structures:id="cmf.ReferenceCodeType">
+    <Name>ReferenceCodeType</Name>
+    <Namespace structures:ref="cmf" xsi:nil="true"/>
+    <DocumentationText>A data type for a code describing how a property may be referenced (or must appear inline).</DocumentationText>
+    <RestrictionOf>
+      <Datatype structures:ref="xs.token" xsi:nil="true"/>
+      <Enumeration>
+        <StringValue>ANY</StringValue>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>NONE</StringValue>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>REF</StringValue>
+      </Enumeration>
+      <Enumeration>
+        <StringValue>URI</StringValue>
+      </Enumeration>
     </RestrictionOf>
   </Datatype>
   <Datatype structures:id="cmf.URIListType">
