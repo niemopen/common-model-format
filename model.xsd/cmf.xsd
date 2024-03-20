@@ -38,11 +38,12 @@
     <xs:complexContent>
       <xs:extension base="structures:ObjectType">
         <xs:sequence>
-          <xs:element ref="cmf:Class"/>
+          <xs:element ref="cmf:Class" minOccurs="0"/>
           <xs:element ref="cmf:PropertyAbstract"/>
           <xs:element ref="cmf:AugmentationIndex"/>
           <xs:element ref="cmf:MinOccursQuantity"/>
           <xs:element ref="cmf:MaxOccursQuantity"/>
+          <xs:element ref="cmf:GlobalAugmentationCode" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -102,7 +103,7 @@
     <xs:complexContent>
       <xs:extension base="cmf:PropertyType">
         <xs:sequence>
-          <xs:element ref="cmf:Datatype" minOccurs="0"/> <!-- could be abstract -->
+          <xs:element ref="cmf:Datatype" minOccurs="0"/>
           <xs:element ref="cmf:AttributeIndicator" minOccurs="0"/>
           <xs:element ref="cmf:RefAttributeIndicator" minOccurs="0"/>
           <xs:element ref="cmf:DataPropertyAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
@@ -125,6 +126,22 @@
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GlobalAugmentationCodeType">
+    <xs:simpleContent>
+      <xs:restriction base="niem-xs:token">
+        <xs:enumeration value="ASSOCIATION">
+          <xs:annotation>
+            <xs:documentation>An augmentation of all Association objects.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="OBJECT">
+          <xs:annotation>
+            <xs:documentation>An augmentation of all ordinary Objects (not Association objects).</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="HasPropertyType">
     <xs:annotation>
@@ -172,7 +189,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="cmf:MaxOccursSimpleType">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -194,7 +211,7 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="cmf:MaxOccursUnboundedCodeSimpleType">
-        <xs:anyAttribute processContents="lax"/>
+        <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -205,79 +222,61 @@
     <xs:complexContent>
       <xs:extension base="structures:ObjectType">
         <xs:sequence>
-          <xs:element ref="cmf:AugmentRecord" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:ModelItemAbstract" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:ModelAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:simpleType name="NCNameSimpleType">
-    <xs:restriction base="xs:Name">
-      <xs:pattern value="[\i-[:]][\c-[:]]*"/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name="NCNameType">
-    <xs:simpleContent>
-      <xs:extension base="cmf:NCNameSimpleType">
-        <xs:anyAttribute processContents="lax"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:simpleType name="NamespaceKindCodeSimpleType">
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="EXTENSION">
-        <xs:annotation>
-          <xs:documentation>An extension namespace.</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="DOMAIN">
-        <xs:annotation>
-          <xs:documentation>A namespace for a NIEM domain.</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CORE">
-        <xs:annotation>
-          <xs:documentation>The namespace for the NIEM core.</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="OTHERNIEM">
-        <xs:annotation>
-          <xs:documentation>A namespace in the publication or release domain, but not core, domain, or builtin.</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="BUILTIN">
-        <xs:annotation>
-          <xs:documentation>A builtin namespace (appinfo, code-lists, conformance, proxy, structures).</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="XSD">
-        <xs:annotation>
-          <xs:documentation>http://www.w3.org/2001/XMLSchema</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="XML">
-        <xs:annotation>
-          <xs:documentation>http://www.w3.org/XML/1998/namespace</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="EXTERNAL">
-        <xs:annotation>
-          <xs:documentation>A non-conforming namespace.</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="UNKNOWN">
-        <xs:annotation>
-          <xs:documentation>A namespace of an unknown kind.</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
   <xs:complexType name="NamespaceKindCodeType">
     <xs:simpleContent>
-      <xs:extension base="cmf:NamespaceKindCodeSimpleType">
-        <xs:anyAttribute processContents="lax"/>
-      </xs:extension>
+      <xs:restriction base="niem-xs:token">
+        <xs:enumeration value="BUILTIN">
+          <xs:annotation>
+            <xs:documentation>A builtin namespace (appinfo, code-lists, conformance, proxy, structures).</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="CORE">
+          <xs:annotation>
+            <xs:documentation>The namespace for the NIEM core.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="DOMAIN">
+          <xs:annotation>
+            <xs:documentation>A namespace for a NIEM domain.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="EXTENSION">
+          <xs:annotation>
+            <xs:documentation>An extension namespace.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="EXTERNAL">
+          <xs:annotation>
+            <xs:documentation>A non-conforming namespace.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="OTHERNIEM">
+          <xs:annotation>
+            <xs:documentation>A namespace in the publication or release domain, but not core, domain, or builtin.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="UNKNOWN">
+          <xs:annotation>
+            <xs:documentation>A namespace of an unknown kind.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="XML">
+          <xs:annotation>
+            <xs:documentation>http://www.w3.org/XML/1998/namespace</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="XSD">
+          <xs:annotation>
+            <xs:documentation>http://www.w3.org/2001/XMLSchema</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="NamespaceType">
@@ -298,7 +297,7 @@
           <xs:element ref="cmf:SchemaLanguageName" minOccurs="0"/>
           <xs:element ref="cmf:ImportDocumentationText" minOccurs="0"/>
           <xs:element ref="cmf:AugmentRecord" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element ref="cmf:LocalTerm" minOccurs="0" maxOccurs="unbounded"/>          
+          <xs:element ref="cmf:LocalTerm" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:NamespaceAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -380,10 +379,10 @@
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base="niem-xs:token">
+        <xs:enumeration value="ANY"/>
         <xs:enumeration value="NONE"/>
         <xs:enumeration value="REF"/>
         <xs:enumeration value="URI"/>
-        <xs:enumeration value="ANY"/>
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
@@ -401,22 +400,6 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:simpleType name="URIListSimpleType">
-    <xs:annotation>
-      <xs:documentation>A data type for a white space-delimited list of URIs.</xs:documentation>
-    </xs:annotation>
-    <xs:list itemType="xs:anyURI"/>
-  </xs:simpleType>
-  <xs:complexType name="URIListType">
-    <xs:annotation>
-      <xs:documentation>A data type for a white space-delimited list of URIs.</xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="cmf:URIListSimpleType">
-        <xs:anyAttribute processContents="lax"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
   <xs:complexType name="UnionOfType">
     <xs:annotation>
       <xs:documentation>A data type for a union of data types.</xs:documentation>
@@ -430,36 +413,44 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:simpleType name="WhiteSpaceFacetCodeSimpleType">
+  <xs:simpleType name="URIListSimpleType">
     <xs:annotation>
-      <xs:documentation>A data type for a specification of white space for a data type.</xs:documentation>
+      <xs:documentation>A data type for a white space-delimited list of URIs.</xs:documentation>
     </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="collapse">
-        <xs:annotation>
-          <xs:documentation>After the processing implied by replace, contiguous sequences of #x20's are collapsed to a single #x20, and leading and trailing #x20's are removed.</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="preserve">
-        <xs:annotation>
-          <xs:documentation>No normalization is done, the value is not changed (this is the behavior required by [XML 1.0 (Second Edition)] for element content)</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="replace">
-        <xs:annotation>
-          <xs:documentation>All occurrences of #x9 (tab), #xA (line feed) and #xD (carriage return) are replaced with #x20 (space)</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
+    <xs:list itemType="xs:anyURI"/>
   </xs:simpleType>
+  <xs:complexType name="URIListType">
+    <xs:annotation>
+      <xs:documentation>A data type for a white space-delimited list of URIs.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="cmf:URIListSimpleType">
+        <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name="WhiteSpaceFacetCodeType">
     <xs:annotation>
       <xs:documentation>A data type for a specification of white space for a data type.</xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base="cmf:WhiteSpaceFacetCodeSimpleType">
-        <xs:anyAttribute processContents="lax"/>
-      </xs:extension>
+      <xs:restriction base="niem-xs:string">
+        <xs:enumeration value="collapse">
+          <xs:annotation>
+            <xs:documentation>After the processing implied by replace, contiguous sequences of #x20's are collapsed to a single #x20, and leading and trailing #x20's are removed.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="preserve">
+          <xs:annotation>
+            <xs:documentation>No normalization is done, the value is not changed (this is the behavior required by [XML 1.0 (Second Edition)] for element content)</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="replace">
+          <xs:annotation>
+            <xs:documentation>All occurrences of #x9 (tab), #xA (line feed) and #xD (carriage return) are replaced with #x20 (space)</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="WhiteSpaceFacetType">
@@ -476,39 +467,31 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:simpleType name="WhiteSpaceValueCodeSimpleType">
-    <xs:annotation>
-      <xs:documentation>A data type for a specification of white space for a data type.</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="collapse">
-        <xs:annotation>
-          <xs:documentation>After the processing implied by replace, contiguous sequences of #x20's are collapsed to a single #x20, and leading and trailing #x20's are removed.</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="preserve">
-        <xs:annotation>
-          <xs:documentation>No normalization is done, the value is not changed (this is the behavior required by [XML 1.0 (Second Edition)] for element content)</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="replace">
-        <xs:annotation>
-          <xs:documentation>All occurrences of #x9 (tab), #xA (line feed) and #xD (carriage return) are replaced with #x20 (space)</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
   <xs:complexType name="WhiteSpaceValueCodeType">
     <xs:annotation>
       <xs:documentation>A data type for a specification of white space for a data type.</xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base="cmf:WhiteSpaceValueCodeSimpleType">
-        <xs:anyAttribute processContents="lax"/>
-      </xs:extension>
+      <xs:restriction base="niem-xs:string">
+        <xs:enumeration value="collapse">
+          <xs:annotation>
+            <xs:documentation>After the processing implied by replace, contiguous sequences of #x20's are collapsed to a single #x20, and leading and trailing #x20's are removed.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="preserve">
+          <xs:annotation>
+            <xs:documentation>No normalization is done, the value is not changed (this is the behavior required by [XML 1.0 (Second Edition)] for element content)</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="replace">
+          <xs:annotation>
+            <xs:documentation>All occurrences of #x9 (tab), #xA (line feed) and #xD (carriage return) are replaced with #x20 (space)</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name="AbstractIndicator" type="niem-xs:boolean">
+  <xs:element name="AbstractIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
       <xs:documentation>True if a component is a base for extension, and must be specialized to be used directly; false if a component may be used directly.</xs:documentation>
     </xs:annotation>
@@ -523,22 +506,17 @@
       <xs:documentation>An augmentation point for AnyValueFacetType.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AttributeIndicator" type="niem-xs:boolean">
+  <xs:element name="AttributeIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
       <xs:documentation>True for properties represented as attributes in XML.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AugmentRecord" type="cmf:AugmentRecordType">
-    <xs:annotation>
-      <xs:documentation>An augmentation of a class that is augmented with a property by a namespace.</xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:element name="AugmentableIndicator" type="niem-xs:boolean">
+  <xs:element name="AugmentableIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
       <xs:documentation>True if the class can be augmented with additional properties.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AugmentationIndex" type="niem-xs:integer">
+  <xs:element name="AugmentationIndex" type="niem-xs:integer" nillable="true">
     <xs:annotation>
       <xs:documentation>An index of an augmentation property within an augmentation type. Negative (-1) for augmentation property not within an augmentation type.</xs:documentation>
     </xs:annotation>
@@ -546,6 +524,11 @@
   <xs:element name="AugmentationNamespace" type="cmf:NamespaceType" nillable="true">
     <xs:annotation>
       <xs:documentation>A namespace responsible for augmenting a class with a property.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AugmentRecord" type="cmf:AugmentRecordType">
+    <xs:annotation>
+      <xs:documentation>An augmentation of a class that is augmented with a property by a namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Class" type="cmf:ClassType" substitutionGroup="cmf:ModelItemAbstract" nillable="true">
@@ -563,17 +546,17 @@
       <xs:documentation>An element for connecting simple content defined by an XML Schema component to a a column of a code list.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="CodeListColumnName" type="niem-xs:string">
+  <xs:element name="CodeListColumnName" type="niem-xs:string" nillable="true">
     <xs:annotation>
       <xs:documentation>A local name for a code list column within a code list.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="CodeListConstrainingIndicator" type="niem-xs:boolean">
+  <xs:element name="CodeListConstrainingIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
       <xs:documentation>True when a code list binding constrains the validity of a code list value, false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="CodeListURI" type="niem-xs:anyURI">
+  <xs:element name="CodeListURI" type="niem-xs:anyURI" nillable="true">
     <xs:annotation>
       <xs:documentation>A universal identifier for a code list.</xs:documentation>
     </xs:annotation>
@@ -583,7 +566,7 @@
       <xs:documentation>An augmentation point for ComponentType.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="ConformanceTargetURIList" type="cmf:URIListType">
+  <xs:element name="ConformanceTargetURIList" type="cmf:URIListType" nillable="true">
     <xs:annotation>
       <xs:documentation>A list of conformance target identifiers.</xs:documentation>
     </xs:annotation>
@@ -608,19 +591,19 @@
       <xs:documentation>An augmentation point for DatatypeType.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="DeprecatedIndicator" type="niem-xs:boolean">
+  <xs:element name="DeprecatedIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
       <xs:documentation>The deprecated attribute provides a method for identifying schema components as being deprecated. A deprecated component is one that is provided, but the use of which is not recommended.</xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:element name="DocumentFilePathText" type="niem-xs:string">
-    <xs:annotation>
-      <xs:documentation>A relative file path to a document.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="DocumentationText" type="nc:TextType">
     <xs:annotation>
       <xs:documentation>A human-readable text definition of a data model component or term, or documentation of a namespace.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DocumentFilePathText" type="niem-xs:string" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A relative file path to a document.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Enumeration" type="cmf:AnyValueFacetType" substitutionGroup="cmf:FacetAbstract">
@@ -633,7 +616,7 @@
       <xs:documentation>A extension of a class.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="ExternalAdapterTypeIndicator" type="niem-xs:boolean">
+  <xs:element name="ExternalAdapterTypeIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
       <xs:documentation>True if the type is an external adapter type.</xs:documentation>
     </xs:annotation>
@@ -646,6 +629,11 @@
   <xs:element name="FractionDigits" type="cmf:NonNegativeValueFacetType" substitutionGroup="cmf:FacetAbstract">
     <xs:annotation>
       <xs:documentation>A restriction on the precision of a decimal data type, via a restriction on the number of digits allowed to the right of the decimal point of its decimal representation.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="GlobalAugmentationCode" type="cmf:GlobalAugmentationCodeType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A kind of global augmentation (of associations, ordinary objects).</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="HasProperty" type="cmf:HasPropertyType">
@@ -662,7 +650,7 @@
     <xs:annotation>
       <xs:documentation>Human-readable documentation of an import element importing this nameespace</xs:documentation>
     </xs:annotation>
-  </xs:element>    
+  </xs:element>
   <xs:element name="Length" type="cmf:NonNegativeValueFacetType" substitutionGroup="cmf:FacetAbstract">
     <xs:annotation>
       <xs:documentation>A restriction of the length of a data type. Unit of length varies depending on the type that is being derived from.</xs:documentation>
@@ -693,7 +681,7 @@
       <xs:documentation>A maximum length of a data type. Unit of length varies depending on the type that is being derived from.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="MaxOccursQuantity" type="cmf:MaxOccursType">
+  <xs:element name="MaxOccursQuantity" type="cmf:MaxOccursType" nillable="true">
     <xs:annotation>
       <xs:documentation>A maximum number of times a property may occur within a class.</xs:documentation>
     </xs:annotation>
@@ -713,7 +701,7 @@
       <xs:documentation>A minimum length of a data type. Unit of length varies depending on the type that is being derived from.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="MinOccursQuantity" type="niem-xs:nonNegativeInteger">
+  <xs:element name="MinOccursQuantity" type="niem-xs:nonNegativeInteger" nillable="true">
     <xs:annotation>
       <xs:documentation>A minimum number of times a property may occur within a class.</xs:documentation>
     </xs:annotation>
@@ -733,12 +721,7 @@
       <xs:documentation>A data concept for an item in a data model.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NIEMVersionText" type="niem-xs:token">
-    <xs:annotation>
-      <xs:documentation>A NIEM version number.</xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:element name="Name" type="cmf:NCNameType">
+  <xs:element name="Name" type="niem-xs:NCName" nillable="true">
     <xs:annotation>
       <xs:documentation>A name of a data model component.</xs:documentation>
     </xs:annotation>
@@ -753,22 +736,27 @@
       <xs:documentation>An augmentation point for NamespaceType.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NamespaceKindCode" type="cmf:NamespaceKindCodeType">
+  <xs:element name="NamespaceKindCode" type="cmf:NamespaceKindCodeType" nillable="true">
     <xs:annotation>
       <xs:documentation>A kind of namespace in a CMF model (external, core, domain, etc.).</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NamespacePrefixText" type="cmf:NCNameType">
+  <xs:element name="NamespacePrefixText" type="niem-xs:NCName" nillable="true">
     <xs:annotation>
       <xs:documentation>A namespace prefix name for a namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NamespaceURI" type="niem-xs:anyURI">
+  <xs:element name="NamespaceURI" type="niem-xs:anyURI" nillable="true">
     <xs:annotation>
       <xs:documentation>A namespace name URI for a namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NonNegativeValue" type="niem-xs:nonNegativeInteger" substitutionGroup="cmf:AnyValueAbstract">
+  <xs:element name="NIEMVersionText" type="niem-xs:token" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A NIEM version number.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NonNegativeValue" type="niem-xs:nonNegativeInteger" substitutionGroup="cmf:AnyValueAbstract" nillable="true">
     <xs:annotation>
       <xs:documentation>A value of a facet, with an integer value zero or greater.</xs:documentation>
     </xs:annotation>
@@ -788,7 +776,7 @@
       <xs:documentation>An augmentation point for ObjectPropertyType.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="OrderedPropertyIndicator" type="niem-xs:boolean">
+  <xs:element name="OrderedPropertyIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
       <xs:documentation>True if the order of a repeated property is significant.</xs:documentation>
     </xs:annotation>
@@ -803,7 +791,7 @@
       <xs:documentation>An augmentation point for PatternFacetType.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="PositiveValue" type="niem-xs:positiveInteger" substitutionGroup="cmf:AnyValueAbstract">
+  <xs:element name="PositiveValue" type="niem-xs:positiveInteger" substitutionGroup="cmf:AnyValueAbstract" nillable="true">
     <xs:annotation>
       <xs:documentation>A value of a facet, with an integer value greater than zero.</xs:documentation>
     </xs:annotation>
@@ -813,7 +801,7 @@
       <xs:documentation>An augmentation point for PositiveValueFacetType.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="PropertyAbstract" type="cmf:PropertyType" abstract="true" substitutionGroup="cmf:ModelItemAbstract" nillable="true">
+  <xs:element name="PropertyAbstract" type="cmf:PropertyType" substitutionGroup="cmf:ModelItemAbstract" abstract="true">
     <xs:annotation>
       <xs:documentation>A property.</xs:documentation>
     </xs:annotation>
@@ -823,17 +811,17 @@
       <xs:documentation>An augmentation point for PropertyType.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="RefAttributeIndicator" type="niem-xs:boolean">
+  <xs:element name="RefAttributeIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
       <xs:documentation>True for a property that is an object reference attribute.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="ReferenceCode" type="cmf:ReferenceCodeType">
+  <xs:element name="ReferenceCode" type="cmf:ReferenceCodeType" nillable="true">
     <xs:annotation>
       <xs:documentation>A code describing how a property may be referenced (or must appear inline).</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="RelationshipPropertyIndicator" type="niem-xs:boolean">
+  <xs:element name="RelationshipPropertyIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
       <xs:documentation>True for a property that applies to an object relationship.</xs:documentation>
     </xs:annotation>
@@ -848,27 +836,27 @@
       <xs:documentation>An augmentation point for RestrictionOfType.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="SchemaLanguageName" type="niem-xs:language">
+  <xs:element name="SchemaLanguageName" type="niem-xs:language" nillable="true">
     <xs:annotation>
       <xs:documentation>A language attribute of an XML schema document (xml:lang attribute).</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="SchemaVersionText" type="niem-xs:token">
+  <xs:element name="SchemaVersionText" type="niem-xs:token" nillable="true">
     <xs:annotation>
       <xs:documentation>A version attribute of an XML schema document.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="SourceCitationText" type="niem-xs:string">
+  <xs:element name="SourceCitationText" type="niem-xs:string" nillable="true">
     <xs:annotation>
       <xs:documentation>A plain text citation of, reference to, or bibliographic entry for an originating or authoritative document defining a local term</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="SourceURIList" type="cmf:URIListType">
+  <xs:element name="SourceURIList" type="cmf:URIListType" nillable="true">
     <xs:annotation>
       <xs:documentation>A list of URIs, each of which is an identifier or locator for an originating or authoritative document defining a local term.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="StringValue" type="niem-xs:string" substitutionGroup="cmf:AnyValueAbstract">
+  <xs:element name="StringValue" type="niem-xs:string" substitutionGroup="cmf:AnyValueAbstract" nillable="true">
     <xs:annotation>
       <xs:documentation>A value of a facet, with a string value.</xs:documentation>
     </xs:annotation>
@@ -878,12 +866,12 @@
       <xs:documentation>An object property of which an object property is a subproperty.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="TermLiteralText" type="niem-xs:string">
+  <xs:element name="TermLiteralText" type="niem-xs:string" nillable="true">
     <xs:annotation>
       <xs:documentation>A meaning of a local term provided as a full, plain-text form.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="TermName" type="niem-xs:token">
+  <xs:element name="TermName" type="niem-xs:token" nillable="true">
     <xs:annotation>
       <xs:documentation>A name for a local term.</xs:documentation>
     </xs:annotation>
@@ -913,7 +901,7 @@
       <xs:documentation>An augmentation point for WhiteSpaceFacetType.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="WhiteSpaceValueCode" type="cmf:WhiteSpaceValueCodeType">
+  <xs:element name="WhiteSpaceValueCode" type="cmf:WhiteSpaceValueCodeType" nillable="true">
     <xs:annotation>
       <xs:documentation>A value of a specification of white space for a data type.</xs:documentation>
     </xs:annotation>
