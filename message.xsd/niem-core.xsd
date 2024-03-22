@@ -3,7 +3,6 @@
   targetNamespace="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/"
   xmlns:ct="https://docs.oasis-open.org/niemopen/ns/specification/conformanceTargets/6.0/"
   xmlns:nc="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/"
-  xmlns:niem-xs="https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/"
   xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   ct:conformanceTargets="https://docs.oasis-open.org/niemopen/ns/specification/XNDR/6.0/#ReferenceSchemaDocument"
@@ -12,7 +11,6 @@
   <xs:annotation>
     <xs:documentation>NIEM Core.</xs:documentation>
   </xs:annotation>
-  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/" schemaLocation="adapters/niem-xs.xsd"/>
   <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" schemaLocation="utility/structures.xsd"/>
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="external/xml.xsd"/>
   <xs:complexType name="TextType">
@@ -20,9 +18,12 @@
       <xs:documentation>A data type for a character string.</xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
-      <xs:extension base="niem-xs:string">
-        <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+      <xs:extension base="xs:string">
         <xs:attribute ref="xml:lang"/>
+        <xs:attribute ref="structures:appliesToParent"/>
+        <xs:attribute ref="structures:id"/>
+        <xs:attribute ref="structures:ref"/>
+        <xs:attribute ref="structures:uri"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

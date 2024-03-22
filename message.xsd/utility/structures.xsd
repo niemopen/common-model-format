@@ -22,7 +22,6 @@
     <xs:attribute ref="structures:id"/>
     <xs:attribute ref="structures:ref"/>
     <xs:attribute ref="structures:uri"/>
-    <xs:anyAttribute namespace="##other" processContents="strict"/>
   </xs:attributeGroup>
   <xs:complexType name="AdapterType" abstract="true">
     <xs:annotation>
@@ -35,7 +34,6 @@
     <xs:attribute ref="structures:id"/>
     <xs:attribute ref="structures:ref"/>
     <xs:attribute ref="structures:uri"/>
-    <xs:anyAttribute namespace="##other" processContents="strict"/>
   </xs:complexType>
   <xs:complexType name="AssociationType" abstract="true">
     <xs:annotation>
@@ -48,7 +46,6 @@
     <xs:attribute ref="structures:id"/>
     <xs:attribute ref="structures:ref"/>
     <xs:attribute ref="structures:uri"/>
-    <xs:anyAttribute namespace="##other" processContents="strict"/>
   </xs:complexType>
   <xs:complexType name="AugmentationType" abstract="true">
     <xs:annotation>
@@ -66,7 +63,6 @@
     <xs:attribute ref="structures:id"/>
     <xs:attribute ref="structures:ref"/>
     <xs:attribute ref="structures:uri"/>
-    <xs:anyAttribute namespace="##other" processContents="strict"/>
   </xs:complexType>
   <xs:element name="AssociationAugmentationPoint" abstract="true">
     <xs:annotation>

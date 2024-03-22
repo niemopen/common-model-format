@@ -34,7 +34,7 @@
     <ConformanceTargetURIList>https://docs.oasis-open.org/niemopen/ns/specification/XNDR/6.0/#ReferenceSchemaDocument</ConformanceTargetURIList>
     <DocumentFilePathText>adapters/niem-xs.xsd</DocumentFilePathText>
     <NIEMVersionText>6</NIEMVersionText>
-    <SchemaVersionText>psd01</SchemaVersionText>
+    <SchemaVersionText>ps02</SchemaVersionText>
     <SchemaLanguageName>en-US</SchemaLanguageName>
     <LocalTerm>
       <TermName>maxInclusive</TermName>
@@ -48,13 +48,13 @@
     <NamespaceKindCode>BUILTIN</NamespaceKindCode>
     <DocumentFilePathText>utility/structures.xsd</DocumentFilePathText>
     <NIEMVersionText>6</NIEMVersionText>
-    <SchemaVersionText>psd01</SchemaVersionText>
+    <SchemaVersionText>ps02</SchemaVersionText>
     <SchemaLanguageName>en-US</SchemaLanguageName>
   </Namespace>
   <Namespace structures:id="xml">
     <NamespaceURI>http://www.w3.org/XML/1998/namespace</NamespaceURI>
     <NamespacePrefixText>xml</NamespacePrefixText>
-    <NamespaceKindCode>UNKNOWN</NamespaceKindCode>
+    <NamespaceKindCode>XML</NamespaceKindCode>
   </Namespace>
   <Namespace structures:id="xs">
     <NamespaceURI>http://www.w3.org/2001/XMLSchema</NamespaceURI>
@@ -194,12 +194,6 @@
     <Class structures:ref="cmf.ClassType" xsi:nil="true"/>
     <ReferenceCode>ANY</ReferenceCode>
   </ObjectProperty>
-  <DataProperty structures:id="cmf.ExternalAdapterTypeIndicator">
-    <Name>ExternalAdapterTypeIndicator</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>True if the type is an external adapter type.</DocumentationText>
-    <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
-  </DataProperty>
   <DataProperty structures:id="cmf.FacetAbstract">
     <Name>FacetAbstract</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -254,7 +248,7 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A data type for the meaning of a term that may appear within the name of a model component.</DocumentationText>
     <Class structures:ref="cmf.LocalTermType" xsi:nil="true"/>
-    <ReferenceCode>ANY</ReferenceCode>
+    <ReferenceCode>NONE</ReferenceCode>
   </ObjectProperty>
   <ObjectProperty structures:id="cmf.MaxExclusive">
     <Name>MaxExclusive</Name>
@@ -543,7 +537,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.AugmentRecordType">
     <Name>AugmentRecordType</Name>
@@ -577,9 +570,8 @@
     <HasProperty>
       <DataProperty structures:ref="cmf.GlobalAugmentationCode" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.ClassType">
     <Name>ClassType</Name>
@@ -589,11 +581,6 @@
     <ExtensionOfClass structures:ref="cmf.ComponentType" xsi:nil="true"/>
     <HasProperty>
       <DataProperty structures:ref="cmf.AugmentableIndicator" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-    <HasProperty>
-      <DataProperty structures:ref="cmf.ExternalAdapterTypeIndicator" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
@@ -613,7 +600,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.CodeListBindingType">
     <Name>CodeListBindingType</Name>
@@ -634,7 +620,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.ComponentType">
     <Name>ComponentType</Name>
@@ -667,7 +652,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.DataPropertyType">
     <Name>DataPropertyType</Name>
@@ -690,7 +674,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.DatatypeType">
     <Name>DatatypeType</Name>
@@ -718,7 +701,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.HasPropertyType">
     <Name>HasPropertyType</Name>
@@ -755,7 +737,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.LocalTermType">
     <Name>LocalTermType</Name>
@@ -786,7 +767,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.ModelType">
     <Name>ModelType</Name>
@@ -798,7 +778,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.NamespaceType">
     <Name>NamespaceType</Name>
@@ -865,7 +844,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.NonNegativeValueFacetType">
     <Name>NonNegativeValueFacetType</Name>
@@ -882,7 +860,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.ObjectPropertyType">
     <Name>ObjectPropertyType</Name>
@@ -900,7 +877,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.PatternFacetType">
     <Name>PatternFacetType</Name>
@@ -917,7 +893,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.PositiveValueFacetType">
     <Name>PositiveValueFacetType</Name>
@@ -934,7 +909,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.PropertyType">
     <Name>PropertyType</Name>
@@ -952,7 +926,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.RestrictionOfType">
     <Name>RestrictionOfType</Name>
@@ -969,7 +942,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.UnionOfType">
     <Name>UnionOfType</Name>
@@ -981,7 +953,6 @@
       <MinOccursQuantity>1</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="cmf.WhiteSpaceFacetType">
     <Name>WhiteSpaceFacetType</Name>
@@ -998,7 +969,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Class structures:id="nc.TextType">
     <Name>TextType</Name>
@@ -1015,7 +985,6 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
       <DocumentationText>lang (as an attribute name) denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification. Notes Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility. See BCP 47 at http://www.rfc-editor.org/rfc/bcp/bcp47.txt and the IANA language subtag registry at http://www.iana.org/assignments/language-subtag-registry for further information. The union allows for the 'un-declaration' of xml:lang with the empty string.</DocumentationText>
     </HasProperty>
-    <ReferenceCode>ANY</ReferenceCode>
   </Class>
   <Datatype structures:id="cmf.GlobalAugmentationCodeType">
     <Name>GlobalAugmentationCodeType</Name>
@@ -1104,15 +1073,19 @@
       <Datatype structures:ref="xs.token" xsi:nil="true"/>
       <Enumeration>
         <StringValue>ANY</StringValue>
+        <DocumentationText>A code for a component that may be referenced by IDREF or URI.</DocumentationText>
       </Enumeration>
       <Enumeration>
         <StringValue>NONE</StringValue>
+        <DocumentationText>A code for a component that may not be referenced.</DocumentationText>
       </Enumeration>
       <Enumeration>
         <StringValue>REF</StringValue>
+        <DocumentationText>A code for a component that may be referenced only by IDREF.</DocumentationText>
       </Enumeration>
       <Enumeration>
         <StringValue>URI</StringValue>
+        <DocumentationText>A code for a component that may be referenced only by URI.</DocumentationText>
       </Enumeration>
     </RestrictionOf>
   </Datatype>
