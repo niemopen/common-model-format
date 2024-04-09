@@ -2,13 +2,43 @@
 
 # Common Model Format Specification
 
-This repository is part of the NIEM Open Project.  It contains the NIEMOpen Common Model Format Specification (CMF).  CMF is a NIEM message specification for data models,  In all versions of NIEM through version 5, data models are expressed in XML Schema (XSD).  CMF offers an equivalent expression, one that is more suitable for developers not working in XML and is easier to support with developer tools.  Using CMF, a data model can be expressed as XML or JSON or any other data serialization that NIEM supports, and the data described by the CMF data model can also be expressed in any supported serialization.  More documentation on CMF is available [here](doc/README.md).
+This repository is part of the NIEM Open Project.  It contains the NIEMOpen Common Model Format Specification (CMF).  
+
+CMF is a NIEM message specification for data models,  In all versions of NIEM through version 5, data models are expressed in XML Schema (XSD).  CMF offers an equivalent expression, one that is more suitable for developers not working in XML and is easier to support with developer tools.  Using CMF, a data model can be expressed as XML or JSON or any other data serialization that NIEM supports, and the data described by the CMF data model can also be expressed in any supported serialization.  
+
+More documentation on CMF is available [here](doc/README.md).
 
 For more information on NIEMOpen, see the project's website at [www.niemopen.org](www.niemopen.org).
 
 General questions about OASIS Open Projects may be directed to OASIS staff at project-admin@lists.oasis-open-projects.org
 
-# What's new in version 0.6
+## What's new in version 1.0-alpha.2
+
+* A message schema is provided in *message.xsd*
+
+## What's new in version 1.0 alpha 1
+
+* cmf:DefinitionText replaced with cmf:DocumentationText.  
+  (Namespaces are documented, not defined.)
+* Removed NIEM 5 schema documents
+
+## What's new in version 0.8
+
+* CMF is now a NIEM 6 message specification
+* Namespace URIs start with `http://docs.open-oasis.org`
+* `NCName` becomes `NCNameType` for NDR conformance
+* *model5.xsd* is the NIEM 5 XSD for CMF version 0.7
+* *model6.xsd* is the NIEM 6 reference XSD for CMF version 0.8
+  (don't yet have the message XSD for CMF 0.8)
+
+## What's new in version 0.7
+
+* New `AugmentRecord` child in `NamespaceType`
+* New `CodeListBinding` child in `ComponentType`
+* Augmentation properties in `HasPropertyType were revised
+* `NamespacePrefixText` put back into `SchemaDocumentType`
+
+## What's new in version 0.6
 
 * DefinitionText in CMF is now repeatable
 * DefinitionText now has nc:TextType with xml:lang attribute
@@ -18,11 +48,11 @@ General questions about OASIS Open Projects may be directed to OASIS staff at pr
 * All schema documents canonicalized
 * Added CMF and XSD documentation
 
-# Where are the older versions of CMF?
+## Where are the older versions of CMF?
 
 The pre-OASIS history of CMF is at [NIEM/CMF-MessageSpec (github.com)](https://github.com/NIEM/CMF-MessageSpec) 
 
-# Other assets
+## Other assets
 
 In addition to this GitHub repository, this project also makes use of other assets. 
 
