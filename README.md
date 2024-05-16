@@ -12,6 +12,48 @@ For more information on NIEMOpen, see the project's website at [www.niemopen.org
 
 General questions about OASIS Open Projects may be directed to OASIS staff at project-admin@lists.oasis-open-projects.org
 
+## What's new in version 1.0-alpha.3
+
+Several changes to component names and definitions that align CMF with the metamodel:
+
+* AugmentRecord becomes AugmentationRecord
+* AugmentationNamespace becomes AugmentingNamespace
+* ClassType child elements are reordered
+* Component (abstract element) added
+* ComponentType now has subclasses instead of properties
+* ComponentType doesn't have AbstractIndicator (datatypes can't be abstract)
+* ConformanceTargetURIList becomes (repeatable) ConformanceTargetURI
+* FacetAbstract becomes Facet
+* GlobalAugmentationCode becomes GlobalAugmented
+* HasProperty becomes @minOccurs="1" in ClassType
+* ListType added (subclass of DatatypeType)
+* ModelItemAbstract replaced with Namespace, Component
+* PropertyAbstract becomes Property
+* RestrictionOfType becomes RestrictionType (with a RestrictionOf property)
+* SchemaLangugeName becomes NamespaceLanguageName
+* SchemaVersionText becomes NamespaceVersionText
+* SourceURIList becomes (repeatable) SourceURI
+* UnionOfType becomes UnionType (with a repeatable UnionOf property)
+* New documentation for
+
+  * AttributeIndicator
+  * AugmentationIndex
+  * ComponentType
+  * DeprecatedIndicator
+  * DocumentFilePathText
+  * DocumentationText
+  * ExtensionOfClass
+  * ImportDocumentationText
+  * ListOf
+  * MaxOccursQuantity
+  * MinOccursQuantity
+  * ModelType
+  * NIEMVersionText
+  * NamespaceLanguageName
+  * OrderedPropertyIndicator
+  * RelationshipPropertyIndicator
+
+
 ## What's new in version 1.0-alpha.2
 
 * A message schema is provided in *message.xsd*
