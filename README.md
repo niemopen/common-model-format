@@ -72,7 +72,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details how to join the proje
 
 # Governance
 
-NIEM Open operates under the terms of the [Open Project Rules](https://www.oasis-open.org/policies-guidelines/open-projects-process) and the applicable license(s) specified in [LICENSE.md](LICENSE.md). Further details can be found in [GOVERNANCE.md](GOVERNANCE.md), [GOVERNANCE-NBAC.md](GOVERNANCE-NBAC.md), and [GOVERNANCE-NTAC.md](GOVERNANCE-NTAC.md).
+NIEM Open operates under the terms of the [Open Project Rules](https://www.oasis-open.org/policies-guidelines/open-projects-process) and the applicable license(s) specified in [LICENSE.md](LICENSE.md). Further details can be found in [GOVERNANCE.md](https://github.com/niemopen/oasis-open-project/blob/main/GOVERNANCE.md), [GOVERNANCE-NBAC.md](https://github.com/niemopen/nbac-admin/blob/main/documents/(APPROVED)%20%20NIEMOpen%20NBAC%20TSC%20Governance%20Doc%20(Rev%202)%20%20v7%20%207-27-2023.pdf), and [GOVERNANCE-NTAC.md](https://github.com/niemopen/ntac-admin/blob/main/GOVERNANCE-NTAC.md).
 
 # CLA & Non-assert signatures required
 
