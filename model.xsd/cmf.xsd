@@ -56,10 +56,10 @@
       <xs:extension base="cmf:ComponentType">
         <xs:sequence>
           <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
-          <xs:element ref="cmf:AugmentableIndicator" minOccurs="0"/>
           <xs:element ref="cmf:ExtensionOfClass" minOccurs="0"/>
+          <xs:element ref="cmf:AugmentableIndicator" minOccurs="0"/>
           <xs:element ref="cmf:ReferenceCode" minOccurs="0"/>
-          <xs:element ref="cmf:HasProperty" maxOccurs="unbounded" appinfo:orderedPropertyIndicator="true"/>
+          <xs:element ref="cmf:HasProperty" minOccurs="0" maxOccurs="unbounded" appinfo:orderedPropertyIndicator="true"/>
           <xs:element ref="cmf:ClassAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -140,7 +140,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="ListType">
+  <xs:complexType name="ListDatatypeType">
     <xs:annotation>
       <xs:documentation>A data type for a NIEM model datatype that is whitespace-separated list of atomic values.</xs:documentation>
     </xs:annotation>
@@ -286,8 +286,8 @@
           <xs:element ref="cmf:ConformanceTargetURI" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:DocumentFilePathText" minOccurs="0"/>
           <xs:element ref="cmf:NIEMVersionText" minOccurs="0"/>
-          <xs:element ref="cmf:NamespaceVersionText"/>
-          <xs:element ref="cmf:NamespaceLanguageName"/>
+          <xs:element ref="cmf:NamespaceVersionText" minOccurs="0"/>
+          <xs:element ref="cmf:NamespaceLanguageName" minOccurs="0"/>
           <xs:element ref="cmf:ImportDocumentationText" minOccurs="0"/>
           <xs:element ref="cmf:AugmentationRecord" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:LocalTerm" minOccurs="0" maxOccurs="unbounded"/>
@@ -665,6 +665,11 @@
   <xs:element name="Length" type="cmf:NonNegativeValueFacetType" substitutionGroup="cmf:Facet">
     <xs:annotation>
       <xs:documentation>A restriction of the length of a data type. Unit of length varies depending on the type that is being derived from.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ListDatatype" type="cmf:ListDatatypeType" substitutionGroup="cmf:Datatype">
+    <xs:annotation>
+      <xs:documentation>A data type for a NIEM model datatype that is a whitespace-separated list of atomic values.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="ListOf" type="cmf:DatatypeType" nillable="true">
