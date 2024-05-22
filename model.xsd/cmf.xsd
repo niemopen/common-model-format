@@ -31,7 +31,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="AugmentationType">
+  <xs:complexType name="AugmentationRecordType">
     <xs:annotation>
       <xs:documentation>A data type for a class that is augmented with a property by a namespace.</xs:documentation>
     </xs:annotation>
@@ -44,6 +44,7 @@
           <xs:element ref="cmf:MinOccursQuantity"/>
           <xs:element ref="cmf:MaxOccursQuantity"/>
           <xs:element ref="cmf:GlobalAugmented" minOccurs="0"/>
+          <xs:element ref="cmf:AugmentationRecordAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -75,6 +76,7 @@
           <xs:element ref="cmf:CodeListURI"/>
           <xs:element ref="cmf:CodeListColumnName" minOccurs="0"/>
           <xs:element ref="cmf:CodeListConstrainingIndicator" minOccurs="0"/>
+          <xs:element ref="cmf:CodeListBindingAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -149,6 +151,7 @@
         <xs:sequence>
           <xs:element ref="cmf:ListOf"/>
           <xs:element ref="cmf:OrderedPropertyIndicator" minOccurs="0"/>
+          <xs:element ref="cmf:ListDatatypeAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -165,6 +168,7 @@
           <xs:element ref="cmf:TermLiteralText" minOccurs="0"/>
           <xs:element ref="cmf:SourceURI" minOccurs="0"/>
           <xs:element ref="cmf:SourceCitationText" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:LocalTermAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -214,7 +218,7 @@
     <xs:complexContent>
       <xs:extension base="structures:ObjectType">
         <xs:sequence>
-          <xs:element ref="cmf:Namespace" minOccurs="1" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:Namespace" maxOccurs="unbounded"/>
           <xs:element ref="cmf:Component" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:ModelAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
@@ -222,6 +226,9 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="NamespaceKindCodeType">
+    <xs:annotation>
+      <xs:documentation>A kind of a namespace.</xs:documentation>
+    </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base="niem-xs:token">
         <xs:enumeration value="BUILTIN">
@@ -396,22 +403,22 @@
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name="RestrictionType">
+  <xs:complexType name="RestrictionDatatypeType">
     <xs:annotation>
       <xs:documentation>A data type for a restriction of a data type.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="cmf:DatatypeType">
         <xs:sequence>
-          <xs:element ref="cmf:RestrictionOf"/>
+          <xs:element ref="cmf:RestrictionBase"/>
           <xs:element ref="cmf:Facet" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:CodeListBinding" minOccurs="0"/>
-          <xs:element ref="cmf:RestrictionOfAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:RestrictionDatatypeAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="UnionType">
+  <xs:complexType name="UnionDatatypeType">
     <xs:annotation>
       <xs:documentation>A data type for a datatype that is a union of datatypes.</xs:documentation>
     </xs:annotation>
@@ -419,7 +426,7 @@
       <xs:extension base="cmf:DatatypeType">
         <xs:sequence>
           <xs:element ref="cmf:UnionOf" maxOccurs="unbounded"/>
-          <xs:element ref="cmf:UnionOfAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:UnionDatatypeAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -532,14 +539,19 @@
       <xs:documentation>An ordinal position of an augmentation property that is part of an augmentation type.</xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:element name="AugmentationRecord" type="cmf:AugmentationRecordType">
+    <xs:annotation>
+      <xs:documentation>An augmentation of a class with a property by a namespace.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AugmentationRecordAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for AugmentationRecordType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:element name="AugmentingNamespace" type="cmf:NamespaceType" nillable="true">
     <xs:annotation>
       <xs:documentation>A namespace responsible for augmenting a class with a property.</xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:element name="AugmentationRecord" type="cmf:AugmentationType">
-    <xs:annotation>
-      <xs:documentation>An augmentation of a class with a property by a namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Class" type="cmf:ClassType" substitutionGroup="cmf:Component" nillable="true">
@@ -555,6 +567,11 @@
   <xs:element name="CodeListBinding" type="cmf:CodeListBindingType">
     <xs:annotation>
       <xs:documentation>An element for connecting simple content defined by an XML Schema component to a a column of a code list.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="CodeListBindingAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for CodeListBindingType.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="CodeListColumnName" type="niem-xs:string" nillable="true">
@@ -644,7 +661,7 @@
   </xs:element>
   <xs:element name="GlobalAugmented" type="niem-xs:NCName" nillable="true">
     <xs:annotation>
-      <xs:documentation>	A kind of component (all associations, all objects, or all atomic values) that is the target of this global augmentation.</xs:documentation>
+      <xs:documentation>A kind of component (all associations, all objects, or all atomic values) that is the target of this global augmentation.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="HasProperty" type="cmf:HasPropertyType">
@@ -672,6 +689,11 @@
       <xs:documentation>A data type for a NIEM model datatype that is a whitespace-separated list of atomic values.</xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:element name="ListDatatypeAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for ListDatatypeType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:element name="ListOf" type="cmf:DatatypeType" nillable="true">
     <xs:annotation>
       <xs:documentation>A NIEM model datatype of the atomic values in a list.</xs:documentation>
@@ -680,6 +702,11 @@
   <xs:element name="LocalTerm" type="cmf:LocalTermType">
     <xs:annotation>
       <xs:documentation>A data type for the meaning of a term that may appear within the name of a model component.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="LocalTermAugmentationPoint" abstract="true">
+    <xs:annotation>
+      <xs:documentation>An augmentation point for LocalTermType.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="MaxExclusive" type="cmf:AnyValueFacetType" substitutionGroup="cmf:Facet">
@@ -752,6 +779,11 @@
       <xs:documentation>A kind of namespace in a CMF model (external, core, domain, etc.).</xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:element name="NamespaceLanguageName" type="niem-xs:language" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A name of a default language of the terms and documentation text in a namespace.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:element name="NamespacePrefixText" type="niem-xs:NCName" nillable="true">
     <xs:annotation>
       <xs:documentation>A namespace prefix name for a namespace.</xs:documentation>
@@ -760,6 +792,11 @@
   <xs:element name="NamespaceURI" type="niem-xs:anyURI" nillable="true">
     <xs:annotation>
       <xs:documentation>A URI for a namespace.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NamespaceVersionText" type="niem-xs:token" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A version attribute of an XML schema document.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="NIEMVersionText" type="niem-xs:token" nillable="true">
@@ -834,27 +871,22 @@
   </xs:element>
   <xs:element name="RelationshipPropertyIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
-      <xs:documentation>True for a property that applies to the relationship between two objects (instead of to a single object). </xs:documentation>
+      <xs:documentation>True for a property that applies to the relationship between two objects (instead of to a single object).</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="RestrictionOf" type="cmf:DatatypeType">
+  <xs:element name="RestrictionBase" type="cmf:DatatypeType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data type that is the restriction base of a data type.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="RestrictionOfAugmentationPoint" abstract="true">
+  <xs:element name="RestrictionDatatype" type="cmf:RestrictionDatatypeType" substitutionGroup="cmf:Datatype">
     <xs:annotation>
-      <xs:documentation>An augmentation point for RestrictionOfType.</xs:documentation>
+      <xs:documentation>A datatype that is a restriction of a base datatype plus zero or more restricting facets.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NamespaceLanguageName" type="niem-xs:language" nillable="true">
+  <xs:element name="RestrictionDatatypeAugmentationPoint" abstract="true">
     <xs:annotation>
-      <xs:documentation>A name of a default language of the terms and documentation text in a namespace.</xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:element name="NamespaceVersionText" type="niem-xs:token" nillable="true">
-    <xs:annotation>
-      <xs:documentation>A version attribute of an XML schema document.</xs:documentation>
+      <xs:documentation>An augmentation point for RestrictionDatatypeType.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="SourceCitationText" type="niem-xs:string" nillable="true">
@@ -892,14 +924,19 @@
       <xs:documentation>A restriction on the size and precision of a decimal data type, via a restriction on the number of digits required to represent its value.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="UnionOf" type="cmf:DatatypeType">
+  <xs:element name="UnionDatatype" type="cmf:UnionDatatypeType" substitutionGroup="cmf:Datatype">
     <xs:annotation>
-      <xs:documentation>A NIEM model datatype that is a member of a union datatype.</xs:documentation>
+      <xs:documentation>A NIEM model datatype that is a union of datatypes.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="UnionOfAugmentationPoint" abstract="true">
+  <xs:element name="UnionDatatypeAugmentationPoint" abstract="true">
     <xs:annotation>
-      <xs:documentation>An augmentation point for UnionOfType.</xs:documentation>
+      <xs:documentation>An augmentation point for UnionDatatypeType.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="UnionOf" type="cmf:DatatypeType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A NIEM model datatype that is a member of a union datatype.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="WhiteSpace" type="cmf:WhiteSpaceFacetType" substitutionGroup="cmf:Facet">

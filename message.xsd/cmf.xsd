@@ -22,8 +22,8 @@
     <xs:sequence>
       <xs:choice>
         <xs:element ref="cmf:NonNegativeValue"/>
-        <xs:element ref="cmf:PositiveValue"/>
         <xs:element ref="cmf:StringValue"/>
+        <xs:element ref="cmf:PositiveValue"/>
       </xs:choice>
       <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
     </xs:sequence>
@@ -32,20 +32,20 @@
     <xs:attribute ref="structures:ref"/>
     <xs:attribute ref="structures:uri"/>
   </xs:complexType>
-  <xs:complexType name="AugmentRecordType">
+  <xs:complexType name="AugmentationRecordType">
     <xs:annotation>
       <xs:documentation>A data type for a class that is augmented with a property by a namespace.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element ref="cmf:Class" minOccurs="0"/>
       <xs:choice>
-        <xs:element ref="cmf:DataProperty"/>
         <xs:element ref="cmf:ObjectProperty"/>
+        <xs:element ref="cmf:DataProperty"/>
       </xs:choice>
       <xs:element ref="cmf:AugmentationIndex"/>
       <xs:element ref="cmf:MinOccursQuantity"/>
       <xs:element ref="cmf:MaxOccursQuantity"/>
-      <xs:element ref="cmf:GlobalAugmentationCode" minOccurs="0"/>
+      <xs:element ref="cmf:GlobalAugmented" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute ref="structures:appliesToParent"/>
     <xs:attribute ref="structures:id"/>
@@ -60,12 +60,12 @@
       <xs:element ref="cmf:Name"/>
       <xs:element ref="cmf:Namespace"/>
       <xs:element ref="cmf:DocumentationText" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
       <xs:element ref="cmf:DeprecatedIndicator" minOccurs="0"/>
-      <xs:element ref="cmf:AugmentableIndicator" minOccurs="0"/>
+      <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
       <xs:element ref="cmf:ExtensionOfClass" minOccurs="0"/>
-      <xs:element ref="cmf:HasProperty" minOccurs="0" maxOccurs="unbounded" appinfo:orderedPropertyIndicator="true"/>
+      <xs:element ref="cmf:AugmentableIndicator" minOccurs="0"/>
       <xs:element ref="cmf:ReferenceCode" minOccurs="0"/>
+      <xs:element ref="cmf:HasProperty" minOccurs="0" maxOccurs="unbounded" appinfo:orderedPropertyIndicator="true"/>
     </xs:sequence>
     <xs:attribute ref="structures:appliesToParent"/>
     <xs:attribute ref="structures:id"/>
@@ -88,13 +88,12 @@
   </xs:complexType>
   <xs:complexType name="ComponentType" abstract="true">
     <xs:annotation>
-      <xs:documentation>A data type for common properties of a data component in NIEM.</xs:documentation>
+      <xs:documentation>A data type for common properties of a data model component in NIEM.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element ref="cmf:Name"/>
       <xs:element ref="cmf:Namespace"/>
       <xs:element ref="cmf:DocumentationText" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
       <xs:element ref="cmf:DeprecatedIndicator" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute ref="structures:appliesToParent"/>
@@ -110,11 +109,16 @@
       <xs:element ref="cmf:Name"/>
       <xs:element ref="cmf:Namespace"/>
       <xs:element ref="cmf:DocumentationText" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
       <xs:element ref="cmf:DeprecatedIndicator" minOccurs="0"/>
+      <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
       <xs:element ref="cmf:SubPropertyOf" minOccurs="0"/>
       <xs:element ref="cmf:RelationshipPropertyIndicator" minOccurs="0"/>
-      <xs:element ref="cmf:Datatype" minOccurs="0"/>
+      <xs:choice minOccurs="0">
+        <xs:element ref="cmf:Datatype"/>
+        <xs:element ref="cmf:RestrictionDatatype"/>
+        <xs:element ref="cmf:ListDatatype"/>
+        <xs:element ref="cmf:UnionDatatype"/>
+      </xs:choice>
       <xs:element ref="cmf:AttributeIndicator" minOccurs="0"/>
       <xs:element ref="cmf:RefAttributeIndicator" minOccurs="0"/>
     </xs:sequence>
@@ -131,46 +135,44 @@
       <xs:element ref="cmf:Name"/>
       <xs:element ref="cmf:Namespace"/>
       <xs:element ref="cmf:DocumentationText" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
       <xs:element ref="cmf:DeprecatedIndicator" minOccurs="0"/>
-      <xs:element ref="cmf:RestrictionOf" minOccurs="0"/>
-      <xs:element ref="cmf:UnionOf" minOccurs="0"/>
-      <xs:element ref="cmf:ListOf" minOccurs="0"/>
-      <xs:element ref="cmf:CodeListBinding" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute ref="structures:appliesToParent"/>
     <xs:attribute ref="structures:id"/>
     <xs:attribute ref="structures:ref"/>
     <xs:attribute ref="structures:uri"/>
   </xs:complexType>
-  <xs:simpleType name="GlobalAugmentationCodeType">
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="ASSOCIATION">
-        <xs:annotation>
-          <xs:documentation>An augmentation of all Association objects.</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="OBJECT">
-        <xs:annotation>
-          <xs:documentation>An augmentation of all ordinary Objects (not Association objects).</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
   <xs:complexType name="HasPropertyType">
     <xs:annotation>
       <xs:documentation>A data type for an occurrence of a property as content of a class.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:choice>
-        <xs:element ref="cmf:DataProperty"/>
         <xs:element ref="cmf:ObjectProperty"/>
+        <xs:element ref="cmf:DataProperty"/>
       </xs:choice>
       <xs:element ref="cmf:MinOccursQuantity"/>
       <xs:element ref="cmf:MaxOccursQuantity"/>
       <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
       <xs:element ref="cmf:OrderedPropertyIndicator" minOccurs="0"/>
-      <xs:element ref="cmf:AugmentationNamespace" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="cmf:AugmentingNamespace" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute ref="structures:appliesToParent"/>
+    <xs:attribute ref="structures:id"/>
+    <xs:attribute ref="structures:ref"/>
+    <xs:attribute ref="structures:uri"/>
+  </xs:complexType>
+  <xs:complexType name="ListDatatypeType">
+    <xs:annotation>
+      <xs:documentation>A data type for a NIEM model datatype that is whitespace-separated list of atomic values.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="cmf:Name"/>
+      <xs:element ref="cmf:Namespace"/>
+      <xs:element ref="cmf:DocumentationText" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="cmf:DeprecatedIndicator" minOccurs="0"/>
+      <xs:element ref="cmf:ListOf"/>
+      <xs:element ref="cmf:OrderedPropertyIndicator" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute ref="structures:appliesToParent"/>
     <xs:attribute ref="structures:id"/>
@@ -185,7 +187,7 @@
       <xs:element ref="cmf:TermName"/>
       <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
       <xs:element ref="cmf:TermLiteralText" minOccurs="0"/>
-      <xs:element ref="cmf:SourceURIList" minOccurs="0"/>
+      <xs:element ref="cmf:SourceURI" minOccurs="0"/>
       <xs:element ref="cmf:SourceCitationText" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute ref="structures:appliesToParent"/>
@@ -225,15 +227,18 @@
   </xs:simpleType>
   <xs:complexType name="ModelType">
     <xs:annotation>
-      <xs:documentation>A data type for a CMF data model.</xs:documentation>
+      <xs:documentation>A data type for a NIEM data model.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
+      <xs:element ref="cmf:Namespace" maxOccurs="unbounded"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="cmf:Class"/>
-        <xs:element ref="cmf:Namespace"/>
         <xs:element ref="cmf:Datatype"/>
-        <xs:element ref="cmf:DataProperty"/>
+        <xs:element ref="cmf:RestrictionDatatype"/>
+        <xs:element ref="cmf:ListDatatype"/>
+        <xs:element ref="cmf:UnionDatatype"/>
         <xs:element ref="cmf:ObjectProperty"/>
+        <xs:element ref="cmf:DataProperty"/>
+        <xs:element ref="cmf:Class"/>
       </xs:choice>
     </xs:sequence>
     <xs:attribute ref="structures:appliesToParent"/>
@@ -297,15 +302,15 @@
     <xs:sequence>
       <xs:element ref="cmf:NamespaceURI"/>
       <xs:element ref="cmf:NamespacePrefixText"/>
-      <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
-      <xs:element ref="cmf:NamespaceKindCode" minOccurs="0"/>
-      <xs:element ref="cmf:ConformanceTargetURIList" minOccurs="0"/>
+      <xs:element ref="cmf:DocumentationText" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="cmf:NamespaceKindCode"/>
+      <xs:element ref="cmf:ConformanceTargetURI" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="cmf:DocumentFilePathText" minOccurs="0"/>
       <xs:element ref="cmf:NIEMVersionText" minOccurs="0"/>
-      <xs:element ref="cmf:SchemaVersionText" minOccurs="0"/>
-      <xs:element ref="cmf:SchemaLanguageName" minOccurs="0"/>
+      <xs:element ref="cmf:NamespaceVersionText" minOccurs="0"/>
+      <xs:element ref="cmf:NamespaceLanguageName" minOccurs="0"/>
       <xs:element ref="cmf:ImportDocumentationText" minOccurs="0"/>
-      <xs:element ref="cmf:AugmentRecord" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="cmf:AugmentationRecord" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="cmf:LocalTerm" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute ref="structures:appliesToParent"/>
@@ -328,14 +333,14 @@
   </xs:complexType>
   <xs:complexType name="ObjectPropertyType">
     <xs:annotation>
-      <xs:documentation>A data type for an object property</xs:documentation>
+      <xs:documentation>A data type for an object property.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element ref="cmf:Name"/>
       <xs:element ref="cmf:Namespace"/>
       <xs:element ref="cmf:DocumentationText" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
       <xs:element ref="cmf:DeprecatedIndicator" minOccurs="0"/>
+      <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
       <xs:element ref="cmf:SubPropertyOf" minOccurs="0"/>
       <xs:element ref="cmf:RelationshipPropertyIndicator" minOccurs="0"/>
       <xs:element ref="cmf:Class"/>
@@ -374,14 +379,14 @@
   </xs:complexType>
   <xs:complexType name="PropertyType">
     <xs:annotation>
-      <xs:documentation>An abstract data type for a property</xs:documentation>
+      <xs:documentation>A data type for a property.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element ref="cmf:Name"/>
       <xs:element ref="cmf:Namespace"/>
       <xs:element ref="cmf:DocumentationText" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
       <xs:element ref="cmf:DeprecatedIndicator" minOccurs="0"/>
+      <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
       <xs:element ref="cmf:SubPropertyOf" minOccurs="0"/>
       <xs:element ref="cmf:RelationshipPropertyIndicator" minOccurs="0"/>
     </xs:sequence>
@@ -417,38 +422,47 @@
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:complexType name="RestrictionOfType">
+  <xs:complexType name="RestrictionDatatypeType">
     <xs:annotation>
       <xs:documentation>A data type for a restriction of a data type.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element ref="cmf:Datatype"/>
+      <xs:element ref="cmf:Name"/>
+      <xs:element ref="cmf:Namespace"/>
+      <xs:element ref="cmf:DocumentationText" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="cmf:DeprecatedIndicator" minOccurs="0"/>
+      <xs:element ref="cmf:RestrictionBase"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="cmf:MinInclusive"/>
-        <xs:element ref="cmf:WhiteSpace"/>
-        <xs:element ref="cmf:MinExclusive"/>
-        <xs:element ref="cmf:Length"/>
-        <xs:element ref="cmf:MaxInclusive"/>
-        <xs:element ref="cmf:FractionDigits"/>
         <xs:element ref="cmf:Enumeration"/>
-        <xs:element ref="cmf:MaxExclusive"/>
-        <xs:element ref="cmf:MaxLength"/>
         <xs:element ref="cmf:MinLength"/>
-        <xs:element ref="cmf:TotalDigits"/>
         <xs:element ref="cmf:Pattern"/>
+        <xs:element ref="cmf:WhiteSpace"/>
+        <xs:element ref="cmf:FractionDigits"/>
+        <xs:element ref="cmf:MaxLength"/>
+        <xs:element ref="cmf:Length"/>
+        <xs:element ref="cmf:MaxExclusive"/>
+        <xs:element ref="cmf:TotalDigits"/>
+        <xs:element ref="cmf:MinExclusive"/>
+        <xs:element ref="cmf:MinInclusive"/>
+        <xs:element ref="cmf:MaxInclusive"/>
       </xs:choice>
+      <xs:element ref="cmf:CodeListBinding" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute ref="structures:appliesToParent"/>
     <xs:attribute ref="structures:id"/>
     <xs:attribute ref="structures:ref"/>
     <xs:attribute ref="structures:uri"/>
   </xs:complexType>
-  <xs:complexType name="UnionOfType">
+  <xs:complexType name="UnionDatatypeType">
     <xs:annotation>
-      <xs:documentation>A data type for a union of data types.</xs:documentation>
+      <xs:documentation>A data type for a datatype that is a union of datatypes.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element ref="cmf:Datatype" maxOccurs="unbounded"/>
+      <xs:element ref="cmf:Name"/>
+      <xs:element ref="cmf:Namespace"/>
+      <xs:element ref="cmf:DocumentationText" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="cmf:DeprecatedIndicator" minOccurs="0"/>
+      <xs:element ref="cmf:UnionOf" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute ref="structures:appliesToParent"/>
     <xs:attribute ref="structures:id"/>
@@ -531,7 +545,7 @@
   </xs:element>
   <xs:element name="AttributeIndicator" type="xs:boolean">
     <xs:annotation>
-      <xs:documentation>True for properties represented as attributes in XML.</xs:documentation>
+      <xs:documentation>True for a property that is represented as attributes in XML.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="AugmentableIndicator" type="xs:boolean">
@@ -541,17 +555,17 @@
   </xs:element>
   <xs:element name="AugmentationIndex" type="xs:integer">
     <xs:annotation>
-      <xs:documentation>An index of an augmentation property within an augmentation type. Negative (-1) for augmentation property not within an augmentation type.</xs:documentation>
+      <xs:documentation>An ordinal position of an augmentation property that is part of an augmentation type.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AugmentationNamespace" type="cmf:NamespaceType" nillable="true">
+  <xs:element name="AugmentationRecord" type="cmf:AugmentationRecordType">
+    <xs:annotation>
+      <xs:documentation>An augmentation of a class with a property by a namespace.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AugmentingNamespace" type="cmf:NamespaceType" nillable="true">
     <xs:annotation>
       <xs:documentation>A namespace responsible for augmenting a class with a property.</xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:element name="AugmentRecord" type="cmf:AugmentRecordType">
-    <xs:annotation>
-      <xs:documentation>An augmentation of a class that is augmented with a property by a namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Class" type="cmf:ClassType" nillable="true">
@@ -579,7 +593,7 @@
       <xs:documentation>A universal identifier for a code list.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="ConformanceTargetURIList" type="cmf:URIListType">
+  <xs:element name="ConformanceTargetURI" type="xs:anyURI">
     <xs:annotation>
       <xs:documentation>A list of conformance target identifiers.</xs:documentation>
     </xs:annotation>
@@ -596,17 +610,17 @@
   </xs:element>
   <xs:element name="DeprecatedIndicator" type="xs:boolean">
     <xs:annotation>
-      <xs:documentation>The deprecated attribute provides a method for identifying schema components as being deprecated. A deprecated component is one that is provided, but the use of which is not recommended.</xs:documentation>
+      <xs:documentation>True for a deprecated schema component; that is, a component that is provided, but the use of which is not recommended.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="DocumentationText" type="nc:TextType">
     <xs:annotation>
-      <xs:documentation>A human-readable text definition of a data model component or term, or documentation of a namespace.</xs:documentation>
+      <xs:documentation>A human-readable text definition of a data model component or term, or the documentation of a namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="DocumentFilePathText" type="xs:string">
     <xs:annotation>
-      <xs:documentation>A relative file path to a document.</xs:documentation>
+      <xs:documentation>A relative file path from a schema pile root directory to a schema document for this namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Enumeration" type="cmf:AnyValueFacetType">
@@ -616,7 +630,7 @@
   </xs:element>
   <xs:element name="ExtensionOfClass" type="cmf:ClassType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A extension of a class.</xs:documentation>
+      <xs:documentation>A base class of a subclass.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="FractionDigits" type="cmf:NonNegativeValueFacetType">
@@ -624,9 +638,9 @@
       <xs:documentation>A restriction on the precision of a decimal data type, via a restriction on the number of digits allowed to the right of the decimal point of its decimal representation.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="GlobalAugmentationCode" type="cmf:GlobalAugmentationCodeType">
+  <xs:element name="GlobalAugmented" type="xs:NCName">
     <xs:annotation>
-      <xs:documentation>A kind of global augmentation (of associations, ordinary objects).</xs:documentation>
+      <xs:documentation>A kind of component (all associations, all objects, or all atomic values) that is the target of this global augmentation.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="HasProperty" type="cmf:HasPropertyType">
@@ -636,7 +650,7 @@
   </xs:element>
   <xs:element name="ImportDocumentationText" type="nc:TextType">
     <xs:annotation>
-      <xs:documentation>Human-readable documentation of an import element importing this nameespace</xs:documentation>
+      <xs:documentation>A human-readable documentation text for an import element importing this nameespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Length" type="cmf:NonNegativeValueFacetType">
@@ -644,9 +658,14 @@
       <xs:documentation>A restriction of the length of a data type. Unit of length varies depending on the type that is being derived from.</xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:element name="ListDatatype" type="cmf:ListDatatypeType">
+    <xs:annotation>
+      <xs:documentation>A data type for a NIEM model datatype that is a whitespace-separated list of atomic values.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:element name="ListOf" type="cmf:DatatypeType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A data type for a list of values.</xs:documentation>
+      <xs:documentation>A NIEM model datatype of the atomic values in a list.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="LocalTerm" type="cmf:LocalTermType">
@@ -671,7 +690,7 @@
   </xs:element>
   <xs:element name="MaxOccursQuantity" type="cmf:MaxOccursType">
     <xs:annotation>
-      <xs:documentation>A maximum number of times a property may occur within a class.</xs:documentation>
+      <xs:documentation>A maximum number of times a property may occur within an object of a class.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="MinExclusive" type="cmf:AnyValueFacetType">
@@ -691,7 +710,7 @@
   </xs:element>
   <xs:element name="MinOccursQuantity" type="xs:nonNegativeInteger">
     <xs:annotation>
-      <xs:documentation>A minimum number of times a property may occur within a class.</xs:documentation>
+      <xs:documentation>A minimum number of times a property may occur within an object of a class.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Model" type="cmf:ModelType">
@@ -714,6 +733,11 @@
       <xs:documentation>A kind of namespace in a CMF model (external, core, domain, etc.).</xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:element name="NamespaceLanguageName" type="xs:language">
+    <xs:annotation>
+      <xs:documentation>A name of a default language of the terms and documentation text in a namespace.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:element name="NamespacePrefixText" type="xs:NCName">
     <xs:annotation>
       <xs:documentation>A namespace prefix name for a namespace.</xs:documentation>
@@ -721,12 +745,17 @@
   </xs:element>
   <xs:element name="NamespaceURI" type="xs:anyURI">
     <xs:annotation>
-      <xs:documentation>A namespace name URI for a namespace.</xs:documentation>
+      <xs:documentation>A URI for a namespace.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="NamespaceVersionText" type="xs:token">
+    <xs:annotation>
+      <xs:documentation>A version attribute of an XML schema document.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="NIEMVersionText" type="xs:token">
     <xs:annotation>
-      <xs:documentation>A NIEM version number.</xs:documentation>
+      <xs:documentation>A NIEM version number of the builtin schema components used in a namespace; e.g. "5" or "6".</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="NonNegativeValue" type="xs:nonNegativeInteger">
@@ -741,7 +770,7 @@
   </xs:element>
   <xs:element name="OrderedPropertyIndicator" type="xs:boolean">
     <xs:annotation>
-      <xs:documentation>True if the order of a repeated property is significant.</xs:documentation>
+      <xs:documentation>True if the order of a repeated property within an object is significant.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Pattern" type="cmf:PatternFacetType">
@@ -766,32 +795,23 @@
   </xs:element>
   <xs:element name="RelationshipPropertyIndicator" type="xs:boolean">
     <xs:annotation>
-      <xs:documentation>True for a property that applies to an object relationship.</xs:documentation>
+      <xs:documentation>True for a property that applies to the relationship between two objects (instead of to a single object).</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="RestrictionOf" type="cmf:RestrictionOfType">
+  <xs:element name="RestrictionBase" type="cmf:DatatypeType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A restriction of a data type.</xs:documentation>
+      <xs:documentation>A data type that is the restriction base of a data type.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="SchemaLanguageName" type="xs:language">
-    <xs:annotation>
-      <xs:documentation>A language attribute of an XML schema document (xml:lang attribute).</xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:element name="SchemaVersionText" type="xs:token">
-    <xs:annotation>
-      <xs:documentation>A version attribute of an XML schema document.</xs:documentation>
-    </xs:annotation>
-  </xs:element>
+  <xs:element name="RestrictionDatatype" type="cmf:RestrictionDatatypeType"/>
   <xs:element name="SourceCitationText" type="xs:string">
     <xs:annotation>
-      <xs:documentation>A plain text citation of, reference to, or bibliographic entry for an originating or authoritative document defining a local term</xs:documentation>
+      <xs:documentation>A plain text citation of, reference to, or bibliographic entry for an originating or authoritative document defining a local term.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="SourceURIList" type="cmf:URIListType">
+  <xs:element name="SourceURI" type="xs:anyURI">
     <xs:annotation>
-      <xs:documentation>A list of URIs, each of which is an identifier or locator for an originating or authoritative document defining a local term.</xs:documentation>
+      <xs:documentation>A URI that is an identifier or locator for an originating or authoritative document defining a local term.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="StringValue" type="xs:string">
@@ -819,9 +839,14 @@
       <xs:documentation>A restriction on the size and precision of a decimal data type, via a restriction on the number of digits required to represent its value.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="UnionOf" type="cmf:UnionOfType">
+  <xs:element name="UnionDatatype" type="cmf:UnionDatatypeType">
     <xs:annotation>
-      <xs:documentation>A union of data types.</xs:documentation>
+      <xs:documentation>A NIEM model datatype that is a union of datatypes.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="UnionOf" type="cmf:DatatypeType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A NIEM model datatype that is a member of a union datatype.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="WhiteSpace" type="cmf:WhiteSpaceFacetType">
