@@ -40,10 +40,10 @@
         <xs:sequence>
           <xs:element ref="cmf:Class" minOccurs="0"/>
           <xs:element ref="cmf:Property"/>
-          <xs:element ref="cmf:AugmentationIndex"/>
           <xs:element ref="cmf:MinOccursQuantity"/>
           <xs:element ref="cmf:MaxOccursQuantity"/>
-          <xs:element ref="cmf:GlobalAugmented" minOccurs="0"/>
+          <xs:element ref="cmf:AugmentationIndex" minOccurs="0"/>
+          <xs:element ref="cmf:GlobalAugmentedCode" minOccurs="0"/>
           <xs:element ref="cmf:AugmentationRecordAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -124,6 +124,30 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  <xs:complexType name="GlobalAugmentedCodeType">
+    <xs:annotation>
+      <xs:documentation>A data type for a kind of component (all associations, all objects, or all atomic values) that is the target of a global augmentation.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base="niem-xs:token">
+        <xs:enumeration value="ASSOC">
+          <xs:annotation>
+            <xs:documentation>An augmentation applicable to all association classes.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="OBJECT">
+          <xs:annotation>
+            <xs:documentation>An augmentation applicable to all non-association classes with object properties.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="ATOMIC">
+          <xs:annotation>
+            <xs:documentation>An augmentation applicable to all classes with no object properties.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
   <xs:complexType name="HasPropertyType">
     <xs:annotation>
       <xs:documentation>A data type for an occurrence of a property as content of a class.</xs:documentation>
@@ -166,7 +190,7 @@
           <xs:element ref="cmf:TermName"/>
           <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
           <xs:element ref="cmf:TermLiteralText" minOccurs="0"/>
-          <xs:element ref="cmf:SourceURI" minOccurs="0"/>
+          <xs:element ref="cmf:SourceURI" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:SourceCitationText" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:LocalTermAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
@@ -659,9 +683,9 @@
       <xs:documentation>A restriction on the precision of a decimal data type, via a restriction on the number of digits allowed to the right of the decimal point of its decimal representation.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="GlobalAugmented" type="niem-xs:NCName" nillable="true">
+  <xs:element name="GlobalAugmentedCode" type="cmf:GlobalAugmentedCodeType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A kind of component (all associations, all objects, or all atomic values) that is the target of this global augmentation.</xs:documentation>
+      <xs:documentation>A kind of component (all associations, all objects, or all atomic values) that is the target of a global augmentation.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="HasProperty" type="cmf:HasPropertyType">
