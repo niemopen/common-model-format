@@ -12,6 +12,20 @@ For more information on NIEMOpen, see the project's website at [www.niemopen.org
 
 General questions about OASIS Open Projects may be directed to OASIS staff at project-admin@lists.oasis-open-projects.org
 
+## What's new in version 1.0-alpha.4
+
+Several changes based on NTAC review of draft NDR 6:
+
+* Now have a single `Facet` and `FacetType` with a new `FacetCategoryCode`. There is no longer any schema validation of facet values. 
+* ExtensionOfClass becomes SubClassOf
+* HasProperty becomes PropertyAssociation
+* ListOf becomes ListItemDatatype
+* NamespaceKindCode becomes NamespaceCategoryCode
+* UnionOf becomes UnionMemberDatatype
+* RestrictionDatatype becomes Restriction
+* ListDatatype becomes List
+* UnionDatatype becomes Union
+
 ## What's new in version 1.0-alpha.3
 
 Several changes to component names and definitions that align CMF with the metamodel:

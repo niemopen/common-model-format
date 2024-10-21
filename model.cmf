@@ -12,7 +12,7 @@
     <ConformanceTargetURI>https://docs.oasis-open.org/niemopen/ns/specification/XNDR/6.0/#ExtensionSchemaDocument</ConformanceTargetURI>
     <DocumentFilePathText>cmf.xsd</DocumentFilePathText>
     <NIEMVersionText>6</NIEMVersionText>
-    <NamespaceVersionText>1.0-alpha.2</NamespaceVersionText>
+    <NamespaceVersionText>1.0-alpha.4</NamespaceVersionText>
     <NamespaceLanguageName>en-US</NamespaceLanguageName>
   </Namespace>
   <Namespace structures:id="nc">
@@ -67,12 +67,6 @@
     <DocumentationText>True if a component is a base for extension, and must be specialized to be used directly; false if a component may be used directly.</DocumentationText>
     <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
   </DataProperty>
-  <DataProperty structures:id="cmf.AnyValueAbstract">
-    <Name>AnyValueAbstract</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data concept for a value of a facet.</DocumentationText>
-    <AbstractIndicator>true</AbstractIndicator>
-  </DataProperty>
   <DataProperty structures:id="cmf.AttributeIndicator">
     <Name>AttributeIndicator</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -98,6 +92,12 @@
     <Class structures:ref="cmf.AugmentationRecordType" xsi:nil="true"/>
     <ReferenceCode>NONE</ReferenceCode>
   </ObjectProperty>
+  <DataProperty structures:id="cmf.AugmentedGlobalComponentID">
+    <Name>AugmentedGlobalComponentID</Name>
+    <Namespace structures:ref="cmf" xsi:nil="true"/>
+    <DocumentationText>An identifer for a NIEM version and kind of component that is the target of a global augmentation.</DocumentationText>
+    <Datatype structures:ref="xs.QName" xsi:nil="true"/>
+  </DataProperty>
   <ObjectProperty structures:id="cmf.AugmentingNamespace">
     <Name>AugmentingNamespace</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -187,48 +187,25 @@
     <DocumentationText>A relative file path from a schema pile root directory to a schema document for this namespace.</DocumentationText>
     <Datatype structures:ref="xs.string" xsi:nil="true"/>
   </DataProperty>
-  <ObjectProperty structures:id="cmf.Enumeration">
-    <Name>Enumeration</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A restriction of the length of a data type.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.Facet" xsi:nil="true"/>
-    <Class structures:ref="cmf.AnyValueFacetType" xsi:nil="true"/>
-    <ReferenceCode>NONE</ReferenceCode>
-  </ObjectProperty>
-  <ObjectProperty structures:id="cmf.ExtensionOfClass">
-    <Name>ExtensionOfClass</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A base class of a subclass.</DocumentationText>
-    <Class structures:ref="cmf.ClassType" xsi:nil="true"/>
-    <ReferenceCode>ANY</ReferenceCode>
-  </ObjectProperty>
-  <DataProperty structures:id="cmf.Facet">
+  <ObjectProperty structures:id="cmf.Facet">
     <Name>Facet</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data concept for a facet that restricts an aspect of a data type.</DocumentationText>
-    <AbstractIndicator>true</AbstractIndicator>
-  </DataProperty>
-  <ObjectProperty structures:id="cmf.FractionDigits">
-    <Name>FractionDigits</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A restriction on the precision of a decimal data type, via a restriction on the number of digits allowed to the right of the decimal point of its decimal representation.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.Facet" xsi:nil="true"/>
-    <Class structures:ref="cmf.NonNegativeValueFacetType" xsi:nil="true"/>
+    <DocumentationText>A facet that restricts an aspect of a data type.</DocumentationText>
+    <Class structures:ref="cmf.FacetType" xsi:nil="true"/>
     <ReferenceCode>NONE</ReferenceCode>
   </ObjectProperty>
-  <DataProperty structures:id="cmf.GlobalAugmented">
-    <Name>GlobalAugmented</Name>
+  <DataProperty structures:id="cmf.FacetCategoryCode">
+    <Name>FacetCategoryCode</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A kind of component (all associations, all objects, or all atomic values) that is the target of this global augmentation.</DocumentationText>
-    <Datatype structures:ref="xs.NCName" xsi:nil="true"/>
+    <DocumentationText>A kind of constraining facet of a datatype restriction</DocumentationText>
+    <Datatype structures:ref="cmf.FacetCategoryCodeType" xsi:nil="true"/>
   </DataProperty>
-  <ObjectProperty structures:id="cmf.HasProperty">
-    <Name>HasProperty</Name>
+  <DataProperty structures:id="cmf.FacetValue">
+    <Name>FacetValue</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>An occurrence of a property as content of a class.</DocumentationText>
-    <Class structures:ref="cmf.HasPropertyType" xsi:nil="true"/>
-    <ReferenceCode>NONE</ReferenceCode>
-  </ObjectProperty>
+    <DocumentationText>A value of a facet that constrains a restriction datatype.</DocumentationText>
+    <Datatype structures:ref="xs.string" xsi:nil="true"/>
+  </DataProperty>
   <ObjectProperty structures:id="cmf.ImportDocumentationText">
     <Name>ImportDocumentationText</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -236,24 +213,16 @@
     <Class structures:ref="nc.TextType" xsi:nil="true"/>
     <ReferenceCode>NONE</ReferenceCode>
   </ObjectProperty>
-  <ObjectProperty structures:id="cmf.Length">
-    <Name>Length</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A restriction of the length of a data type. Unit of length varies depending on the type that is being derived from.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.Facet" xsi:nil="true"/>
-    <Class structures:ref="cmf.NonNegativeValueFacetType" xsi:nil="true"/>
-    <ReferenceCode>NONE</ReferenceCode>
-  </ObjectProperty>
-  <ObjectProperty structures:id="cmf.ListDatatype">
-    <Name>ListDatatype</Name>
+  <ObjectProperty structures:id="cmf.List">
+    <Name>List</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A data type for a NIEM model datatype that is a whitespace-separated list of atomic values.</DocumentationText>
     <SubPropertyOf structures:ref="cmf.Datatype" xsi:nil="true"/>
-    <Class structures:ref="cmf.ListDatatypeType" xsi:nil="true"/>
+    <Class structures:ref="cmf.ListType" xsi:nil="true"/>
     <ReferenceCode>NONE</ReferenceCode>
   </ObjectProperty>
-  <ObjectProperty structures:id="cmf.ListOf">
-    <Name>ListOf</Name>
+  <ObjectProperty structures:id="cmf.ListItemDatatype">
+    <Name>ListItemDatatype</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A NIEM model datatype of the atomic values in a list.</DocumentationText>
     <Class structures:ref="cmf.DatatypeType" xsi:nil="true"/>
@@ -266,60 +235,12 @@
     <Class structures:ref="cmf.LocalTermType" xsi:nil="true"/>
     <ReferenceCode>NONE</ReferenceCode>
   </ObjectProperty>
-  <ObjectProperty structures:id="cmf.MaxExclusive">
-    <Name>MaxExclusive</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>An exclusive upper bound of a data type.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.Facet" xsi:nil="true"/>
-    <Class structures:ref="cmf.AnyValueFacetType" xsi:nil="true"/>
-    <ReferenceCode>NONE</ReferenceCode>
-  </ObjectProperty>
-  <ObjectProperty structures:id="cmf.MaxInclusive">
-    <Name>MaxInclusive</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>An inclusive upper bound of a data type.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.Facet" xsi:nil="true"/>
-    <Class structures:ref="cmf.AnyValueFacetType" xsi:nil="true"/>
-    <ReferenceCode>NONE</ReferenceCode>
-  </ObjectProperty>
-  <ObjectProperty structures:id="cmf.MaxLength">
-    <Name>MaxLength</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A maximum length of a data type. Unit of length varies depending on the type that is being derived from.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.Facet" xsi:nil="true"/>
-    <Class structures:ref="cmf.NonNegativeValueFacetType" xsi:nil="true"/>
-    <ReferenceCode>NONE</ReferenceCode>
-  </ObjectProperty>
   <DataProperty structures:id="cmf.MaxOccursQuantity">
     <Name>MaxOccursQuantity</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A maximum number of times a property may occur within an object of a class.</DocumentationText>
     <Datatype structures:ref="cmf.MaxOccursType" xsi:nil="true"/>
   </DataProperty>
-  <ObjectProperty structures:id="cmf.MinExclusive">
-    <Name>MinExclusive</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>An exclusive lower bound of a data type.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.Facet" xsi:nil="true"/>
-    <Class structures:ref="cmf.AnyValueFacetType" xsi:nil="true"/>
-    <ReferenceCode>NONE</ReferenceCode>
-  </ObjectProperty>
-  <ObjectProperty structures:id="cmf.MinInclusive">
-    <Name>MinInclusive</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>An inclusive lower bound of a data type.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.Facet" xsi:nil="true"/>
-    <Class structures:ref="cmf.AnyValueFacetType" xsi:nil="true"/>
-    <ReferenceCode>NONE</ReferenceCode>
-  </ObjectProperty>
-  <ObjectProperty structures:id="cmf.MinLength">
-    <Name>MinLength</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A minimum length of a data type. Unit of length varies depending on the type that is being derived from.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.Facet" xsi:nil="true"/>
-    <Class structures:ref="cmf.NonNegativeValueFacetType" xsi:nil="true"/>
-    <ReferenceCode>NONE</ReferenceCode>
-  </ObjectProperty>
   <DataProperty structures:id="cmf.MinOccursQuantity">
     <Name>MinOccursQuantity</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -346,11 +267,11 @@
     <Class structures:ref="cmf.NamespaceType" xsi:nil="true"/>
     <ReferenceCode>ANY</ReferenceCode>
   </ObjectProperty>
-  <DataProperty structures:id="cmf.NamespaceKindCode">
-    <Name>NamespaceKindCode</Name>
+  <DataProperty structures:id="cmf.NamespaceCategoryCode">
+    <Name>NamespaceCategoryCode</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A kind of namespace in a CMF model (external, core, domain, etc.).</DocumentationText>
-    <Datatype structures:ref="cmf.NamespaceKindCodeType" xsi:nil="true"/>
+    <Datatype structures:ref="cmf.NamespaceCategoryCodeType" xsi:nil="true"/>
   </DataProperty>
   <DataProperty structures:id="cmf.NamespaceLanguageName">
     <Name>NamespaceLanguageName</Name>
@@ -382,13 +303,6 @@
     <DocumentationText>A NIEM version number of the builtin schema components used in a namespace; e.g. "5" or "6".</DocumentationText>
     <Datatype structures:ref="xs.token" xsi:nil="true"/>
   </DataProperty>
-  <DataProperty structures:id="cmf.NonNegativeValue">
-    <Name>NonNegativeValue</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A value of a facet, with an integer value zero or greater.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.AnyValueAbstract" xsi:nil="true"/>
-    <Datatype structures:ref="xs.nonNegativeInteger" xsi:nil="true"/>
-  </DataProperty>
   <ObjectProperty structures:id="cmf.ObjectProperty">
     <Name>ObjectProperty</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -403,21 +317,6 @@
     <DocumentationText>True if the order of a repeated property within an object is significant.</DocumentationText>
     <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
   </DataProperty>
-  <ObjectProperty structures:id="cmf.Pattern">
-    <Name>Pattern</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A restriction of the content of a datatype to values that match a specific pattern, provided as a regular expression.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.Facet" xsi:nil="true"/>
-    <Class structures:ref="cmf.PatternFacetType" xsi:nil="true"/>
-    <ReferenceCode>NONE</ReferenceCode>
-  </ObjectProperty>
-  <DataProperty structures:id="cmf.PositiveValue">
-    <Name>PositiveValue</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A value of a facet, with an integer value greater than zero.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.AnyValueAbstract" xsi:nil="true"/>
-    <Datatype structures:ref="xs.positiveInteger" xsi:nil="true"/>
-  </DataProperty>
   <ObjectProperty structures:id="cmf.Property">
     <Name>Property</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -425,6 +324,13 @@
     <AbstractIndicator>true</AbstractIndicator>
     <SubPropertyOf structures:ref="cmf.Component" xsi:nil="true"/>
     <Class structures:ref="cmf.PropertyType" xsi:nil="true"/>
+    <ReferenceCode>NONE</ReferenceCode>
+  </ObjectProperty>
+  <ObjectProperty structures:id="cmf.PropertyAssociation">
+    <Name>PropertyAssociation</Name>
+    <Namespace structures:ref="cmf" xsi:nil="true"/>
+    <DocumentationText>An occurrence of a property as content of a class.</DocumentationText>
+    <Class structures:ref="cmf.PropertyAssociationType" xsi:nil="true"/>
     <ReferenceCode>NONE</ReferenceCode>
   </ObjectProperty>
   <DataProperty structures:id="cmf.RefAttributeIndicator">
@@ -445,6 +351,14 @@
     <DocumentationText>True for a property that applies to the relationship between two objects (instead of to a single object).</DocumentationText>
     <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
   </DataProperty>
+  <ObjectProperty structures:id="cmf.Restriction">
+    <Name>Restriction</Name>
+    <Namespace structures:ref="cmf" xsi:nil="true"/>
+    <DocumentationText>A datatype that is a restriction of a base datatype plus zero or more restricting facets.</DocumentationText>
+    <SubPropertyOf structures:ref="cmf.Datatype" xsi:nil="true"/>
+    <Class structures:ref="cmf.RestrictionType" xsi:nil="true"/>
+    <ReferenceCode>NONE</ReferenceCode>
+  </ObjectProperty>
   <ObjectProperty structures:id="cmf.RestrictionBase">
     <Name>RestrictionBase</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -452,13 +366,13 @@
     <Class structures:ref="cmf.DatatypeType" xsi:nil="true"/>
     <ReferenceCode>ANY</ReferenceCode>
   </ObjectProperty>
-  <ObjectProperty structures:id="cmf.RestrictionDatatype">
-    <Name>RestrictionDatatype</Name>
+  <ObjectProperty structures:id="cmf.RestrictionSubClassOf">
+    <Name>RestrictionSubClassOf</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText/>
-    <SubPropertyOf structures:ref="cmf.Datatype" xsi:nil="true"/>
-    <Class structures:ref="cmf.RestrictionDatatypeType" xsi:nil="true"/>
-    <ReferenceCode>NONE</ReferenceCode>
+    <DocumentationText>A base class of a subclass that may exclude optional properties from the base.</DocumentationText>
+    <SubPropertyOf structures:ref="cmf.SubClassOf" xsi:nil="true"/>
+    <Class structures:ref="cmf.ClassType" xsi:nil="true"/>
+    <ReferenceCode>ANY</ReferenceCode>
   </ObjectProperty>
   <DataProperty structures:id="cmf.SourceCitationText">
     <Name>SourceCitationText</Name>
@@ -472,13 +386,13 @@
     <DocumentationText>A URI that is an identifier or locator for an originating or authoritative document defining a local term.</DocumentationText>
     <Datatype structures:ref="xs.anyURI" xsi:nil="true"/>
   </DataProperty>
-  <DataProperty structures:id="cmf.StringValue">
-    <Name>StringValue</Name>
+  <ObjectProperty structures:id="cmf.SubClassOf">
+    <Name>SubClassOf</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A value of a facet, with a string value.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.AnyValueAbstract" xsi:nil="true"/>
-    <Datatype structures:ref="xs.string" xsi:nil="true"/>
-  </DataProperty>
+    <DocumentationText>A base class of a subclass.</DocumentationText>
+    <Class structures:ref="cmf.ClassType" xsi:nil="true"/>
+    <ReferenceCode>ANY</ReferenceCode>
+  </ObjectProperty>
   <ObjectProperty structures:id="cmf.SubPropertyOf">
     <Name>SubPropertyOf</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -498,36 +412,20 @@
     <DocumentationText>A name for a local term.</DocumentationText>
     <Datatype structures:ref="xs.token" xsi:nil="true"/>
   </DataProperty>
-  <ObjectProperty structures:id="cmf.TotalDigits">
-    <Name>TotalDigits</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A restriction on the size and precision of a decimal data type, via a restriction on the number of digits required to represent its value.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.Facet" xsi:nil="true"/>
-    <Class structures:ref="cmf.PositiveValueFacetType" xsi:nil="true"/>
-    <ReferenceCode>NONE</ReferenceCode>
-  </ObjectProperty>
-  <ObjectProperty structures:id="cmf.UnionDatatype">
-    <Name>UnionDatatype</Name>
+  <ObjectProperty structures:id="cmf.Union">
+    <Name>Union</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A NIEM model datatype that is a union of datatypes.</DocumentationText>
     <SubPropertyOf structures:ref="cmf.Datatype" xsi:nil="true"/>
-    <Class structures:ref="cmf.UnionDatatypeType" xsi:nil="true"/>
+    <Class structures:ref="cmf.UnionType" xsi:nil="true"/>
     <ReferenceCode>NONE</ReferenceCode>
   </ObjectProperty>
-  <ObjectProperty structures:id="cmf.UnionOf">
-    <Name>UnionOf</Name>
+  <ObjectProperty structures:id="cmf.UnionMemberDatatype">
+    <Name>UnionMemberDatatype</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A NIEM model datatype that is a member of a union datatype.</DocumentationText>
     <Class structures:ref="cmf.DatatypeType" xsi:nil="true"/>
     <ReferenceCode>ANY</ReferenceCode>
-  </ObjectProperty>
-  <ObjectProperty structures:id="cmf.WhiteSpace">
-    <Name>WhiteSpace</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A constraint on how white space within data values is handled.</DocumentationText>
-    <SubPropertyOf structures:ref="cmf.Facet" xsi:nil="true"/>
-    <Class structures:ref="cmf.WhiteSpaceFacetType" xsi:nil="true"/>
-    <ReferenceCode>NONE</ReferenceCode>
   </ObjectProperty>
   <DataProperty structures:id="cmf.WhiteSpaceValueCode">
     <Name>WhiteSpaceValueCode</Name>
@@ -547,22 +445,6 @@
     <Datatype structures:ref="xs.string" xsi:nil="true"/>
     <AttributeIndicator>true</AttributeIndicator>
   </DataProperty>
-  <Class structures:id="cmf.AnyValueFacetType">
-    <Name>AnyValueFacetType</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data type for a facet that can have any value type.</DocumentationText>
-    <AugmentableIndicator>true</AugmentableIndicator>
-    <HasProperty>
-      <DataProperty structures:ref="cmf.AnyValueAbstract" xsi:nil="true"/>
-      <MinOccursQuantity>1</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-    <HasProperty>
-      <ObjectProperty structures:ref="cmf.DocumentationText" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-  </Class>
   <Class structures:id="cmf.AugmentationRecordType">
     <Name>AugmentationRecordType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -579,11 +461,6 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
     <HasProperty>
-      <DataProperty structures:ref="cmf.AugmentationIndex" xsi:nil="true"/>
-      <MinOccursQuantity>1</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-    <HasProperty>
       <DataProperty structures:ref="cmf.MinOccursQuantity" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
@@ -594,7 +471,12 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
     <HasProperty>
-      <DataProperty structures:ref="cmf.GlobalAugmented" xsi:nil="true"/>
+      <DataProperty structures:ref="cmf.AugmentationIndex" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty>
+      <DataProperty structures:ref="cmf.AugmentedGlobalComponentID" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
@@ -611,7 +493,7 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
     <HasProperty>
-      <ObjectProperty structures:ref="cmf.ExtensionOfClass" xsi:nil="true"/>
+      <ObjectProperty structures:ref="cmf.SubClassOf" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
@@ -626,7 +508,7 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
     <HasProperty>
-      <ObjectProperty structures:ref="cmf.HasProperty" xsi:nil="true"/>
+      <ObjectProperty structures:ref="cmf.PropertyAssociation" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
       <OrderedPropertyIndicator>true</OrderedPropertyIndicator>
@@ -709,23 +591,18 @@
     <ExtensionOfClass structures:ref="cmf.ComponentType" xsi:nil="true"/>
     <AugmentableIndicator>true</AugmentableIndicator>
   </Class>
-  <Class structures:id="cmf.HasPropertyType">
-    <Name>HasPropertyType</Name>
+  <Class structures:id="cmf.FacetType">
+    <Name>FacetType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data type for an occurrence of a property as content of a class.</DocumentationText>
+    <DocumentationText>A data type for a facet of a datatype restriction.</DocumentationText>
     <AugmentableIndicator>true</AugmentableIndicator>
     <HasProperty>
-      <ObjectProperty structures:ref="cmf.Property" xsi:nil="true"/>
+      <DataProperty structures:ref="cmf.FacetCategoryCode" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
     <HasProperty>
-      <DataProperty structures:ref="cmf.MinOccursQuantity" xsi:nil="true"/>
-      <MinOccursQuantity>1</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-    <HasProperty>
-      <DataProperty structures:ref="cmf.MaxOccursQuantity" xsi:nil="true"/>
+      <DataProperty structures:ref="cmf.FacetValue" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
@@ -734,25 +611,15 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-    <HasProperty>
-      <DataProperty structures:ref="cmf.OrderedPropertyIndicator" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-    <HasProperty>
-      <ObjectProperty structures:ref="cmf.AugmentingNamespace" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
-    </HasProperty>
   </Class>
-  <Class structures:id="cmf.ListDatatypeType">
-    <Name>ListDatatypeType</Name>
+  <Class structures:id="cmf.ListType">
+    <Name>ListType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A data type for a NIEM model datatype that is whitespace-separated list of atomic values.</DocumentationText>
     <ExtensionOfClass structures:ref="cmf.DatatypeType" xsi:nil="true"/>
     <AugmentableIndicator>true</AugmentableIndicator>
     <HasProperty>
-      <ObjectProperty structures:ref="cmf.ListOf" xsi:nil="true"/>
+      <ObjectProperty structures:ref="cmf.ListItemDatatype" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
@@ -785,7 +652,7 @@
     <HasProperty>
       <DataProperty structures:ref="cmf.SourceURI" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
     <HasProperty>
       <DataProperty structures:ref="cmf.SourceCitationText" xsi:nil="true"/>
@@ -830,7 +697,7 @@
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
     <HasProperty>
-      <DataProperty structures:ref="cmf.NamespaceKindCode" xsi:nil="true"/>
+      <DataProperty structures:ref="cmf.NamespaceCategoryCode" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
@@ -875,22 +742,6 @@
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
   </Class>
-  <Class structures:id="cmf.NonNegativeValueFacetType">
-    <Name>NonNegativeValueFacetType</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data type for a facet that carries a value that is either zero or a positive integer.</DocumentationText>
-    <AugmentableIndicator>true</AugmentableIndicator>
-    <HasProperty>
-      <DataProperty structures:ref="cmf.NonNegativeValue" xsi:nil="true"/>
-      <MinOccursQuantity>1</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-    <HasProperty>
-      <ObjectProperty structures:ref="cmf.DocumentationText" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-  </Class>
   <Class structures:id="cmf.ObjectPropertyType">
     <Name>ObjectPropertyType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -908,13 +759,23 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
   </Class>
-  <Class structures:id="cmf.PatternFacetType">
-    <Name>PatternFacetType</Name>
+  <Class structures:id="cmf.PropertyAssociationType">
+    <Name>PropertyAssociationType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data type for restricting the content of a datatype to values that match a specific pattern, provided as a regular expression.</DocumentationText>
+    <DocumentationText>A data type for an occurrence of a property as content of a class.</DocumentationText>
     <AugmentableIndicator>true</AugmentableIndicator>
     <HasProperty>
-      <DataProperty structures:ref="cmf.StringValue" xsi:nil="true"/>
+      <ObjectProperty structures:ref="cmf.Property" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty>
+      <DataProperty structures:ref="cmf.MinOccursQuantity" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </HasProperty>
+    <HasProperty>
+      <DataProperty structures:ref="cmf.MaxOccursQuantity" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
@@ -923,21 +784,15 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
-  </Class>
-  <Class structures:id="cmf.PositiveValueFacetType">
-    <Name>PositiveValueFacetType</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data type for a facet that carries a value that is a positive integer.</DocumentationText>
-    <AugmentableIndicator>true</AugmentableIndicator>
     <HasProperty>
-      <DataProperty structures:ref="cmf.PositiveValue" xsi:nil="true"/>
-      <MinOccursQuantity>1</MinOccursQuantity>
+      <DataProperty structures:ref="cmf.OrderedPropertyIndicator" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
     <HasProperty>
-      <ObjectProperty structures:ref="cmf.DocumentationText" xsi:nil="true"/>
+      <ObjectProperty structures:ref="cmf.AugmentingNamespace" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
   </Class>
   <Class structures:id="cmf.PropertyType">
@@ -962,8 +817,8 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
   </Class>
-  <Class structures:id="cmf.RestrictionDatatypeType">
-    <Name>RestrictionDatatypeType</Name>
+  <Class structures:id="cmf.RestrictionType">
+    <Name>RestrictionType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A data type for a restriction of a data type.</DocumentationText>
     <ExtensionOfClass structures:ref="cmf.DatatypeType" xsi:nil="true"/>
@@ -974,7 +829,7 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
     <HasProperty>
-      <DataProperty structures:ref="cmf.Facet" xsi:nil="true"/>
+      <ObjectProperty structures:ref="cmf.Facet" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </HasProperty>
@@ -984,32 +839,16 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
   </Class>
-  <Class structures:id="cmf.UnionDatatypeType">
-    <Name>UnionDatatypeType</Name>
+  <Class structures:id="cmf.UnionType">
+    <Name>UnionType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A data type for a datatype that is a union of datatypes.</DocumentationText>
     <ExtensionOfClass structures:ref="cmf.DatatypeType" xsi:nil="true"/>
     <AugmentableIndicator>true</AugmentableIndicator>
     <HasProperty>
-      <ObjectProperty structures:ref="cmf.UnionOf" xsi:nil="true"/>
+      <ObjectProperty structures:ref="cmf.UnionMemberDatatype" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
-    </HasProperty>
-  </Class>
-  <Class structures:id="cmf.WhiteSpaceFacetType">
-    <Name>WhiteSpaceFacetType</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data type constraining how white space within data values is handled.</DocumentationText>
-    <AugmentableIndicator>true</AugmentableIndicator>
-    <HasProperty>
-      <DataProperty structures:ref="cmf.WhiteSpaceValueCode" xsi:nil="true"/>
-      <MinOccursQuantity>1</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </HasProperty>
-    <HasProperty>
-      <ObjectProperty structures:ref="cmf.DocumentationText" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
     </HasProperty>
   </Class>
   <Class structures:id="nc.TextType">
@@ -1028,6 +867,60 @@
       <DocumentationText>lang (as an attribute name) denotes an attribute whose value is a language code for the natural language of the content of any element; its value is inherited. This name is reserved by virtue of its definition in the XML specification. Notes Attempting to install the relevant ISO 2- and 3-letter codes as the enumerated possible values is probably never going to be a realistic possibility. See BCP 47 at http://www.rfc-editor.org/rfc/bcp/bcp47.txt and the IANA language subtag registry at http://www.iana.org/assignments/language-subtag-registry for further information. The union allows for the 'un-declaration' of xml:lang with the empty string.</DocumentationText>
     </HasProperty>
   </Class>
+  <RestrictionDatatype structures:id="cmf.FacetCategoryCodeType">
+    <Name>FacetCategoryCodeType</Name>
+    <Namespace structures:ref="cmf" xsi:nil="true"/>
+    <DocumentationText>A code type for a kind of constraining facet of a datatype restriction.</DocumentationText>
+    <RestrictionBase structures:ref="xs.token" xsi:nil="true"/>
+    <Enumeration>
+      <StringValue>enumeration</StringValue>
+      <DocumentationText>A facet that constrains the value space to a specified set of values.</DocumentationText>
+    </Enumeration>
+    <Enumeration>
+      <StringValue>fractionDigits</StringValue>
+      <DocumentationText>A facet that places an upper limit on the arithmetic precision of decimal values.</DocumentationText>
+    </Enumeration>
+    <Enumeration>
+      <StringValue>length</StringValue>
+      <DocumentationText>A facet that constrains the value space to values with a specific number of units of length (which vary according to the base type definition).</DocumentationText>
+    </Enumeration>
+    <Enumeration>
+      <StringValue>maxExclusive</StringValue>
+      <DocumentationText>A facet that constrains the value space to values with a specific exclusive upper bound.</DocumentationText>
+    </Enumeration>
+    <Enumeration>
+      <StringValue>maxInclusive</StringValue>
+      <DocumentationText>A facet that constrains the value space to values with a specific inclusive upper bound.</DocumentationText>
+    </Enumeration>
+    <Enumeration>
+      <StringValue>maxLength</StringValue>
+      <DocumentationText>A facet that constrains the value space to values with at most a specific number of units of length (which vary according to the base type definition).</DocumentationText>
+    </Enumeration>
+    <Enumeration>
+      <StringValue>minExclusive</StringValue>
+      <DocumentationText>A facet that constrains the value space to values with a specific exclusive lower bound.</DocumentationText>
+    </Enumeration>
+    <Enumeration>
+      <StringValue>minInclusive</StringValue>
+      <DocumentationText>A facet that constrains the value space to values with a specific inclusive lower bound.</DocumentationText>
+    </Enumeration>
+    <Enumeration>
+      <StringValue>minLength</StringValue>
+      <DocumentationText>A facet that constrains the value space to values with at least a specific number of units of length (which vary according to the base type definition).</DocumentationText>
+    </Enumeration>
+    <Enumeration>
+      <StringValue>pattern</StringValue>
+      <DocumentationText>A facet that constrains the value space to values that are denoted by literals which match each of a set of regular expressions.</DocumentationText>
+    </Enumeration>
+    <Enumeration>
+      <StringValue>totalDigits</StringValue>
+      <DocumentationText>A facet that constrains the value space to those values that can be represented lexically using no more than a specified number of digits in decimal notation, or no more than a specified number of digits for the coefficient, in scientific notation..</DocumentationText>
+    </Enumeration>
+    <Enumeration>
+      <StringValue>whiteSpace</StringValue>
+      <DocumentationText>A facet that constrains the value space of types·derived from string such that the various behaviors specified in Attribute Value Normalization in XML are realized.</DocumentationText>
+    </Enumeration>
+  </RestrictionDatatype>
   <UnionDatatype structures:id="cmf.MaxOccursType">
     <Name>MaxOccursType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -1045,9 +938,10 @@
       <DocumentationText>There is no maximum number of times that a property may occur.</DocumentationText>
     </Enumeration>
   </RestrictionDatatype>
-  <RestrictionDatatype structures:id="cmf.NamespaceKindCodeType">
-    <Name>NamespaceKindCodeType</Name>
+  <RestrictionDatatype structures:id="cmf.NamespaceCategoryCodeType">
+    <Name>NamespaceCategoryCodeType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
+    <DocumentationText>A kind of a namespace.</DocumentationText>
     <RestrictionBase structures:ref="xs.token" xsi:nil="true"/>
     <Enumeration>
       <StringValue>BUILTIN</StringValue>
@@ -1093,19 +987,19 @@
     <RestrictionBase structures:ref="xs.token" xsi:nil="true"/>
     <Enumeration>
       <StringValue>ANY</StringValue>
-      <DocumentationText>A code for a component that may be referenced by IDREF or URI.</DocumentationText>
+      <DocumentationText>A code for a property that may be referenced by IDREF or URI.</DocumentationText>
     </Enumeration>
     <Enumeration>
       <StringValue>NONE</StringValue>
-      <DocumentationText>A code for a component that may not be referenced.</DocumentationText>
+      <DocumentationText>A code for a property that may not be referenced.</DocumentationText>
     </Enumeration>
     <Enumeration>
       <StringValue>REF</StringValue>
-      <DocumentationText>A code for a component that may be referenced only by IDREF.</DocumentationText>
+      <DocumentationText>A code for a property that may be referenced only by IDREF.</DocumentationText>
     </Enumeration>
     <Enumeration>
       <StringValue>URI</StringValue>
-      <DocumentationText>A code for a component that may be referenced only by URI.</DocumentationText>
+      <DocumentationText>A code for a property that may be referenced only by URI.</DocumentationText>
     </Enumeration>
   </RestrictionDatatype>
   <ListDatatype structures:id="cmf.URIListType">
@@ -1114,24 +1008,6 @@
     <DocumentationText>A data type for a white space-delimited list of URIs.</DocumentationText>
     <ListOf structures:ref="xs.anyURI" xsi:nil="true"/>
   </ListDatatype>
-  <RestrictionDatatype structures:id="cmf.WhiteSpaceFacetCodeType">
-    <Name>WhiteSpaceFacetCodeType</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data type for a specification of white space for a data type.</DocumentationText>
-    <RestrictionBase structures:ref="xs.string" xsi:nil="true"/>
-    <Enumeration>
-      <StringValue>collapse</StringValue>
-      <DocumentationText>After the processing implied by replace, contiguous sequences of #x20's are collapsed to a single #x20, and leading and trailing #x20's are removed.</DocumentationText>
-    </Enumeration>
-    <Enumeration>
-      <StringValue>preserve</StringValue>
-      <DocumentationText>No normalization is done, the value is not changed (this is the behavior required by [XML 1.0 (Second Edition)] for element content)</DocumentationText>
-    </Enumeration>
-    <Enumeration>
-      <StringValue>replace</StringValue>
-      <DocumentationText>All occurrences of #x9 (tab), #xA (line feed) and #xD (carriage return) are replaced with #x20 (space)</DocumentationText>
-    </Enumeration>
-  </RestrictionDatatype>
   <RestrictionDatatype structures:id="cmf.WhiteSpaceValueCodeType">
     <Name>WhiteSpaceValueCodeType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -1174,8 +1050,8 @@
     <Name>nonNegativeInteger</Name>
     <Namespace structures:ref="xs" xsi:nil="true"/>
   </Datatype>
-  <Datatype structures:id="xs.positiveInteger">
-    <Name>positiveInteger</Name>
+  <Datatype structures:id="xs.QName">
+    <Name>QName</Name>
     <Namespace structures:ref="xs" xsi:nil="true"/>
   </Datatype>
   <Datatype structures:id="xs.string">
