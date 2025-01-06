@@ -9,7 +9,7 @@
   xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   ct:conformanceTargets="https://docs.oasis-open.org/niemopen/ns/specification/XNDR/6.0/#ExtensionSchemaDocument"
-  version="1.0-alpha.4"
+  version="1.0-alpha.5"
   xml:lang="en-US">
   <xs:annotation>
     <xs:documentation>The NIEM Common Model Format (CMF).</xs:documentation>
@@ -29,7 +29,7 @@
           <xs:element ref="cmf:MinOccursQuantity"/>
           <xs:element ref="cmf:MaxOccursQuantity"/>
           <xs:element ref="cmf:AugmentationIndex" minOccurs="0"/>
-          <xs:element ref="cmf:AugmentedGlobalComponentID" minOccurs="0"/>
+          <xs:element ref="cmf:GlobalClassCode" minOccurs="0"/>
           <xs:element ref="cmf:AugmentationRecordAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -43,10 +43,11 @@
       <xs:extension base="cmf:ComponentType">
         <xs:sequence>
           <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
+          <xs:element ref="cmf:AnyAttributeIndicator" minOccurs="0"/>
+          <xs:element ref="cmf:AnyElementIndicator" minOccurs="0"/>
           <xs:element ref="cmf:SubClassOf" minOccurs="0"/>
-          <xs:element ref="cmf:AugmentableIndicator" minOccurs="0"/>
           <xs:element ref="cmf:ReferenceCode" minOccurs="0"/>
-          <xs:element ref="cmf:PropertyAssociation" minOccurs="0" maxOccurs="unbounded" appinfo:orderedPropertyIndicator="true"/>
+          <xs:element ref="cmf:ChildPropertyAssociation" minOccurs="0" maxOccurs="unbounded" appinfo:orderedPropertyIndicator="true"/>
           <xs:element ref="cmf:ClassAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -85,7 +86,7 @@
   </xs:complexType>
   <xs:complexType name="DataPropertyType">
     <xs:annotation>
-      <xs:documentation>A data type for a data property</xs:documentation>
+      <xs:documentation>A data type for a data property.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="cmf:PropertyType">
@@ -112,7 +113,7 @@
   </xs:complexType>
   <xs:complexType name="FacetCategoryCodeType">
     <xs:annotation>
-      <xs:documentation>A code type for a kind of constraining facet of a datatype restriction.</xs:documentation>
+      <xs:documentation>A code type for a kind of constraint on a restriction datatype.</xs:documentation>
     </xs:annotation>
     <xs:simpleContent>
       <xs:restriction base="niem-xs:token">
@@ -181,7 +182,7 @@
   </xs:complexType>
   <xs:complexType name="FacetType">
     <xs:annotation>
-      <xs:documentation>A data type for a facet of a datatype restriction.</xs:documentation>
+      <xs:documentation>A data type for a constraint on an aspect of a data type.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="structures:ObjectType">
@@ -193,6 +194,30 @@
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GlobalClassCodeType">
+    <xs:annotation>
+      <xs:documentation>A data type for a code for a kind of class (object, association, or literal), such that every class in a model of that kind is augmented with a property.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base="niem-xs:token">
+        <xs:enumeration value="ASSOCIATION">
+          <xs:annotation>
+            <xs:documentation>A code for an augmentation property that applies to all association classes in the model.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="LITERAL">
+          <xs:annotation>
+            <xs:documentation>A code for an augmentation property that applies to all datatypes and literal classes in the model.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="OBJECT">
+          <xs:annotation>
+            <xs:documentation>A code for an augmentation property that applies to all object classes in the model.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="ListType">
     <xs:annotation>
@@ -362,14 +387,14 @@
     <xs:complexContent>
       <xs:extension base="cmf:PropertyType">
         <xs:sequence>
-          <xs:element ref="cmf:Class"/>
           <xs:element ref="cmf:ReferenceCode" minOccurs="0"/>
+          <xs:element ref="cmf:Class"/>
           <xs:element ref="cmf:ObjectPropertyAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="PropertyAssociationType">
+  <xs:complexType name="ChildPropertyAssociationType">
     <xs:annotation>
       <xs:documentation>A data type for an occurrence of a property as content of a class.</xs:documentation>
     </xs:annotation>
@@ -381,7 +406,6 @@
           <xs:element ref="cmf:MaxOccursQuantity"/>
           <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
           <xs:element ref="cmf:OrderedPropertyIndicator" minOccurs="0"/>
-          <xs:element ref="cmf:AugmentingNamespace" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:PropertyAssociationAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -396,7 +420,7 @@
         <xs:sequence>
           <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
           <xs:element ref="cmf:SubPropertyOf" minOccurs="0"/>
-          <xs:element ref="cmf:RelationshipPropertyIndicator" minOccurs="0"/>
+          <xs:element ref="cmf:RelationshipIndicator" minOccurs="0"/>
           <xs:element ref="cmf:PropertyAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -410,17 +434,17 @@
       <xs:restriction base="niem-xs:token">
         <xs:enumeration value="ANY">
           <xs:annotation>
-            <xs:documentation>A code for a property that may be referenced by IDREF or URI.</xs:documentation>
+            <xs:documentation>A code for a property that may be referenced by IDREF, NCName, or URI.</xs:documentation>
           </xs:annotation>
         </xs:enumeration>
         <xs:enumeration value="NONE">
           <xs:annotation>
-            <xs:documentation>A code for a property that may not be referenced.</xs:documentation>
+            <xs:documentation>A code for a property that may not be referenced and must appear inline.</xs:documentation>
           </xs:annotation>
         </xs:enumeration>
         <xs:enumeration value="REF">
           <xs:annotation>
-            <xs:documentation>A code for a property that may be referenced only by IDREF.</xs:documentation>
+            <xs:documentation>A code for a property that may be referenced only by IDREF in XML or NCName in JSON.</xs:documentation>
           </xs:annotation>
         </xs:enumeration>
         <xs:enumeration value="URI">
@@ -475,43 +499,24 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name="WhiteSpaceValueCodeType">
-    <xs:annotation>
-      <xs:documentation>A data type for a specification of white space for a data type.</xs:documentation>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:restriction base="niem-xs:string">
-        <xs:enumeration value="collapse">
-          <xs:annotation>
-            <xs:documentation>After the processing implied by replace, contiguous sequences of #x20's are collapsed to a single #x20, and leading and trailing #x20's are removed.</xs:documentation>
-          </xs:annotation>
-        </xs:enumeration>
-        <xs:enumeration value="preserve">
-          <xs:annotation>
-            <xs:documentation>No normalization is done, the value is not changed (this is the behavior required by [XML 1.0 (Second Edition)] for element content)</xs:documentation>
-          </xs:annotation>
-        </xs:enumeration>
-        <xs:enumeration value="replace">
-          <xs:annotation>
-            <xs:documentation>All occurrences of #x9 (tab), #xA (line feed) and #xD (carriage return) are replaced with #x20 (space)</xs:documentation>
-          </xs:annotation>
-        </xs:enumeration>
-      </xs:restriction>
-    </xs:simpleContent>
-  </xs:complexType>
   <xs:element name="AbstractIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
       <xs:documentation>True if a component is a base for extension, and must be specialized to be used directly; false if a component may be used directly.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AttributeIndicator" type="niem-xs:boolean" nillable="true">
+  <xs:element name="AnyAttributeIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
-      <xs:documentation>True for a property that is represented as attributes in XML.</xs:documentation>
+      <xs:documentation>	True when instances of a class may have arbitrary attribute properties in addition to those specified by ChildPropertyAssociation.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AugmentableIndicator" type="niem-xs:boolean" nillable="true">
+  <xs:element name="AnyElementIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
-      <xs:documentation>True if the class can be augmented with additional properties.</xs:documentation>
+      <xs:documentation>	True when instances of a class may have arbitrary element properties in addition to those specified by ChildPropertyAssociation.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AttributeIndicator" type="niem-xs:boolean" nillable="true">
+    <xs:annotation>
+      <xs:documentation>True for a property that is represented as an attribute in XML.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="AugmentationIndex" type="niem-xs:integer" nillable="true">
@@ -529,16 +534,6 @@
       <xs:documentation>An augmentation point for AugmentationRecordType.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AugmentedGlobalComponentID" type="niem-xs:QName" nillable="true">
-    <xs:annotation>
-      <xs:documentation>An identifer for a NIEM version and kind of component that is the target of a global augmentation.</xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:element name="AugmentingNamespace" type="cmf:NamespaceType" nillable="true">
-    <xs:annotation>
-      <xs:documentation>A namespace responsible for augmenting a class with a property.</xs:documentation>
-    </xs:annotation>
-  </xs:element>
   <xs:element name="Class" type="cmf:ClassType" substitutionGroup="cmf:Component" nillable="true">
     <xs:annotation>
       <xs:documentation>A class.</xs:documentation>
@@ -551,7 +546,7 @@
   </xs:element>
   <xs:element name="CodeListBinding" type="cmf:CodeListBindingType">
     <xs:annotation>
-      <xs:documentation>An element for connecting simple content defined by an XML Schema component to a a column of a code list.</xs:documentation>
+      <xs:documentation>A property for connecting literal values defined by a data type a column of a code list.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="CodeListBindingAugmentationPoint" abstract="true">
@@ -586,7 +581,7 @@
   </xs:element>
   <xs:element name="ConformanceTargetURI" type="niem-xs:anyURI" nillable="true">
     <xs:annotation>
-      <xs:documentation>A list of conformance target identifiers.</xs:documentation>
+      <xs:documentation>A conformance target identifier.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="DataProperty" type="cmf:DataPropertyType" substitutionGroup="cmf:Property" nillable="true">
@@ -621,12 +616,12 @@
   </xs:element>
   <xs:element name="DocumentFilePathText" type="niem-xs:string" nillable="true">
     <xs:annotation>
-      <xs:documentation>A relative file path from a schema pile root directory to a schema document for this namespace.</xs:documentation>
+      <xs:documentation>A relative file path from a schema top directory to a schema document for this namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Facet" type="cmf:FacetType">
     <xs:annotation>
-      <xs:documentation>A facet that restricts an aspect of a data type.</xs:documentation>
+      <xs:documentation>A constraint on an aspect of a data type.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="FacetAugmentationPoint" abstract="true">
@@ -636,12 +631,17 @@
   </xs:element>
   <xs:element name="FacetCategoryCode" type="cmf:FacetCategoryCodeType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A kind of constraining facet of a datatype restriction</xs:documentation>
+      <xs:documentation>A kind of constraint on a restriction datatype.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="FacetValue" type="niem-xs:string" nillable="true">
     <xs:annotation>
-      <xs:documentation>A value of a facet that constrains a restriction datatype.</xs:documentation>
+      <xs:documentation>A value of a constraint on a restriction datatype.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="GlobalClassCode" type="cmf:GlobalClassCodeType">
+    <xs:annotation>
+      <xs:documentation>A code for a kind of class (object, association, or literal), such that every class in a model of that kind is augmented with a property.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="ImportDocumentationText" type="nc:TextType">
@@ -661,7 +661,7 @@
   </xs:element>
   <xs:element name="ListItemDatatype" type="cmf:DatatypeType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A NIEM model datatype of the atomic values in a list.</xs:documentation>
+      <xs:documentation>A datatype of the literal values in a list.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="LocalTerm" type="cmf:LocalTermType">
@@ -759,7 +759,7 @@
       <xs:documentation>A data property or an object property.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="PropertyAssociation" type="cmf:PropertyAssociationType">
+  <xs:element name="ChildPropertyAssociation" type="cmf:ChildPropertyAssociationType">
     <xs:annotation>
       <xs:documentation>An occurrence of a property as content of a class.</xs:documentation>
     </xs:annotation>
@@ -776,7 +776,7 @@
   </xs:element>
   <xs:element name="RefAttributeIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
-      <xs:documentation>True for a property that is an object reference attribute.</xs:documentation>
+      <xs:documentation>True for a property that is a reference attribute property.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="ReferenceCode" type="cmf:ReferenceCodeType" nillable="true">
@@ -784,9 +784,9 @@
       <xs:documentation>A code describing how a property may be referenced (or must appear inline).</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="RelationshipPropertyIndicator" type="niem-xs:boolean" nillable="true">
+  <xs:element name="RelationshipIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
-      <xs:documentation>True for a property that applies to the relationship between two objects (instead of to a single object).</xs:documentation>
+      <xs:documentation>True for a property that applies to the relationship between its parent and grandparent objects.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Restriction" type="cmf:RestrictionType" substitutionGroup="cmf:Datatype">
@@ -801,7 +801,7 @@
   </xs:element>
   <xs:element name="RestrictionBase" type="cmf:DatatypeType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A data type that is the restriction base of a data type.</xs:documentation>
+      <xs:documentation>A datatype that is the restriction base of a data type.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="RestrictionSubClassOf" type="cmf:ClassType" substitutionGroup="cmf:SubClassOf" nillable="true">
@@ -851,12 +851,7 @@
   </xs:element>
   <xs:element name="UnionMemberDatatype" type="cmf:DatatypeType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A NIEM model datatype that is a member of a union datatype.</xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:element name="WhiteSpaceValueCode" type="cmf:WhiteSpaceValueCodeType" nillable="true">
-    <xs:annotation>
-      <xs:documentation>A value of a specification of white space for a data type.</xs:documentation>
+      <xs:documentation>A datatype that is a member of a union datatype.</xs:documentation>
     </xs:annotation>
   </xs:element>
 </xs:schema>

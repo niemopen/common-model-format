@@ -12,6 +12,18 @@ For more information on NIEMOpen, see the project's website at [www.niemopen.org
 
 General questions about OASIS Open Projects may be directed to OASIS staff at project-admin@lists.oasis-open-projects.org
 
+## What's new in version 1.0-alpha.5
+
+* Wildcards supported: ClassType has AnyAttributeIndicator and AnyElementIndicator
+* AugmentedGlobalClassID becomes GlobalClassCode
+* PropertyAssociation becomes ChildPropertyAssociation
+* RelationshpPropertyIndicator becomes RelationshipIndicator
+* AugmentableIndicator removed
+* AugmentingNamespace removed
+* Unnecessary types and elements removed
+* Examples not updated
+* CMF version of model not included
+
 ## What's new in version 1.0-alpha.4
 
 Several changes based on NTAC review of draft NDR 6:
