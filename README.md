@@ -12,6 +12,19 @@ For more information on NIEMOpen, see the project's website at [www.niemopen.org
 
 General questions about OASIS Open Projects may be directed to OASIS staff at project-admin@lists.oasis-open-projects.org
 
+## What's new in version 1.0-alpha.7
+
+* LocalTerm has at most one DocumentText child
+* Update appinfo.xsd to include appinfo:Augmentation
+
+## What's new in version 1.0-alpha.6
+
+* Component and Namespace elements with content must be top-level
+* Model object has xml:lang
+* DocumentationText is repeatable
+* GlobalClassCode is repeatable
+* Removed NIEMVersionText and NamespaceCategoryCode
+
 ## What's new in version 1.0-alpha.5
 
 * Wildcards supported: ClassType has AnyAttributeIndicator and AnyElementIndicator

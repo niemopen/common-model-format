@@ -88,6 +88,45 @@
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
+  <xs:element name="AttributeAugmentation">
+    <xs:annotation>
+      <xs:documentation>A record of an attribute augmentation from an augmenting namespace.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="class" type="xs:QName" use="optional">
+        <xs:annotation>
+          <xs:documentation>An augmented type.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="property" type="xs:QName" use="required">
+        <xs:annotation>
+          <xs:documentation>An augmentation attribute.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="use" type="appinfo:UseSimpleType" use="optional">
+        <xs:annotation>
+          <xs:documentation>A code indicating whether the augmentation attribute must appear in an object of the augmented type; default is "optional".</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="globalCode" type="appinfo:GlobalCodeListType" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="UseSimpleType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="optional"/>
+      <xs:enumeration value="required"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="GlobalCodeListType">
+    <xs:list itemType="appinfo:GlobalCodeSimpleType"/>
+  </xs:simpleType>
+  <xs:simpleType name="GlobalCodeSimpleType">
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="ASSOCIATION"/>
+      <xs:enumeration value="LITERAL"/>
+      <xs:enumeration value="OBJECT"/>
+    </xs:restriction>
+  </xs:simpleType>
   <xs:element name="LocalTerm">
     <xs:annotation>
       <xs:documentation>A meaning of a local term within a namespace.</xs:documentation>
