@@ -10,7 +10,7 @@
   xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   ct:conformanceTargets="https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#ExtensionSchemaDocument"
-  version="1.0-alpha.7"
+  version="1.0-alpha.8"
   xml:lang="en-US">
   <xs:annotation>
     <xs:documentation>The NIEM Common Model Format (CMF).</xs:documentation>
@@ -19,6 +19,22 @@
   <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/" schemaLocation="adapters/niem-xs.xsd"/>
   <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" schemaLocation="utility/structures.xsd"/>
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="external/xml.xsd"/>
+  <xs:complexType name="AnyPropertyType">
+    <xs:annotation>
+      <xs:documentation>A data type for an unspecified property of a class.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="cmf:MinOccursQuantity"/>
+          <xs:element ref="cmf:MaxOccursQuantity"/>
+          <xs:element ref="cmf:AttributeIndicator" minOccurs="0"/>
+          <xs:element ref="cmf:NamespaceConstraintText" minOccurs="0"/>
+          <xs:element ref="cmf:ProcessingCode" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:complexType name="AugmentationRecordType">
     <xs:annotation>
       <xs:documentation>A data type for a class that is augmented with a property by a namespace.</xs:documentation>
@@ -37,6 +53,23 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
+  <xs:complexType name="ChildPropertyAssociationType">
+    <xs:annotation>
+      <xs:documentation>A data type for an occurrence of a property as content of a class.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:AssociationType">
+        <xs:sequence>
+          <xs:element ref="cmf:Property"/>
+          <xs:element ref="cmf:MinOccursQuantity"/>
+          <xs:element ref="cmf:MaxOccursQuantity"/>
+          <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
+          <xs:element ref="cmf:OrderedPropertyIndicator" minOccurs="0"/>
+          <xs:element ref="cmf:PropertyAssociationAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
   <xs:complexType name="ClassType">
     <xs:annotation>
       <xs:documentation>A data type for a class.</xs:documentation>
@@ -45,11 +78,10 @@
       <xs:extension base="cmf:ComponentType">
         <xs:sequence>
           <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
-          <xs:element ref="cmf:AnyAttributeIndicator" minOccurs="0"/>
-          <xs:element ref="cmf:AnyElementIndicator" minOccurs="0"/>
           <xs:element ref="cmf:SubClassOf" minOccurs="0"/>
           <xs:element ref="cmf:ReferenceCode" minOccurs="0"/>
           <xs:element ref="cmf:ChildPropertyAssociation" minOccurs="0" maxOccurs="unbounded" appinfo:orderedPropertyIndicator="true"/>
+          <xs:element ref="cmf:AnyProperty" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:ClassAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -407,22 +439,29 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="ChildPropertyAssociationType">
+  <xs:complexType name="ProcessingCodeType">
     <xs:annotation>
-      <xs:documentation>A data type for an occurrence of a property as content of a class.</xs:documentation>
+      <xs:documentation>A data type for a code describing the validation required for an unspecified property of a class.</xs:documentation>
     </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="structures:AssociationType">
-        <xs:sequence>
-          <xs:element ref="cmf:Property"/>
-          <xs:element ref="cmf:MinOccursQuantity"/>
-          <xs:element ref="cmf:MaxOccursQuantity"/>
-          <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
-          <xs:element ref="cmf:OrderedPropertyIndicator" minOccurs="0"/>
-          <xs:element ref="cmf:PropertyAssociationAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
+    <xs:simpleContent>
+      <xs:restriction base="niem-xs:token">
+        <xs:enumeration value="lax">
+          <xs:annotation>
+            <xs:documentation>A code for an unspecified property that must be validated if and only if constraints for teh property are available.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="skip">
+          <xs:annotation>
+            <xs:documentation>A code for an unspecified property that need not be validated.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="strict">
+          <xs:annotation>
+            <xs:documentation>A code for an unspecified property that must be validated.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="PropertyType">
     <xs:annotation>
@@ -517,14 +556,9 @@
       <xs:documentation>True if a component is a base for extension, and must be specialized to be used directly; false if a component may be used directly.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AnyAttributeIndicator" type="niem-xs:boolean" nillable="true">
+  <xs:element name="AnyProperty" type="cmf:AnyPropertyType">
     <xs:annotation>
-      <xs:documentation>	True when instances of a class may have arbitrary attribute properties in addition to those specified by ChildPropertyAssociation.</xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:element name="AnyElementIndicator" type="niem-xs:boolean" nillable="true">
-    <xs:annotation>
-      <xs:documentation>	True when instances of a class may have arbitrary element properties in addition to those specified by ChildPropertyAssociation.</xs:documentation>
+      <xs:documentation>An unconstrained property of a class.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="AttributeIndicator" type="niem-xs:boolean" nillable="true">
@@ -727,6 +761,11 @@
       <xs:documentation>A kind of namespace in a CMF model (external, core, domain, etc.).</xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:element name="NamespaceConstraintText" type="niem-xs:string">
+    <xs:annotation>
+      <xs:documentation>A description of the namespace constraints on an unspecified property of a class.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:element name="NamespaceLanguageName" type="niem-xs:language" nillable="true">
     <xs:annotation>
       <xs:documentation>A name of a default language of the terms and documentation text in a namespace.</xs:documentation>
@@ -765,6 +804,11 @@
   <xs:element name="OrderedPropertyIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
       <xs:documentation>True if the order of a repeated property within an object is significant.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ProcessingCode" type="cmf:ProcessingCodeType">
+    <xs:annotation>
+      <xs:documentation>A code describing the validation required for an unspecified property of a class.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Property" type="cmf:PropertyType" substitutionGroup="cmf:Component" abstract="true">
