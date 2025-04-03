@@ -12,6 +12,12 @@ For more information on NIEMOpen, see the project's website at [www.niemopen.org
 
 General questions about OASIS Open Projects may be directed to OASIS staff at project-admin@lists.oasis-open-projects.org
 
+## What's new in version 1.0-alpha.8
+
+* DocumentationText is unbounded in FacetType
+* ImportDocumentationText is unbounded in NamespaceType
+* Class is optional in PropertyType
+
 ## What's new in version 1.0-alpha.7
 
 * LocalTerm has at most one DocumentText child

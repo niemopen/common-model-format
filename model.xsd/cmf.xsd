@@ -229,7 +229,7 @@
         <xs:sequence>
           <xs:element ref="cmf:FacetCategoryCode"/>
           <xs:element ref="cmf:FacetValue"/>
-          <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
+          <xs:element ref="cmf:DocumentationText" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:FacetAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -417,7 +417,7 @@
           <xs:element ref="cmf:DocumentFilePathText" minOccurs="0"/>
           <xs:element ref="cmf:NamespaceVersionText" minOccurs="0"/>
           <xs:element ref="cmf:NamespaceLanguageName" minOccurs="0"/>
-          <xs:element ref="cmf:ImportDocumentationText" minOccurs="0"/>
+          <xs:element ref="cmf:ImportDocumentationText" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:AugmentationRecord" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:LocalTerm" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:NamespaceAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
@@ -433,7 +433,7 @@
       <xs:extension base="cmf:PropertyType">
         <xs:sequence>
           <xs:element ref="cmf:ReferenceCode" minOccurs="0"/>
-          <xs:element ref="cmf:Class"/>
+          <xs:element ref="cmf:Class" minOccurs="0"/>
           <xs:element ref="cmf:ObjectPropertyAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
