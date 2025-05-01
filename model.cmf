@@ -11,7 +11,9 @@
     <DocumentationText>The NIEM Common Model Format (CMF).</DocumentationText>
     <ConformanceTargetURI>https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#ExtensionSchemaDocument</ConformanceTargetURI>
     <DocumentFilePathText>cmf.xsd</DocumentFilePathText>
-    <NamespaceVersionText>1.0-alpha.8</NamespaceVersionText>
+    <NamespaceCategoryCode>EXTENSION</NamespaceCategoryCode>
+    <NamespaceVersionText>1.0-alpha.9</NamespaceVersionText>
+    <NIEMVersionName>NIEM6.0</NIEMVersionName>
     <NamespaceLanguageName>en-US</NamespaceLanguageName>
   </Namespace>
   <Namespace structures:id="nc">
@@ -20,17 +22,21 @@
     <DocumentationText>NIEM Core.</DocumentationText>
     <ConformanceTargetURI>https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#SubsetSchemaDocument</ConformanceTargetURI>
     <DocumentFilePathText>niem-core.xsd</DocumentFilePathText>
+    <NamespaceCategoryCode>CORE</NamespaceCategoryCode>
     <NamespaceVersionText>psd01</NamespaceVersionText>
+    <NIEMVersionName>NIEM6.0</NIEMVersionName>
     <NamespaceLanguageName>en-US</NamespaceLanguageName>
   </Namespace>
   <Namespace structures:id="xml">
     <NamespaceURI>http://www.w3.org/XML/1998/namespace</NamespaceURI>
     <NamespacePrefixText>xml</NamespacePrefixText>
     <DocumentFilePathText>external/xml.xsd</DocumentFilePathText>
+    <NamespaceCategoryCode>XML</NamespaceCategoryCode>
   </Namespace>
   <Namespace structures:id="xs">
     <NamespaceURI>http://www.w3.org/2001/XMLSchema</NamespaceURI>
     <NamespacePrefixText>xs</NamespacePrefixText>
+    <NamespaceCategoryCode>XSD</NamespaceCategoryCode>
   </Namespace>
   <DataProperty structures:id="cmf.AbstractIndicator">
     <Name>AbstractIndicator</Name>
@@ -168,16 +174,16 @@
     <DocumentationText>A code for a kind of class (object, association, or literal), such that every class in a model of that kind is augmented with a property.</DocumentationText>
     <Datatype structures:ref="cmf.GlobalClassCodeType" xsi:nil="true"/>
   </DataProperty>
-  <ObjectProperty structures:id="cmf.ImportDocumentationText">
-    <Name>ImportDocumentationText</Name>
+  <ObjectProperty structures:id="cmf.ImportDocumentation">
+    <Name>ImportDocumentation</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A human-readable documentation text for an import element importing this nameespace.</DocumentationText>
-    <Class structures:ref="nc.TextType" xsi:nil="true"/>
+    <DocumentationText>A documentation of an xs:import element in a schema document.</DocumentationText>
+    <Class structures:ref="cmf.ImportDocumentationType" xsi:nil="true"/>
   </ObjectProperty>
   <ObjectProperty structures:id="cmf.List">
     <Name>List</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data type for a NIEM model datatype that is a whitespace-separated list of atomic values.</DocumentationText>
+    <DocumentationText>A NIEM model datatype that is a whitespace-separated list of atomic values.</DocumentationText>
     <SubPropertyOf structures:ref="cmf.Datatype" xsi:nil="true"/>
     <Class structures:ref="cmf.ListType" xsi:nil="true"/>
   </ObjectProperty>
@@ -190,7 +196,7 @@
   <ObjectProperty structures:id="cmf.LocalTerm">
     <Name>LocalTerm</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data type for the meaning of a term that may appear within the name of a model component.</DocumentationText>
+    <DocumentationText>A meaning of a term that may appear within the name of a model component.</DocumentationText>
     <Class structures:ref="cmf.LocalTermType" xsi:nil="true"/>
   </ObjectProperty>
   <DataProperty structures:id="cmf.MaxOccursQuantity">
@@ -259,10 +265,10 @@
     <DocumentationText>A version attribute of an XML schema document.</DocumentationText>
     <Datatype structures:ref="xs.token" xsi:nil="true"/>
   </DataProperty>
-  <DataProperty structures:id="cmf.NIEMVersionText">
-    <Name>NIEMVersionText</Name>
+  <DataProperty structures:id="cmf.NIEMVersionName">
+    <Name>NIEMVersionName</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A NIEM version number of the builtin schema components used in a namespace; e.g. "5" or "6".</DocumentationText>
+    <DocumentationText>A name of a NIEM version for the utility schema components used in an XSD representation of a namespace; e.g. "NIEM5.0" or "NIEM6.0".</DocumentationText>
     <Datatype structures:ref="xs.token" xsi:nil="true"/>
   </DataProperty>
   <ObjectProperty structures:id="cmf.ObjectProperty">
@@ -381,6 +387,7 @@
   <DataProperty structures:id="xml.lang">
     <Name>lang</Name>
     <Namespace structures:ref="xml" xsi:nil="true"/>
+    <AttributeIndicator>true</AttributeIndicator>
   </DataProperty>
   <Class structures:id="cmf.AnyPropertyType">
     <Name>AnyPropertyType</Name>
@@ -602,6 +609,21 @@
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </ChildPropertyAssociation>
   </Class>
+  <Class structures:id="cmf.ImportDocumentationType">
+    <Name>ImportDocumentationType</Name>
+    <Namespace structures:ref="cmf" xsi:nil="true"/>
+    <DocumentationText>A data type for documentation of an xs:import element in a schema document.</DocumentationText>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="cmf.NamespaceURI" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="cmf.DocumentationText" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+  </Class>
   <Class structures:id="cmf.ListType">
     <Name>ListType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -698,7 +720,17 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </ChildPropertyAssociation>
     <ChildPropertyAssociation>
+      <DataProperty structures:ref="cmf.NamespaceCategoryCode" xsi:nil="true"/>
+      <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
       <DataProperty structures:ref="cmf.NamespaceVersionText" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="cmf.NIEMVersionName" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </ChildPropertyAssociation>
@@ -708,7 +740,7 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </ChildPropertyAssociation>
     <ChildPropertyAssociation>
-      <ObjectProperty structures:ref="cmf.ImportDocumentationText" xsi:nil="true"/>
+      <ObjectProperty structures:ref="cmf.ImportDocumentation" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </ChildPropertyAssociation>
@@ -811,18 +843,6 @@
     <Name>FacetCategoryCodeType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A code type for a kind of constraint on a restriction datatype.</DocumentationText>
-    <DocumentationText>A facet that constrains the value space to a specified set of values.</DocumentationText>
-    <DocumentationText>A facet that places an upper limit on the arithmetic precision of decimal values.</DocumentationText>
-    <DocumentationText>A facet that constrains the value space to values with a specific number of units of length (which vary according to the base type definition).</DocumentationText>
-    <DocumentationText>A facet that constrains the value space to values with a specific exclusive upper bound.</DocumentationText>
-    <DocumentationText>A facet that constrains the value space to values with a specific inclusive upper bound.</DocumentationText>
-    <DocumentationText>A facet that constrains the value space to values with at most a specific number of units of length (which vary according to the base type definition).</DocumentationText>
-    <DocumentationText>A facet that constrains the value space to values with a specific exclusive lower bound.</DocumentationText>
-    <DocumentationText>A facet that constrains the value space to values with a specific inclusive lower bound.</DocumentationText>
-    <DocumentationText>A facet that constrains the value space to values with at least a specific number of units of length (which vary according to the base type definition).</DocumentationText>
-    <DocumentationText>A facet that constrains the value space to values that are denoted by literals which match each of a set of regular expressions.</DocumentationText>
-    <DocumentationText>A facet that constrains the value space to those values that can be represented lexically using no more than a specified number of digits in decimal notation, or no more than a specified number of digits for the coefficient, in scientific notation..</DocumentationText>
-    <DocumentationText>A facet that constrains the value space of types·derived from string such that the various behaviors specified in Attribute Value Normalization in XML are realized.</DocumentationText>
     <RestrictionBase structures:ref="xs.token" xsi:nil="true"/>
     <Facet>
       <FacetCategoryCode>enumeration</FacetCategoryCode>
@@ -889,9 +909,6 @@
     <Name>GlobalClassCodeType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A data type for a code for a kind of class (object, association, or literal), such that every class in a model of that kind is augmented with a property.</DocumentationText>
-    <DocumentationText>A code for an augmentation property that applies to all association classes in the model.</DocumentationText>
-    <DocumentationText>A code for an augmentation property that applies to all datatypes and literal classes in the model.</DocumentationText>
-    <DocumentationText>A code for an augmentation property that applies to all object classes in the model.</DocumentationText>
     <RestrictionBase structures:ref="xs.token" xsi:nil="true"/>
     <Facet>
       <FacetCategoryCode>enumeration</FacetCategoryCode>
@@ -931,20 +948,16 @@
     <Name>NamespaceCategoryCodeType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A kind of a namespace.</DocumentationText>
-    <DocumentationText>A builtin namespace (appinfo, code-lists, conformance, proxy, structures).</DocumentationText>
-    <DocumentationText>The namespace for the NIEM core.</DocumentationText>
-    <DocumentationText>A namespace for a NIEM domain.</DocumentationText>
-    <DocumentationText>An extension namespace.</DocumentationText>
-    <DocumentationText>A non-conforming namespace.</DocumentationText>
-    <DocumentationText>A namespace in the publication or release domain, but not core, domain, or builtin.</DocumentationText>
-    <DocumentationText>A namespace of an unknown kind.</DocumentationText>
-    <DocumentationText>http://www.w3.org/XML/1998/namespace</DocumentationText>
-    <DocumentationText>http://www.w3.org/2001/XMLSchema</DocumentationText>
     <RestrictionBase structures:ref="xs.token" xsi:nil="true"/>
     <Facet>
       <FacetCategoryCode>enumeration</FacetCategoryCode>
       <FacetValue>BUILTIN</FacetValue>
       <DocumentationText>A builtin namespace (appinfo, code-lists, conformance, proxy, structures).</DocumentationText>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>enumeration</FacetCategoryCode>
+      <FacetValue>CLI</FacetValue>
+      <DocumentationText>The code list instance namespace.</DocumentationText>
     </Facet>
     <Facet>
       <FacetCategoryCode>enumeration</FacetCategoryCode>
@@ -991,9 +1004,6 @@
     <Name>ProcessingCodeType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A data type for a code describing the validation required for an unspecified property of a class.</DocumentationText>
-    <DocumentationText>A code for an unspecified property that must be validated if and only if constraints for teh property are available.</DocumentationText>
-    <DocumentationText>A code for an unspecified property that need not be validated.</DocumentationText>
-    <DocumentationText>A code for an unspecified property that must be validated.</DocumentationText>
     <RestrictionBase structures:ref="xs.token" xsi:nil="true"/>
     <Facet>
       <FacetCategoryCode>enumeration</FacetCategoryCode>
@@ -1015,10 +1025,6 @@
     <Name>ReferenceCodeType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A data type for a code describing how a property may be referenced (or must appear inline).</DocumentationText>
-    <DocumentationText>A code for a property that may be referenced by IDREF, NCName, or URI.</DocumentationText>
-    <DocumentationText>A code for a property that may not be referenced and must appear inline.</DocumentationText>
-    <DocumentationText>A code for a property that may be referenced only by IDREF in XML or NCName in JSON.</DocumentationText>
-    <DocumentationText>A code for a property that may be referenced only by URI.</DocumentationText>
     <RestrictionBase structures:ref="xs.token" xsi:nil="true"/>
     <Facet>
       <FacetCategoryCode>enumeration</FacetCategoryCode>

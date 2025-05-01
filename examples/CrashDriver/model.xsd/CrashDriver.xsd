@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  targetNamespace="http://example.com/CrashDriver/1.2/"
+  xmlns:ct="https://docs.oasis-open.org/niemopen/ns/specification/conformanceTargets/6.0/"
+  xmlns:exch="http://example.com/CrashDriver/1.2/"
+  xmlns:hs="https://docs.oasis-open.org/niemopen/ns/model/domains/humanServices/6.0/"
+  xmlns:j="https://docs.oasis-open.org/niemopen/ns/model/domains/justice/6.0/"
+  xmlns:nc="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/"
+  xmlns:niem-xs="https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/"
+  xmlns:priv="http://example.com/PrivacyMetadata/2.0/"
+  xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  ct:conformanceTargets="https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#SubsetSchemaDocument"
+  version="1"
+  xml:lang="en-US">
+  <xs:annotation>
+    <xs:documentation>This is the extension schema for an example IEPD used to illustrate guidance for representing an IEP in JSON-LD syntax.</xs:documentation>
+  </xs:annotation>
+  <xs:import namespace="http://example.com/PrivacyMetadata/2.0/" schemaLocation="PrivacyMetadata.xsd"/>
+  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/domains/humanServices/6.0/" schemaLocation="niem/domains/hs.xsd"/>
+  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/domains/justice/6.0/" schemaLocation="niem/domains/justice.xsd"/>
+  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/" schemaLocation="niem/niem-core.xsd"/>
+  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/" schemaLocation="niem/adapters/niem-xs.xsd"/>
+  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" schemaLocation="niem/utility/structures.xsd"/>
+  <xs:complexType name="CrashDriverInfoType">
+    <xs:annotation>
+      <xs:documentation>A data type for a collection of legal charges associated with the driver of a vehicle in a crash.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence>
+          <xs:element ref="j:Crash"/>
+          <xs:element ref="j:Charge" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="j:PersonChargeAssociation" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="nc:PersonUnionAssociation" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="hs:ParentChildAssociation" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="hs:PersonOtherKinAssociation" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="nc:Metadata" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="priv:PrivacyMetadata" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CrashDriverInfo" type="exch:CrashDriverInfoType">
+    <xs:annotation>
+      <xs:documentation>A collection of legal charges associated with the driver of a vehicle in a crash.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="PersonFictionalCharacterIndicator" type="niem-xs:boolean" substitutionGroup="nc:PersonAugmentationPoint" nillable="true">
+    <xs:annotation>
+      <xs:documentation>True if this person is a fictional character in a literary work; false otherwise.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>

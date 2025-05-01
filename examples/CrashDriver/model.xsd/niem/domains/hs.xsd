@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+  targetNamespace="https://docs.oasis-open.org/niemopen/ns/model/domains/humanServices/6.0/"
+  xmlns:ct="https://docs.oasis-open.org/niemopen/ns/specification/conformanceTargets/6.0/"
+  xmlns:hs="https://docs.oasis-open.org/niemopen/ns/model/domains/humanServices/6.0/"
+  xmlns:nc="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/"
+  xmlns:niem-xs="https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/"
+  xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  ct:conformanceTargets="https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#SubsetSchemaDocument"
+  version="ps02"
+  xml:lang="en-US">
+  <xs:annotation>
+    <xs:documentation>Human Services</xs:documentation>
+  </xs:annotation>
+  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/" schemaLocation="../adapters/niem-xs.xsd"/>
+  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/" schemaLocation="../niem-core.xsd"/>
+  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" schemaLocation="../utility/structures.xsd"/>
+  <xs:complexType name="ChildType">
+    <xs:annotation>
+      <xs:documentation>A data type for information about a person who has not yet reached the age of legal majority (i.e., adulthood).</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="structures:ObjectType">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="ParentChildAssociationType">
+    <xs:annotation>
+      <xs:documentation>A data type for an association between a child and a person who is in a parent role toward that child.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="nc:AssociationType">
+        <xs:sequence>
+          <xs:element ref="hs:Child" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="hs:Parent" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="PersonOtherKinAssociationCodeType">
+    <xs:annotation>
+      <xs:documentation>A data type for describing the nature of the kinship or other close personal relationship from a source person to a target person</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:restriction base="niem-xs:token">
+        <xs:enumeration value="Authority Figure">
+          <xs:annotation>
+            <xs:documentation>Authority Figure</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Babysitter">
+          <xs:annotation>
+            <xs:documentation>Babysitter</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Brother">
+          <xs:annotation>
+            <xs:documentation>Brother</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Brother-In-Law">
+          <xs:annotation>
+            <xs:documentation>Brother-In-Law</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Clergy">
+          <xs:annotation>
+            <xs:documentation>Clergy</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Coach">
+          <xs:annotation>
+            <xs:documentation>Coach</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Domestic Partner">
+          <xs:annotation>
+            <xs:documentation>Domestic Partner</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Father-in-Law">
+          <xs:annotation>
+            <xs:documentation>Father-in-Law</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Fiance">
+          <xs:annotation>
+            <xs:documentation>Fiance</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Fiancee">
+          <xs:annotation>
+            <xs:documentation>Fiancee</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Fictive Kin">
+          <xs:annotation>
+            <xs:documentation>Fictive Kin</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Godfather">
+          <xs:annotation>
+            <xs:documentation>Godfather</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Godmother">
+          <xs:annotation>
+            <xs:documentation>Godmother</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Granddaughter">
+          <xs:annotation>
+            <xs:documentation>Granddaughter</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Grandson">
+          <xs:annotation>
+            <xs:documentation>Grandson</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Great-Granddaughter">
+          <xs:annotation>
+            <xs:documentation>Great-Granddaughter</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Great-Grandson">
+          <xs:annotation>
+            <xs:documentation>Great-Grandson</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Maternal Aunt">
+          <xs:annotation>
+            <xs:documentation>Maternal Aunt</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Maternal Female Cousin">
+          <xs:annotation>
+            <xs:documentation>Maternal Female Cousin</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Maternal Grandfather">
+          <xs:annotation>
+            <xs:documentation>Maternal Grandfather</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Maternal Grandmother">
+          <xs:annotation>
+            <xs:documentation>Maternal Grandmother</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Maternal Great Grandfather">
+          <xs:annotation>
+            <xs:documentation>Maternal Great Grandfather</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Maternal Great Grandmother">
+          <xs:annotation>
+            <xs:documentation>Maternal Great Grandmother</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Maternal Male Cousin">
+          <xs:annotation>
+            <xs:documentation>Maternal Male Cousin</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Maternal Uncle">
+          <xs:annotation>
+            <xs:documentation>Maternal Uncle</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Mother-in-Law">
+          <xs:annotation>
+            <xs:documentation>Mother-in-Law</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Neighbor">
+          <xs:annotation>
+            <xs:documentation>Neighbor</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Nephew">
+          <xs:annotation>
+            <xs:documentation>Nephew</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Niece">
+          <xs:annotation>
+            <xs:documentation>Niece</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Paternal Aunt">
+          <xs:annotation>
+            <xs:documentation>Paternal Aunt</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Paternal Female Cousin">
+          <xs:annotation>
+            <xs:documentation>Paternal Female Cousin</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Paternal Grandfather">
+          <xs:annotation>
+            <xs:documentation>Paternal Grandfather</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Paternal Grandmother">
+          <xs:annotation>
+            <xs:documentation>Paternal Grandmother</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Paternal Great Grandfather">
+          <xs:annotation>
+            <xs:documentation>Paternal Great Grandfather</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Paternal Great Grandmother">
+          <xs:annotation>
+            <xs:documentation>Paternal Great Grandmother</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Paternal Male Cousin">
+          <xs:annotation>
+            <xs:documentation>Paternal Male Cousin</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Paternal Uncle">
+          <xs:annotation>
+            <xs:documentation>Paternal Uncle</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Roommate">
+          <xs:annotation>
+            <xs:documentation>Roommate</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Significant Other">
+          <xs:annotation>
+            <xs:documentation>Significant Other</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Sister">
+          <xs:annotation>
+            <xs:documentation>Sister</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Sister-In-Law">
+          <xs:annotation>
+            <xs:documentation>Sister-In-Law</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Teacher">
+          <xs:annotation>
+            <xs:documentation>Teacher</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Unrelated Friend">
+          <xs:annotation>
+            <xs:documentation>Unrelated Friend</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PersonOtherKinAssociationType">
+    <xs:annotation>
+      <xs:documentation>A data type for a relationship that is a kinship or other close personal association between the source object and the target object. The relationship between a parent and a child should be captured using the ParentChildAssociation</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="nc:AssociationType">
+        <xs:sequence>
+          <xs:element ref="hs:PersonOtherKinAssociationCategoryAbstract" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Child" type="hs:ChildType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A person who was an unmarried minor at the time of his or her involvement in a judicial proceeding or non-judicial program.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Parent" type="nc:PersonType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A father or mother of a person.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ParentChildAssociation" type="hs:ParentChildAssociationType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>An association between a child and a person who is in a parent role toward that child.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="PersonOtherKinAssociation" type="hs:PersonOtherKinAssociationType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A directed association that describes the kinship or other close personal relationship between the source object and the target object. The relationship between a parent and a child should be captured using the ParentChildAssociation</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="PersonOtherKinAssociationCategoryAbstract" abstract="true">
+    <xs:annotation>
+      <xs:documentation>A data concept for describing the kinship or other close personal relationship that exists from the source person to the target person.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="PersonOtherKinAssociationCategoryCode" type="hs:PersonOtherKinAssociationCodeType" substitutionGroup="hs:PersonOtherKinAssociationCategoryAbstract" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A code list that describes the nature of the kinship or other close personal relationship from a source person to a target person.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+</xs:schema>
