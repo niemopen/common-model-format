@@ -68,10 +68,36 @@
     </xs:annotation>
     <xs:simpleType>
       <xs:restriction base="xs:token">
-        <xs:enumeration value="NONE"/>
-        <xs:enumeration value="REF"/>
-        <xs:enumeration value="URI"/>
-        <xs:enumeration value="ANY"/>
+        <xs:enumeration value="ANY">
+          <xs:annotation>
+            <xs:documentation>A code for a reference that may be any IDREF or URI.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="ANYURI">
+          <xs:annotation>
+            <xs:documentation>A code for a reference that may be any URI.</xs:documentation>
+          </xs:annotation> 
+        </xs:enumeration>
+        <xs:enumeration value="INTERNAL">
+          <xs:annotation>
+            <xs:documentation>A code for a reference to an object in the same message; an IDREF, or a relative URI.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="RELURI">
+          <xs:annotation>
+            <xs:documentation>A code for a reference that is a relative URI.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="IDREF">
+          <xs:annotation>
+            <xs:documentation>A code for a reference that is an IDREF in XML, or a relative URI in an otherwise-empty JSON object; an object pointer.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="NONE">
+          <xs:annotation>
+            <xs:documentation>A code for a property that may not be referenced and must appear inline.</xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
       </xs:restriction>
     </xs:simpleType>
   </xs:attribute>
