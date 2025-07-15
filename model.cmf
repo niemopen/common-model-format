@@ -12,8 +12,8 @@
     <ConformanceTargetURI>https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#ExtensionSchemaDocument</ConformanceTargetURI>
     <DocumentFilePathText>cmf.xsd</DocumentFilePathText>
     <NamespaceCategoryCode>EXTENSION</NamespaceCategoryCode>
-    <NamespaceVersionText>1.0-alpha.9</NamespaceVersionText>
-    <NIEMVersionName>NIEM6.0</NIEMVersionName>
+    <NamespaceVersionText>1.0-beta.1</NamespaceVersionText>
+    <ArchitectureVersionName>NIEM6.0</ArchitectureVersionName>
     <NamespaceLanguageName>en-US</NamespaceLanguageName>
   </Namespace>
   <Namespace structures:id="nc">
@@ -24,7 +24,7 @@
     <DocumentFilePathText>niem-core.xsd</DocumentFilePathText>
     <NamespaceCategoryCode>CORE</NamespaceCategoryCode>
     <NamespaceVersionText>psd01</NamespaceVersionText>
-    <NIEMVersionName>NIEM6.0</NIEMVersionName>
+    <ArchitectureVersionName>NIEM6.0</ArchitectureVersionName>
     <NamespaceLanguageName>en-US</NamespaceLanguageName>
   </Namespace>
   <Namespace structures:id="xml">
@@ -44,12 +44,18 @@
     <DocumentationText>True if a component is a base for extension, and must be specialized to be used directly; false if a component may be used directly.</DocumentationText>
     <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
   </DataProperty>
-  <ObjectProperty structures:id="cmf.AnyProperty">
-    <Name>AnyProperty</Name>
+  <ObjectProperty structures:id="cmf.AnyPropertyAssociation">
+    <Name>AnyPropertyAssociation</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>An unconstrained property of a class.</DocumentationText>
-    <Class structures:ref="cmf.AnyPropertyType" xsi:nil="true"/>
+    <DocumentationText>An occurence of a set of partially specified properties as content of a class.</DocumentationText>
+    <Class structures:ref="cmf.AnyPropertyAssociationType" xsi:nil="true"/>
   </ObjectProperty>
+  <DataProperty structures:id="cmf.ArchitectureVersionName">
+    <Name>ArchitectureVersionName</Name>
+    <Namespace structures:ref="cmf" xsi:nil="true"/>
+    <DocumentationText>A name of a version for the utility schema components used in an XSD representation of a namespace; e.g. "NIEM5.0" or "NIEM6.0".</DocumentationText>
+    <Datatype structures:ref="xs.token" xsi:nil="true"/>
+  </DataProperty>
   <DataProperty structures:id="cmf.AttributeIndicator">
     <Name>AttributeIndicator</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
@@ -262,13 +268,7 @@
   <DataProperty structures:id="cmf.NamespaceVersionText">
     <Name>NamespaceVersionText</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A version attribute of an XML schema document.</DocumentationText>
-    <Datatype structures:ref="xs.token" xsi:nil="true"/>
-  </DataProperty>
-  <DataProperty structures:id="cmf.NIEMVersionName">
-    <Name>NIEMVersionName</Name>
-    <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A name of a NIEM version for the utility schema components used in an XSD representation of a namespace; e.g. "NIEM5.0" or "NIEM6.0".</DocumentationText>
+    <DocumentationText>A version attribute of an XML schema document; for example, used to distinguish a namespace subset, bug fix, documentation change, etc..</DocumentationText>
     <Datatype structures:ref="xs.token" xsi:nil="true"/>
   </DataProperty>
   <ObjectProperty structures:id="cmf.ObjectProperty">
@@ -389,10 +389,10 @@
     <Namespace structures:ref="xml" xsi:nil="true"/>
     <AttributeIndicator>true</AttributeIndicator>
   </DataProperty>
-  <Class structures:id="cmf.AnyPropertyType">
-    <Name>AnyPropertyType</Name>
+  <Class structures:id="cmf.AnyPropertyAssociationType">
+    <Name>AnyPropertyAssociationType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data type for an unspecified property of a class.</DocumentationText>
+    <DocumentationText>A data type for an occurrence of a set of partially specified properties as content of a class.</DocumentationText>
     <ChildPropertyAssociation>
       <DataProperty structures:ref="cmf.MinOccursQuantity" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -401,6 +401,11 @@
     <ChildPropertyAssociation>
       <DataProperty structures:ref="cmf.MaxOccursQuantity" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <ObjectProperty structures:ref="cmf.DocumentationText" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </ChildPropertyAssociation>
     <ChildPropertyAssociation>
@@ -478,11 +483,6 @@
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </ChildPropertyAssociation>
-    <ChildPropertyAssociation>
-      <DataProperty structures:ref="cmf.OrderedPropertyIndicator" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </ChildPropertyAssociation>
   </Class>
   <Class structures:id="cmf.ClassType">
     <Name>ClassType</Name>
@@ -508,10 +508,9 @@
       <ObjectProperty structures:ref="cmf.ChildPropertyAssociation" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
-      <OrderedPropertyIndicator>true</OrderedPropertyIndicator>
     </ChildPropertyAssociation>
     <ChildPropertyAssociation>
-      <ObjectProperty structures:ref="cmf.AnyProperty" xsi:nil="true"/>
+      <ObjectProperty structures:ref="cmf.AnyPropertyAssociation" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </ChildPropertyAssociation>
@@ -730,7 +729,7 @@
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </ChildPropertyAssociation>
     <ChildPropertyAssociation>
-      <DataProperty structures:ref="cmf.NIEMVersionName" xsi:nil="true"/>
+      <DataProperty structures:ref="cmf.ArchitectureVersionName" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </ChildPropertyAssociation>
@@ -788,6 +787,11 @@
     </ChildPropertyAssociation>
     <ChildPropertyAssociation>
       <DataProperty structures:ref="cmf.RelationshipIndicator" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="cmf.OrderedPropertyIndicator" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </ChildPropertyAssociation>
@@ -1029,7 +1033,22 @@
     <Facet>
       <FacetCategoryCode>enumeration</FacetCategoryCode>
       <FacetValue>ANY</FacetValue>
-      <DocumentationText>A code for a property that may be referenced by IDREF, NCName, or URI.</DocumentationText>
+      <DocumentationText>A code for a reference that may be any IDREF or URI.</DocumentationText>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>enumeration</FacetCategoryCode>
+      <FacetValue>ANYURI</FacetValue>
+      <DocumentationText>A code for a reference that may be any URI.</DocumentationText>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>enumeration</FacetCategoryCode>
+      <FacetValue>IDREF</FacetValue>
+      <DocumentationText>A code for a reference that is an IDREF in XML, or a relative URI in an otherwise-empty JSON object; an object pointer.</DocumentationText>
+    </Facet>
+    <Facet>
+      <FacetCategoryCode>enumeration</FacetCategoryCode>
+      <FacetValue>INTERNAL</FacetValue>
+      <DocumentationText>A code for a reference to an object in the same message; an IDREF, or a relative URI.</DocumentationText>
     </Facet>
     <Facet>
       <FacetCategoryCode>enumeration</FacetCategoryCode>
@@ -1038,13 +1057,8 @@
     </Facet>
     <Facet>
       <FacetCategoryCode>enumeration</FacetCategoryCode>
-      <FacetValue>REF</FacetValue>
-      <DocumentationText>A code for a property that may be referenced only by IDREF in XML or NCName in JSON.</DocumentationText>
-    </Facet>
-    <Facet>
-      <FacetCategoryCode>enumeration</FacetCategoryCode>
-      <FacetValue>URI</FacetValue>
-      <DocumentationText>A code for a property that may be referenced only by URI.</DocumentationText>
+      <FacetValue>RELURI</FacetValue>
+      <DocumentationText>A code for a reference that is a relative URI.</DocumentationText>
     </Facet>
   </Restriction>
   <List structures:id="cmf.URIListType">

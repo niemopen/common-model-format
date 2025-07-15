@@ -257,7 +257,7 @@
       <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="nc:PersonGivenName" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element ref="nc:PersonMiddleName" minOccurs="0" maxOccurs="unbounded" appinfo:orderedPropertyIndicator="true"/>
+          <xs:element ref="nc:PersonMiddleName" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="nc:PersonSurName" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute ref="nc:personNameCommentText"/>
@@ -439,7 +439,7 @@
       <xs:documentation>A first name of a person.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="PersonMiddleName" type="nc:PersonNameTextType" nillable="true">
+  <xs:element name="PersonMiddleName" type="nc:PersonNameTextType" nillable="true" appinfo:orderedPropertyIndicator="true">
     <xs:annotation>
       <xs:documentation>A middle name of a person.</xs:documentation>
     </xs:annotation>

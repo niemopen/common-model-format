@@ -12,6 +12,12 @@ For more information on NIEMOpen, see the project's website at [www.niemopen.org
 
 General questions about OASIS Open Projects may be directed to OASIS staff at project-admin@lists.oasis-open-projects.org
 
+## What's new in version 1.0-beta.1
+
+* OrderedPropertyIndicator moves from ChildPropertyAssociationType to PropertyType
+* AnyProperty becomes AnyPropertyAssociation
+* NIEMVersion becomes ArchitectureVersion
+
 ## What's new in version 1.0-alpha.9
 
 * Namespace objects store the documentation for each import (if any)

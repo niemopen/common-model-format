@@ -14,7 +14,7 @@
   version="1"
   xml:lang="en-US">
   <xs:annotation>
-    <xs:documentation>This is the extension schema for an example IEPD used to illustrate guidance for representing an IEP in JSON-LD syntax.</xs:documentation>
+    <xs:documentation>This is the extension schema for an example message specification in XSD and CMF.</xs:documentation>
   </xs:annotation>
   <xs:import namespace="http://example.com/PrivacyMetadata/2.0/" schemaLocation="PrivacyMetadata.xsd"/>
   <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/domains/humanServices/6.0/" schemaLocation="niem/domains/hs.xsd"/>

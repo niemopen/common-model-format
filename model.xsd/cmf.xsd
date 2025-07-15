@@ -10,7 +10,7 @@
   xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   ct:conformanceTargets="https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#ExtensionSchemaDocument"
-  version="1.0-alpha.9"
+  version="1.0-beta.1"
   xml:lang="en-US">
   <xs:annotation>
     <xs:documentation>The NIEM Common Model Format (CMF).</xs:documentation>
@@ -19,15 +19,16 @@
   <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/" schemaLocation="adapters/niem-xs.xsd"/>
   <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" schemaLocation="utility/structures.xsd"/>
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="external/xml.xsd"/>
-  <xs:complexType name="AnyPropertyType">
+  <xs:complexType name="AnyPropertyAssociationType">
     <xs:annotation>
-      <xs:documentation>A data type for an unspecified property of a class.</xs:documentation>
+      <xs:documentation>A data type for an occurrence of a set of partially specified properties as content of a class.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="structures:ObjectType">
         <xs:sequence>
           <xs:element ref="cmf:MinOccursQuantity"/>
           <xs:element ref="cmf:MaxOccursQuantity"/>
+          <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
           <xs:element ref="cmf:AttributeIndicator" minOccurs="0"/>
           <xs:element ref="cmf:NamespaceConstraintText" minOccurs="0"/>
           <xs:element ref="cmf:ProcessingCode" minOccurs="0"/>
@@ -64,7 +65,6 @@
           <xs:element ref="cmf:MinOccursQuantity"/>
           <xs:element ref="cmf:MaxOccursQuantity"/>
           <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
-          <xs:element ref="cmf:OrderedPropertyIndicator" minOccurs="0"/>
           <xs:element ref="cmf:PropertyAssociationAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -81,7 +81,7 @@
           <xs:element ref="cmf:SubClassOf" minOccurs="0"/>
           <xs:element ref="cmf:ReferenceCode" minOccurs="0"/>
           <xs:element ref="cmf:ChildPropertyAssociation" minOccurs="0" maxOccurs="unbounded" appinfo:orderedPropertyIndicator="true"/>
-          <xs:element ref="cmf:AnyProperty" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="cmf:AnyPropertyAssociation" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:ClassAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -435,7 +435,7 @@
           <xs:element ref="cmf:DocumentFilePathText" minOccurs="0"/>
           <xs:element ref="cmf:NamespaceCategoryCode"/>
           <xs:element ref="cmf:NamespaceVersionText" minOccurs="0"/>
-          <xs:element ref="cmf:NIEMVersionName" minOccurs="0"/>
+          <xs:element ref="cmf:ArchitectureVersionName" minOccurs="0"/>
           <xs:element ref="cmf:NamespaceLanguageName" minOccurs="0"/>
           <xs:element ref="cmf:ImportDocumentation" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:AugmentationRecord" minOccurs="0" maxOccurs="unbounded"/>
@@ -493,6 +493,7 @@
           <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
           <xs:element ref="cmf:SubPropertyOf" minOccurs="0"/>
           <xs:element ref="cmf:RelationshipIndicator" minOccurs="0"/>
+          <xs:element ref="cmf:OrderedPropertyIndicator" minOccurs="0"/>
           <xs:element ref="cmf:PropertyAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
@@ -586,9 +587,14 @@
       <xs:documentation>True if a component is a base for extension, and must be specialized to be used directly; false if a component may be used directly.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AnyProperty" type="cmf:AnyPropertyType">
+  <xs:element name="AnyPropertyAssociation" type="cmf:AnyPropertyAssociationType">
     <xs:annotation>
-      <xs:documentation>An unconstrained property of a class.</xs:documentation>
+      <xs:documentation>An occurence of a set of partially specified properties as content of a class.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ArchitectureVersionName" type="niem-xs:token" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A name of a version for the utility schema components used in an XSD representation of a namespace; e.g. "NIEM5.0" or "NIEM6.0".</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="AttributeIndicator" type="niem-xs:boolean" nillable="true">
@@ -814,11 +820,6 @@
   <xs:element name="NamespaceVersionText" type="niem-xs:token" nillable="true">
     <xs:annotation>
       <xs:documentation>A version attribute of an XML schema document; for example, used to distinguish a namespace subset, bug fix, documentation change, etc..</xs:documentation>
-    </xs:annotation>
-  </xs:element>
-  <xs:element name="NIEMVersionName" type="niem-xs:token" nillable="true">
-    <xs:annotation>
-      <xs:documentation>A name of a NIEM version for the utility schema components used in an XSD representation of a namespace; e.g. "NIEM5.0" or "NIEM6.0".</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="ObjectProperty" type="cmf:ObjectPropertyType" substitutionGroup="cmf:Property" nillable="true">

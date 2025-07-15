@@ -26,7 +26,7 @@
     <DocumentFilePathText>niem/codes/aamva_d20.xsd</DocumentFilePathText>
     <NamespaceCategoryCode>OTHERNIEM</NamespaceCategoryCode>
     <NamespaceVersionText>ps02</NamespaceVersionText>
-    <NIEMVersionName>NIEM6.0</NIEMVersionName>
+    <ArchitectureVersionName>NIEM6.0</ArchitectureVersionName>
     <NamespaceLanguageName>en-US</NamespaceLanguageName>
     <LocalTerm>
       <TermName>AAMVA</TermName>
@@ -68,12 +68,12 @@
   <Namespace structures:id="exch">
     <NamespaceURI>http://example.com/CrashDriver/1.2/</NamespaceURI>
     <NamespacePrefixText>exch</NamespacePrefixText>
-    <DocumentationText>This is the extension schema for an example IEPD used to illustrate guidance for representing an IEP in JSON-LD syntax.</DocumentationText>
+    <DocumentationText>This is the extension schema for an example message specification in XSD and CMF.</DocumentationText>
     <ConformanceTargetURI>https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#SubsetSchemaDocument</ConformanceTargetURI>
     <DocumentFilePathText>CrashDriver.xsd</DocumentFilePathText>
     <NamespaceCategoryCode>EXTENSION</NamespaceCategoryCode>
     <NamespaceVersionText>1</NamespaceVersionText>
-    <NIEMVersionName>NIEM6.0</NIEMVersionName>
+    <ArchitectureVersionName>NIEM6.0</ArchitectureVersionName>
     <NamespaceLanguageName>en-US</NamespaceLanguageName>
     <AugmentationRecord>
       <Class structures:ref="nc.PersonType" xsi:nil="true"/>
@@ -90,7 +90,7 @@
     <DocumentFilePathText>niem/domains/hs.xsd</DocumentFilePathText>
     <NamespaceCategoryCode>DOMAIN</NamespaceCategoryCode>
     <NamespaceVersionText>ps02</NamespaceVersionText>
-    <NIEMVersionName>NIEM6.0</NIEMVersionName>
+    <ArchitectureVersionName>NIEM6.0</ArchitectureVersionName>
     <NamespaceLanguageName>en-US</NamespaceLanguageName>
   </Namespace>
   <Namespace structures:id="j">
@@ -101,7 +101,7 @@
     <DocumentFilePathText>niem/domains/justice.xsd</DocumentFilePathText>
     <NamespaceCategoryCode>DOMAIN</NamespaceCategoryCode>
     <NamespaceVersionText>ps02</NamespaceVersionText>
-    <NIEMVersionName>NIEM6.0</NIEMVersionName>
+    <ArchitectureVersionName>NIEM6.0</ArchitectureVersionName>
     <NamespaceLanguageName>en-US</NamespaceLanguageName>
     <AugmentationRecord>
       <Class structures:ref="nc.MetadataType" xsi:nil="true"/>
@@ -133,7 +133,7 @@
     <DocumentFilePathText>niem/niem-core.xsd</DocumentFilePathText>
     <NamespaceCategoryCode>CORE</NamespaceCategoryCode>
     <NamespaceVersionText>psd01</NamespaceVersionText>
-    <NIEMVersionName>NIEM6.0</NIEMVersionName>
+    <ArchitectureVersionName>NIEM6.0</ArchitectureVersionName>
     <NamespaceLanguageName>en-US</NamespaceLanguageName>
   </Namespace>
   <Namespace structures:id="priv">
@@ -144,7 +144,7 @@
     <DocumentFilePathText>PrivacyMetadata.xsd</DocumentFilePathText>
     <NamespaceCategoryCode>EXTENSION</NamespaceCategoryCode>
     <NamespaceVersionText>1</NamespaceVersionText>
-    <NIEMVersionName>NIEM6.0</NIEMVersionName>
+    <ArchitectureVersionName>NIEM6.0</ArchitectureVersionName>
     <NamespaceLanguageName>en-US</NamespaceLanguageName>
   </Namespace>
   <Namespace structures:id="xs">
@@ -452,6 +452,7 @@
     <Name>PersonMiddleName</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
     <DocumentationText>A middle name of a person.</DocumentationText>
+    <OrderedPropertyIndicator>true</OrderedPropertyIndicator>
     <Datatype structures:ref="nc.PersonNameTextType" xsi:nil="true"/>
   </DataProperty>
   <ObjectProperty structures:id="nc.PersonName">
@@ -856,7 +857,6 @@
       <DataProperty structures:ref="nc.PersonMiddleName" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>unbounded</MaxOccursQuantity>
-      <OrderedPropertyIndicator>true</OrderedPropertyIndicator>
     </ChildPropertyAssociation>
     <ChildPropertyAssociation>
       <DataProperty structures:ref="nc.PersonSurName" xsi:nil="true"/>
