@@ -280,7 +280,6 @@
       <xs:extension base="cmf:DatatypeType">
         <xs:sequence>
           <xs:element ref="cmf:ListItemDatatype"/>
-          <xs:element ref="cmf:OrderedPropertyIndicator" minOccurs="0"/>
           <xs:element ref="cmf:ListAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>

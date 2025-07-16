@@ -633,11 +633,6 @@
       <MinOccursQuantity>1</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </ChildPropertyAssociation>
-    <ChildPropertyAssociation>
-      <DataProperty structures:ref="cmf.OrderedPropertyIndicator" xsi:nil="true"/>
-      <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
-    </ChildPropertyAssociation>
   </Class>
   <Class structures:id="cmf.LocalTermType">
     <Name>LocalTermType</Name>
