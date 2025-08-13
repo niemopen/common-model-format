@@ -10,7 +10,7 @@
   xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   ct:conformanceTargets="https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#ExtensionSchemaDocument"
-  version="1.0-beta.1"
+  version="1.0-beta.2"
   xml:lang="en-US">
   <xs:annotation>
     <xs:documentation>The NIEM Common Model Format (CMF).</xs:documentation>
@@ -102,7 +102,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="ComponentType" abstract="true">
+  <xs:complexType name="ComponentType" abstract="true" appinfo:referenceCode="ANY">
     <xs:annotation>
       <xs:documentation>A data type for common properties of a data model component in NIEM.</xs:documentation>
       <xs:appinfo>
@@ -414,15 +414,9 @@
       </xs:restriction>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:complexType name="NamespaceType">
+  <xs:complexType name="NamespaceType" appinfo:referenceCode="ANY">
     <xs:annotation>
       <xs:documentation>A data type for a namespace</xs:documentation>
-      <xs:appinfo>
-        <sch:rule context="cmf:Namespace">
-          <sch:assert test="boolean(cmf:NamespaceURI) = boolean(parent::/*)"
-            > An element of this type (or derived type) has a NamespaceURI child if and only if the element is a child of the document element.</sch:assert>
-        </sch:rule>
-      </xs:appinfo>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="structures:ObjectType">

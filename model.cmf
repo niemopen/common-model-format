@@ -12,7 +12,7 @@
     <ConformanceTargetURI>https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#ExtensionSchemaDocument</ConformanceTargetURI>
     <DocumentFilePathText>cmf.xsd</DocumentFilePathText>
     <NamespaceCategoryCode>EXTENSION</NamespaceCategoryCode>
-    <NamespaceVersionText>1.0-beta.1</NamespaceVersionText>
+    <NamespaceVersionText>1.0-beta.2</NamespaceVersionText>
     <ArchitectureVersionName>NIEM6.0</ArchitectureVersionName>
     <NamespaceLanguageName>en-US</NamespaceLanguageName>
   </Namespace>
@@ -540,6 +540,7 @@
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A data type for common properties of a data model component in NIEM.</DocumentationText>
     <AbstractIndicator>true</AbstractIndicator>
+    <ReferenceCode>ANY</ReferenceCode>
     <ChildPropertyAssociation>
       <DataProperty structures:ref="cmf.Name" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -688,6 +689,7 @@
     <Name>NamespaceType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A data type for a namespace</DocumentationText>
+    <ReferenceCode>ANY</ReferenceCode>
     <ChildPropertyAssociation>
       <DataProperty structures:ref="cmf.NamespaceURI" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
