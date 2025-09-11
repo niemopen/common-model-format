@@ -14,7 +14,9 @@ General questions about OASIS Open Projects may be directed to OASIS staff at pr
 
 ## Examples
 
-The [*Crash Driver Report*](https://github.com/iamdrscott/CrashDriver) message specification is designed to test and describe the features of the NIEM technical architecture.  It contains a NIEM model in equivalent CMF and XSD representations.
+This specification is itself a CMF example!  *model.cmf* is a CMF message representing a NIEM model; *model.xsd* is the equivalent model representation in XML Schema.
+
+The [*Crash Driver Report*](https://github.com/iamdrscott/CrashDriver) message specification is designed to test and describe the features of the NIEM technical architecture.  It contains a NIEM model in equivalent CMF and XSD representations.U
 
 ## Where are the original versions of CMF?
 
