@@ -21,7 +21,7 @@
     <NamespacePrefixText>nc</NamespacePrefixText>
     <DocumentationText>NIEM Core.</DocumentationText>
     <ConformanceTargetURI>https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#SubsetSchemaDocument</ConformanceTargetURI>
-    <DocumentFilePathText>niem-core.xsd</DocumentFilePathText>
+    <DocumentFilePathText>niem/niem-core.xsd</DocumentFilePathText>
     <NamespaceCategoryCode>CORE</NamespaceCategoryCode>
     <NamespaceVersionText>psd01</NamespaceVersionText>
     <ArchitectureVersionName>NIEM6.0</ArchitectureVersionName>
@@ -30,7 +30,7 @@
   <Namespace structures:id="xml">
     <NamespaceURI>http://www.w3.org/XML/1998/namespace</NamespaceURI>
     <NamespacePrefixText>xml</NamespacePrefixText>
-    <DocumentFilePathText>external/xml.xsd</DocumentFilePathText>
+    <DocumentFilePathText>niem/external/xml.xsd</DocumentFilePathText>
     <NamespaceCategoryCode>XML</NamespaceCategoryCode>
   </Namespace>
   <Namespace structures:id="xs">

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <catalog 
   xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-  <uri name="https://docs.oasis-open.org/niemopen/ns/specification/conformanceTargets/6.0/" uri="utility/conformanceTargets.xsd"/>
-  <uri name="https://docs.oasis-open.org/niemopen/ns/model/appinfo/6.0/" uri="utility/appinfo.xsd"/>
-  <uri name="https://docs.oasis-open.org/niemopen/ns/specification/code-lists/6.0/appinfo/" uri="utility/code-lists-schema-appinfo.xsd"/>
-  <uri name="https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/" uri="adapters/niem-xs.xsd"/>
-  <uri name="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" uri="utility/structures.xsd"/>
-  <uri name="http://www.w3.org/XML/1998/namespace" uri="external/xml.xsd"/>
+  <uri name="https://docs.oasis-open.org/niemopen/ns/model/appinfo/6.0/" uri="niem/utility/appinfo.xsd"/>
+  <uri name="https://docs.oasis-open.org/niemopen/ns/specification/code-lists/6.0/appinfo/" uri="niem/utility/code-lists-schema-appinfo.xsd"/>
+  <uri name="https://docs.oasis-open.org/niemopen/ns/model/adapters/niem-xs/6.0/" uri="niem/adapters/niem-xs.xsd"/>
+  <uri name="http://www.w3.org/XML/1998/namespace" uri="niem/external/xml.xsd"/>
+  <uri name="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" uri="niem/utility/structures.xsd"/>
   <uri name="https://docs.oasis-open.org/niemopen/ns/specification/cmf/1.0/" uri="cmf.xsd"/>
-  <uri name="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/" uri="niem-core.xsd"/>
+  <uri name="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/" uri="niem/niem-core.xsd"/>
+  <uri name="https://docs.oasis-open.org/niemopen/ns/specification/code-lists/6.0/instance/" uri="niem/utility/code-lists-instance.xsd"/>
 </catalog>

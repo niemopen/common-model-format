@@ -10,9 +10,9 @@
   <xs:annotation>
     <xs:documentation>The NIEM Common Model Format (CMF).</xs:documentation>
   </xs:annotation>
-  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/" schemaLocation="niem-core.xsd"/>
+  <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/" schemaLocation="niem/niem-core.xsd"/>
   <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" schemaLocation="niem/utility/structures.xsd"/>
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="external/xml.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="niem/external/xml.xsd"/>
   <xs:complexType name="AnyPropertyAssociationType">
     <xs:annotation>
       <xs:documentation>A data type for an occurrence of a set of partially specified properties as content of a class.</xs:documentation>
@@ -25,7 +25,6 @@
       <xs:element ref="cmf:NamespaceConstraintText" minOccurs="0"/>
       <xs:element ref="cmf:ProcessingCode" minOccurs="0"/>
     </xs:sequence>
-    <xs:attribute ref="structures:appliesToParent"/>
   </xs:complexType>
   <xs:complexType name="AugmentationRecordType">
     <xs:annotation>
@@ -42,7 +41,6 @@
       <xs:element ref="cmf:AugmentationIndex" minOccurs="0"/>
       <xs:element ref="cmf:GlobalClassCode" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute ref="structures:appliesToParent"/>
   </xs:complexType>
   <xs:complexType name="ChildPropertyAssociationType">
     <xs:annotation>
@@ -57,7 +55,6 @@
       <xs:element ref="cmf:MaxOccursQuantity"/>
       <xs:element ref="cmf:DocumentationText" minOccurs="0"/>
     </xs:sequence>
-    <xs:attribute ref="structures:appliesToParent"/>
   </xs:complexType>
   <xs:complexType name="ClassType">
     <xs:annotation>
@@ -84,7 +81,6 @@
       <xs:element ref="cmf:CodeListColumnName" minOccurs="0"/>
       <xs:element ref="cmf:CodeListConstrainingIndicator" minOccurs="0"/>
     </xs:sequence>
-    <xs:attribute ref="structures:appliesToParent"/>
   </xs:complexType>
   <xs:complexType name="ComponentType">
     <xs:annotation>
@@ -99,7 +95,6 @@
     <xs:attribute ref="structures:id"/>
     <xs:attribute ref="structures:uri"/>
     <xs:attribute ref="structures:ref"/>
-    <xs:attribute ref="structures:appliesToParent"/>
   </xs:complexType>
   <xs:complexType name="DataPropertyType">
     <xs:annotation>
@@ -206,7 +201,6 @@
       <xs:element ref="cmf:FacetValue"/>
       <xs:element ref="cmf:DocumentationText" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute ref="structures:appliesToParent"/>
   </xs:complexType>
   <xs:simpleType name="GlobalClassCodeType">
     <xs:annotation>
@@ -238,7 +232,6 @@
       <xs:element ref="cmf:NamespaceURI"/>
       <xs:element ref="cmf:DocumentationText" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute ref="structures:appliesToParent"/>
   </xs:complexType>
   <xs:complexType name="ListType">
     <xs:annotation>
@@ -263,7 +256,6 @@
       <xs:element ref="cmf:SourceURI" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="cmf:SourceCitationText" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute ref="structures:appliesToParent"/>
   </xs:complexType>
   <xs:simpleType name="MaxOccursType">
     <xs:annotation>
@@ -300,7 +292,6 @@
       </xs:choice>
     </xs:sequence>
     <xs:attribute ref="xml:lang"/>
-    <xs:attribute ref="structures:appliesToParent"/>
   </xs:complexType>
   <xs:simpleType name="NamespaceCategoryCodeType">
     <xs:annotation>
@@ -380,7 +371,6 @@
     <xs:attribute ref="structures:id"/>
     <xs:attribute ref="structures:uri"/>
     <xs:attribute ref="structures:ref"/>
-    <xs:attribute ref="structures:appliesToParent"/>
   </xs:complexType>
   <xs:complexType name="ObjectPropertyType">
     <xs:annotation>
@@ -501,37 +491,37 @@
     </xs:annotation>
     <xs:list itemType="xs:anyURI"/>
   </xs:simpleType>
-  <xs:element name="AbstractIndicator" type="xs:boolean" nillable="true">
+  <xs:element name="AbstractIndicator" type="xs:boolean">
     <xs:annotation>
       <xs:documentation>True if a component is a base for extension, and must be specialized to be used directly; false if a component may be used directly.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AnyPropertyAssociation" type="cmf:AnyPropertyAssociationType" nillable="true">
+  <xs:element name="AnyPropertyAssociation" type="cmf:AnyPropertyAssociationType">
     <xs:annotation>
       <xs:documentation>An occurence of a set of partially specified properties as content of a class.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="ArchitectureVersionName" type="xs:token" nillable="true">
+  <xs:element name="ArchitectureVersionName" type="xs:token">
     <xs:annotation>
       <xs:documentation>A name of a version for the utility schema components used in an XSD representation of a namespace; e.g. "NIEM5.0" or "NIEM6.0".</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AttributeIndicator" type="xs:boolean" nillable="true">
+  <xs:element name="AttributeIndicator" type="xs:boolean">
     <xs:annotation>
       <xs:documentation>True for a property that is represented as an attribute in XML.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AugmentationIndex" type="xs:integer" nillable="true">
+  <xs:element name="AugmentationIndex" type="xs:integer">
     <xs:annotation>
       <xs:documentation>An ordinal position of an augmentation property that is part of an augmentation type.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="AugmentationRecord" type="cmf:AugmentationRecordType" nillable="true">
+  <xs:element name="AugmentationRecord" type="cmf:AugmentationRecordType">
     <xs:annotation>
       <xs:documentation>An augmentation of a class with a property by a namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="ChildPropertyAssociation" type="cmf:ChildPropertyAssociationType" nillable="true">
+  <xs:element name="ChildPropertyAssociation" type="cmf:ChildPropertyAssociationType">
     <xs:annotation>
       <xs:documentation>An occurrence of a property as content of a class.</xs:documentation>
     </xs:annotation>
@@ -541,27 +531,27 @@
       <xs:documentation>A class.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="CodeListBinding" type="cmf:CodeListBindingType" nillable="true">
+  <xs:element name="CodeListBinding" type="cmf:CodeListBindingType">
     <xs:annotation>
       <xs:documentation>A property for connecting literal values defined by a data type a column of a code list.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="CodeListColumnName" type="xs:string" nillable="true">
+  <xs:element name="CodeListColumnName" type="xs:string">
     <xs:annotation>
       <xs:documentation>A local name for a code list column within a code list.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="CodeListConstrainingIndicator" type="xs:boolean" nillable="true">
+  <xs:element name="CodeListConstrainingIndicator" type="xs:boolean">
     <xs:annotation>
       <xs:documentation>True when a code list binding constrains the validity of a code list value, false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="CodeListURI" type="xs:anyURI" nillable="true">
+  <xs:element name="CodeListURI" type="xs:anyURI">
     <xs:annotation>
       <xs:documentation>A universal identifier for a code list.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="ConformanceTargetURI" type="xs:anyURI" nillable="true">
+  <xs:element name="ConformanceTargetURI" type="xs:anyURI">
     <xs:annotation>
       <xs:documentation>A conformance target identifier.</xs:documentation>
     </xs:annotation>
@@ -576,42 +566,42 @@
       <xs:documentation>A data type.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="DeprecatedIndicator" type="xs:boolean" nillable="true">
+  <xs:element name="DeprecatedIndicator" type="xs:boolean">
     <xs:annotation>
       <xs:documentation>True for a deprecated schema component; that is, a component that is provided, but the use of which is not recommended.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="DocumentationText" type="nc:TextType" nillable="true">
+  <xs:element name="DocumentationText" type="nc:TextType">
     <xs:annotation>
       <xs:documentation>A human-readable text definition of a data model component or term, or the documentation of a namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="DocumentFilePathText" type="xs:string" nillable="true">
+  <xs:element name="DocumentFilePathText" type="xs:string">
     <xs:annotation>
       <xs:documentation>A relative file path from a schema top directory to a schema document for this namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="Facet" type="cmf:FacetType" nillable="true">
+  <xs:element name="Facet" type="cmf:FacetType">
     <xs:annotation>
       <xs:documentation>A constraint on an aspect of a data type.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="FacetCategoryCode" type="cmf:FacetCategoryCodeType" nillable="true">
+  <xs:element name="FacetCategoryCode" type="cmf:FacetCategoryCodeType">
     <xs:annotation>
       <xs:documentation>A kind of constraint on a restriction datatype.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="FacetValue" type="xs:string" nillable="true">
+  <xs:element name="FacetValue" type="xs:string">
     <xs:annotation>
       <xs:documentation>A value of a constraint on a restriction datatype.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="GlobalClassCode" type="cmf:GlobalClassCodeType" nillable="true">
+  <xs:element name="GlobalClassCode" type="cmf:GlobalClassCodeType">
     <xs:annotation>
       <xs:documentation>A code for a kind of class (object, association, or literal), such that every class in a model of that kind is augmented with a property.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="ImportDocumentation" type="cmf:ImportDocumentationType" nillable="true">
+  <xs:element name="ImportDocumentation" type="cmf:ImportDocumentationType">
     <xs:annotation>
       <xs:documentation>A documentation of an xs:import element in a schema document.</xs:documentation>
     </xs:annotation>
@@ -626,27 +616,27 @@
       <xs:documentation>A datatype of the literal values in a list.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="LocalTerm" type="cmf:LocalTermType" nillable="true">
+  <xs:element name="LocalTerm" type="cmf:LocalTermType">
     <xs:annotation>
       <xs:documentation>A meaning of a term that may appear within the name of a model component.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="MaxOccursQuantity" type="cmf:MaxOccursType" nillable="true">
+  <xs:element name="MaxOccursQuantity" type="cmf:MaxOccursType">
     <xs:annotation>
       <xs:documentation>A maximum number of times a property may occur within an object of a class.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="MinOccursQuantity" type="xs:nonNegativeInteger" nillable="true">
+  <xs:element name="MinOccursQuantity" type="xs:nonNegativeInteger">
     <xs:annotation>
       <xs:documentation>A minimum number of times a property may occur within an object of a class.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="Model" type="cmf:ModelType" nillable="true">
+  <xs:element name="Model" type="cmf:ModelType">
     <xs:annotation>
       <xs:documentation>A data model.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="Name" type="xs:NCName" nillable="true">
+  <xs:element name="Name" type="xs:NCName">
     <xs:annotation>
       <xs:documentation>A name of a data model component.</xs:documentation>
     </xs:annotation>
@@ -656,32 +646,32 @@
       <xs:documentation>A namespace of a data model component.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NamespaceCategoryCode" type="cmf:NamespaceCategoryCodeType" nillable="true">
+  <xs:element name="NamespaceCategoryCode" type="cmf:NamespaceCategoryCodeType">
     <xs:annotation>
       <xs:documentation>A kind of namespace in a CMF model (external, core, domain, etc.).</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NamespaceConstraintText" type="xs:string" nillable="true">
+  <xs:element name="NamespaceConstraintText" type="xs:string">
     <xs:annotation>
       <xs:documentation>A description of the namespace constraints on an unspecified property of a class.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NamespaceLanguageName" type="xs:language" nillable="true">
+  <xs:element name="NamespaceLanguageName" type="xs:language">
     <xs:annotation>
       <xs:documentation>A name of a default language of the terms and documentation text in a namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NamespacePrefixText" type="xs:NCName" nillable="true">
+  <xs:element name="NamespacePrefixText" type="xs:NCName">
     <xs:annotation>
       <xs:documentation>A namespace prefix name for a namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NamespaceURI" type="xs:anyURI" nillable="true">
+  <xs:element name="NamespaceURI" type="xs:anyURI">
     <xs:annotation>
       <xs:documentation>A URI for a namespace.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="NamespaceVersionText" type="xs:token" nillable="true">
+  <xs:element name="NamespaceVersionText" type="xs:token">
     <xs:annotation>
       <xs:documentation>A version attribute of an XML schema document; for example, used to distinguish a namespace subset, bug fix, documentation change, etc..</xs:documentation>
     </xs:annotation>
@@ -691,27 +681,27 @@
       <xs:documentation>An object property.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="OrderedPropertyIndicator" type="xs:boolean" nillable="true">
+  <xs:element name="OrderedPropertyIndicator" type="xs:boolean">
     <xs:annotation>
       <xs:documentation>True if the order of a repeated property within an object is significant.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="ProcessingCode" type="cmf:ProcessingCodeType" nillable="true">
+  <xs:element name="ProcessingCode" type="cmf:ProcessingCodeType">
     <xs:annotation>
       <xs:documentation>A code describing the validation required for an unspecified property of a class.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="RefAttributeIndicator" type="xs:boolean" nillable="true">
+  <xs:element name="RefAttributeIndicator" type="xs:boolean">
     <xs:annotation>
       <xs:documentation>True for a property that is a reference attribute property.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="ReferenceCode" type="cmf:ReferenceCodeType" nillable="true">
+  <xs:element name="ReferenceCode" type="cmf:ReferenceCodeType">
     <xs:annotation>
       <xs:documentation>A code describing how a property may be referenced (or must appear inline).</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="RelationshipIndicator" type="xs:boolean" nillable="true">
+  <xs:element name="RelationshipIndicator" type="xs:boolean">
     <xs:annotation>
       <xs:documentation>True for a property that applies to the relationship between its parent and grandparent objects.</xs:documentation>
     </xs:annotation>
@@ -726,12 +716,12 @@
       <xs:documentation>A datatype that is the restriction base of a data type.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="SourceCitationText" type="xs:string" nillable="true">
+  <xs:element name="SourceCitationText" type="xs:string">
     <xs:annotation>
       <xs:documentation>A plain text citation of, reference to, or bibliographic entry for an originating or authoritative document defining a local term.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="SourceURI" type="xs:anyURI" nillable="true">
+  <xs:element name="SourceURI" type="xs:anyURI">
     <xs:annotation>
       <xs:documentation>A URI that is an identifier or locator for an originating or authoritative document defining a local term.</xs:documentation>
     </xs:annotation>
@@ -746,12 +736,12 @@
       <xs:documentation>An object property of which an object property is a subproperty.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="TermLiteralText" type="xs:string" nillable="true">
+  <xs:element name="TermLiteralText" type="xs:string">
     <xs:annotation>
       <xs:documentation>A meaning of a local term provided as a full, plain-text form.</xs:documentation>
     </xs:annotation>
   </xs:element>
-  <xs:element name="TermName" type="xs:token" nillable="true">
+  <xs:element name="TermName" type="xs:token">
     <xs:annotation>
       <xs:documentation>A name for a local term.</xs:documentation>
     </xs:annotation>
