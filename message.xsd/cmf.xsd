@@ -5,7 +5,7 @@
   xmlns:nc="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/"
   xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  version="1.0-beta.2"
+  version="1.0-beta.3"
   xml:lang="en-US">
   <xs:annotation>
     <xs:documentation>The NIEM Common Model Format (CMF).</xs:documentation>
@@ -15,7 +15,7 @@
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="niem/external/xml.xsd"/>
   <xs:complexType name="AnyPropertyAssociationType">
     <xs:annotation>
-      <xs:documentation>A data type for an occurrence of a set of partially specified properties as content of a class.</xs:documentation>
+      <xs:documentation>A data type for a relationship between a class and an occurence of a set of partially specified properties as content of that class.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element ref="cmf:MinOccursQuantity"/>
@@ -34,6 +34,7 @@
       <xs:element ref="cmf:Class" minOccurs="0"/>
       <xs:choice>
         <xs:element ref="cmf:ObjectProperty"/>
+        <xs:element ref="cmf:Property"/>
         <xs:element ref="cmf:DataProperty"/>
       </xs:choice>
       <xs:element ref="cmf:MinOccursQuantity"/>
@@ -44,11 +45,12 @@
   </xs:complexType>
   <xs:complexType name="ChildPropertyAssociationType">
     <xs:annotation>
-      <xs:documentation>A data type for an occurrence of a property as content of a class.</xs:documentation>
+      <xs:documentation>A data type for sn association between a class and an occurrence of a property as content of that class.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:choice>
         <xs:element ref="cmf:ObjectProperty"/>
+        <xs:element ref="cmf:Property"/>
         <xs:element ref="cmf:DataProperty"/>
       </xs:choice>
       <xs:element ref="cmf:MinOccursQuantity"/>
@@ -288,6 +290,7 @@
         <xs:element ref="cmf:Restriction"/>
         <xs:element ref="cmf:Union"/>
         <xs:element ref="cmf:Class"/>
+        <xs:element ref="cmf:Property"/>
         <xs:element ref="cmf:DataProperty"/>
       </xs:choice>
     </xs:sequence>
@@ -415,9 +418,10 @@
       <xs:extension base="cmf:ComponentType">
         <xs:sequence>
           <xs:element ref="cmf:AbstractIndicator" minOccurs="0"/>
-          <xs:element ref="cmf:SubPropertyOf" minOccurs="0"/>
+          <xs:element ref="cmf:SubPropertyOf" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element ref="cmf:RelationshipIndicator" minOccurs="0"/>
           <xs:element ref="cmf:OrderedPropertyIndicator" minOccurs="0"/>
+          <xs:element ref="cmf:XSDChoiceIndicator" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -498,7 +502,7 @@
   </xs:element>
   <xs:element name="AnyPropertyAssociation" type="cmf:AnyPropertyAssociationType">
     <xs:annotation>
-      <xs:documentation>An occurence of a set of partially specified properties as content of a class.</xs:documentation>
+      <xs:documentation>A relationship between a class and an occurence of a set of partially specified properties as content of that class.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="ArchitectureVersionName" type="xs:token">
@@ -523,7 +527,7 @@
   </xs:element>
   <xs:element name="ChildPropertyAssociation" type="cmf:ChildPropertyAssociationType">
     <xs:annotation>
-      <xs:documentation>An occurrence of a property as content of a class.</xs:documentation>
+      <xs:documentation>An association between a class and an occurrence of a property as content of that class.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Class" type="cmf:ClassType" nillable="true">
@@ -691,6 +695,11 @@
       <xs:documentation>A code describing the validation required for an unspecified property of a class.</xs:documentation>
     </xs:annotation>
   </xs:element>
+  <xs:element name="Property" type="cmf:PropertyType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data property or an object property.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:element name="RefAttributeIndicator" type="xs:boolean">
     <xs:annotation>
       <xs:documentation>True for a property that is a reference attribute property.</xs:documentation>
@@ -754,6 +763,11 @@
   <xs:element name="UnionMemberDatatype" type="cmf:DatatypeType" nillable="true">
     <xs:annotation>
       <xs:documentation>A datatype that is a member of a union datatype.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="XSDChoiceIndicator" type="xs:boolean">
+    <xs:annotation>
+      <xs:documentation>True for a property that represents a choice in an XSD model representation.</xs:documentation>
     </xs:annotation>
   </xs:element>
 </xs:schema>

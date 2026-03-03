@@ -12,7 +12,7 @@
     <ConformanceTargetURI>https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#ExtensionSchemaDocument</ConformanceTargetURI>
     <DocumentFilePathText>cmf.xsd</DocumentFilePathText>
     <NamespaceCategoryCode>EXTENSION</NamespaceCategoryCode>
-    <NamespaceVersionText>1.0-beta.2</NamespaceVersionText>
+    <NamespaceVersionText>1.0-beta.3</NamespaceVersionText>
     <ArchitectureVersionName>NIEM6.0</ArchitectureVersionName>
     <NamespaceLanguageName>en-US</NamespaceLanguageName>
   </Namespace>
@@ -47,7 +47,7 @@
   <ObjectProperty structures:id="cmf.AnyPropertyAssociation">
     <Name>AnyPropertyAssociation</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>An occurence of a set of partially specified properties as content of a class.</DocumentationText>
+    <DocumentationText>A relationship between a class and an occurence of a set of partially specified properties as content of that class.</DocumentationText>
     <Class structures:ref="cmf.AnyPropertyAssociationType" xsi:nil="true"/>
   </ObjectProperty>
   <DataProperty structures:id="cmf.ArchitectureVersionName">
@@ -77,7 +77,8 @@
   <ObjectProperty structures:id="cmf.ChildPropertyAssociation">
     <Name>ChildPropertyAssociation</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>An occurrence of a property as content of a class.</DocumentationText>
+    <DocumentationText>An association between a class and an occurrence of a property as content of that class.</DocumentationText>
+    <OrderedPropertyIndicator>true</OrderedPropertyIndicator>
     <Class structures:ref="cmf.ChildPropertyAssociationType" xsi:nil="true"/>
   </ObjectProperty>
   <ObjectProperty structures:id="cmf.Class">
@@ -294,7 +295,6 @@
     <Name>Property</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
     <DocumentationText>A data property or an object property.</DocumentationText>
-    <AbstractIndicator>true</AbstractIndicator>
     <SubPropertyOf structures:ref="cmf.Component" xsi:nil="true"/>
     <Class structures:ref="cmf.PropertyType" xsi:nil="true"/>
   </ObjectProperty>
@@ -378,6 +378,12 @@
     <DocumentationText>A datatype that is a member of a union datatype.</DocumentationText>
     <Class structures:ref="cmf.DatatypeType" xsi:nil="true"/>
   </ObjectProperty>
+  <DataProperty structures:id="cmf.XSDChoiceIndicator">
+    <Name>XSDChoiceIndicator</Name>
+    <Namespace structures:ref="cmf" xsi:nil="true"/>
+    <DocumentationText>True for a property that represents a choice in an XSD model representation.</DocumentationText>
+    <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
+  </DataProperty>
   <DataProperty structures:id="nc.TextLiteral">
     <Name>TextLiteral</Name>
     <Namespace structures:ref="nc" xsi:nil="true"/>
@@ -392,7 +398,7 @@
   <Class structures:id="cmf.AnyPropertyAssociationType">
     <Name>AnyPropertyAssociationType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data type for an occurrence of a set of partially specified properties as content of a class.</DocumentationText>
+    <DocumentationText>A data type for a relationship between a class and an occurence of a set of partially specified properties as content of that class.</DocumentationText>
     <ChildPropertyAssociation>
       <DataProperty structures:ref="cmf.MinOccursQuantity" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -462,7 +468,7 @@
   <Class structures:id="cmf.ChildPropertyAssociationType">
     <Name>ChildPropertyAssociationType</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>A data type for an occurrence of a property as content of a class.</DocumentationText>
+    <DocumentationText>A data type for sn association between a class and an occurrence of a property as content of that class.</DocumentationText>
     <ChildPropertyAssociation>
       <ObjectProperty structures:ref="cmf.Property" xsi:nil="true"/>
       <MinOccursQuantity>1</MinOccursQuantity>
@@ -780,7 +786,7 @@
     <ChildPropertyAssociation>
       <ObjectProperty structures:ref="cmf.SubPropertyOf" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
-      <MaxOccursQuantity>1</MaxOccursQuantity>
+      <MaxOccursQuantity>unbounded</MaxOccursQuantity>
     </ChildPropertyAssociation>
     <ChildPropertyAssociation>
       <DataProperty structures:ref="cmf.RelationshipIndicator" xsi:nil="true"/>
@@ -789,6 +795,11 @@
     </ChildPropertyAssociation>
     <ChildPropertyAssociation>
       <DataProperty structures:ref="cmf.OrderedPropertyIndicator" xsi:nil="true"/>
+      <MinOccursQuantity>0</MinOccursQuantity>
+      <MaxOccursQuantity>1</MaxOccursQuantity>
+    </ChildPropertyAssociation>
+    <ChildPropertyAssociation>
+      <DataProperty structures:ref="cmf.XSDChoiceIndicator" xsi:nil="true"/>
       <MinOccursQuantity>0</MinOccursQuantity>
       <MaxOccursQuantity>1</MaxOccursQuantity>
     </ChildPropertyAssociation>
