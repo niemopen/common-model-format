@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema
   targetNamespace="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/"
-  xmlns:nc="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  version="psd01"
-  xml:lang="en-US">
-  <xs:annotation>
-    <xs:documentation>NIEM Core.</xs:documentation>
-  </xs:annotation>
+  xmlns:xml="http://www.w3.org/XML/1998/namespace"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="external/xml.xsd"/>
   <xs:complexType name="TextType">
     <xs:annotation>

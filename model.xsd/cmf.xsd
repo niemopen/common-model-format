@@ -10,7 +10,7 @@
   xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   ct:conformanceTargets="https://docs.oasis-open.org/niemopen/ns/specification/NDR/6.0/#ExtensionSchemaDocument"
-  version="1.0-beta.3"
+  version="1.0.0"
   xml:lang="en-US">
   <xs:annotation>
     <xs:documentation>The NIEM Common Model Format (CMF).</xs:documentation>
@@ -57,7 +57,7 @@
   </xs:complexType>
   <xs:complexType name="ChildPropertyAssociationType">
     <xs:annotation>
-      <xs:documentation>A data type for sn association between a class and an occurrence of a property as content of that class.</xs:documentation>
+      <xs:documentation>A data type for an association between a class and an occurrence of a property as content of that class.</xs:documentation>
     </xs:annotation>
     <xs:complexContent>
       <xs:extension base="structures:AssociationType">
@@ -600,7 +600,7 @@
   </xs:element>
   <xs:element name="AttributeIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
-      <xs:documentation>True for a property that is represented as an attribute in XML.</xs:documentation>
+      <xs:documentation>True if a property is represented as an attribute in XML; false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="AugmentationIndex" type="niem-xs:integer" nillable="true">
@@ -655,7 +655,7 @@
   </xs:element>
   <xs:element name="CodeListConstrainingIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
-      <xs:documentation>True when a code list binding constrains the validity of a code list value, false otherwise.</xs:documentation>
+      <xs:documentation>True if a code list binding constrains the validity of a code list value; false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="CodeListURI" type="niem-xs:anyURI" nillable="true">
@@ -700,7 +700,7 @@
   </xs:element>
   <xs:element name="DeprecatedIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
-      <xs:documentation>True for a deprecated schema component; that is, a component that is provided, but the use of which is not recommended.</xs:documentation>
+      <xs:documentation>True if a schema component is deprecated; that is, a component that is provided, but the use of which is not recommended; false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="DocumentationText" type="nc:TextType" nillable="true">
@@ -850,7 +850,7 @@
   </xs:element>
   <xs:element name="OrderedPropertyIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
-      <xs:documentation>True if the order of a repeated property within an object is significant.</xs:documentation>
+      <xs:documentation>True if the order of a repeated property within an object is significant; false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="ProcessingCode" type="cmf:ProcessingCodeType" nillable="true">
@@ -870,7 +870,7 @@
   </xs:element>
   <xs:element name="RefAttributeIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
-      <xs:documentation>True for a property that is a reference attribute property.</xs:documentation>
+      <xs:documentation>True if a property is a reference attribute property; false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="ReferenceCode" type="cmf:ReferenceCodeType" nillable="true">
@@ -880,7 +880,7 @@
   </xs:element>
   <xs:element name="RelationshipIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
-      <xs:documentation>True for a property that applies to the relationship between its parent and grandparent objects.</xs:documentation>
+      <xs:documentation>True if a property applies to the relationship between its parent and grandparent objects; false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Restriction" type="cmf:RestrictionType" substitutionGroup="cmf:Datatype" nillable="true">
@@ -945,7 +945,7 @@
   </xs:element>
   <xs:element name="XSDChoiceIndicator" type="niem-xs:boolean" nillable="true">
     <xs:annotation>
-      <xs:documentation>True for a property that represents a choice in an XSD model representation.</xs:documentation>
+      <xs:documentation>True if a property represents a choice in an XSD model representation; false otherwise.</xs:documentation>
     </xs:annotation>    
   </xs:element>
 </xs:schema>

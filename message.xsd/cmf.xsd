@@ -4,15 +4,11 @@
   xmlns:cmf="https://docs.oasis-open.org/niemopen/ns/specification/cmf/1.0/"
   xmlns:nc="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/"
   xmlns:structures="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  version="1.0-beta.3"
-  xml:lang="en-US">
-  <xs:annotation>
-    <xs:documentation>The NIEM Common Model Format (CMF).</xs:documentation>
-  </xs:annotation>
+  xmlns:xml="http://www.w3.org/XML/1998/namespace"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="niem/external/xml.xsd"/>
   <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/niem-core/6.0/" schemaLocation="niem/niem-core.xsd"/>
   <xs:import namespace="https://docs.oasis-open.org/niemopen/ns/model/structures/6.0/" schemaLocation="niem/utility/structures.xsd"/>
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="niem/external/xml.xsd"/>
   <xs:complexType name="AnyPropertyAssociationType">
     <xs:annotation>
       <xs:documentation>A data type for a relationship between a class and an occurence of a set of partially specified properties as content of that class.</xs:documentation>
@@ -33,9 +29,9 @@
     <xs:sequence>
       <xs:element ref="cmf:Class" minOccurs="0"/>
       <xs:choice>
+        <xs:element ref="cmf:DataProperty"/>
         <xs:element ref="cmf:ObjectProperty"/>
         <xs:element ref="cmf:Property"/>
-        <xs:element ref="cmf:DataProperty"/>
       </xs:choice>
       <xs:element ref="cmf:MinOccursQuantity"/>
       <xs:element ref="cmf:MaxOccursQuantity"/>
@@ -45,13 +41,13 @@
   </xs:complexType>
   <xs:complexType name="ChildPropertyAssociationType">
     <xs:annotation>
-      <xs:documentation>A data type for sn association between a class and an occurrence of a property as content of that class.</xs:documentation>
+      <xs:documentation>A data type for an association between a class and an occurrence of a property as content of that class.</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:choice>
+        <xs:element ref="cmf:DataProperty"/>
         <xs:element ref="cmf:ObjectProperty"/>
         <xs:element ref="cmf:Property"/>
-        <xs:element ref="cmf:DataProperty"/>
       </xs:choice>
       <xs:element ref="cmf:MinOccursQuantity"/>
       <xs:element ref="cmf:MaxOccursQuantity"/>
@@ -94,9 +90,10 @@
       <xs:element ref="cmf:DocumentationText" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="cmf:DeprecatedIndicator" minOccurs="0"/>
     </xs:sequence>
+    <xs:attribute ref="structures:appliesToParent"/>
     <xs:attribute ref="structures:id"/>
-    <xs:attribute ref="structures:uri"/>
     <xs:attribute ref="structures:ref"/>
+    <xs:attribute ref="structures:uri"/>
   </xs:complexType>
   <xs:complexType name="DataPropertyType">
     <xs:annotation>
@@ -284,14 +281,14 @@
     <xs:sequence>
       <xs:element ref="cmf:Namespace" maxOccurs="unbounded"/>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="cmf:Class"/>
+        <xs:element ref="cmf:DataProperty"/>
         <xs:element ref="cmf:Datatype"/>
-        <xs:element ref="cmf:ObjectProperty"/>
         <xs:element ref="cmf:List"/>
+        <xs:element ref="cmf:ObjectProperty"/>
+        <xs:element ref="cmf:Property"/>
         <xs:element ref="cmf:Restriction"/>
         <xs:element ref="cmf:Union"/>
-        <xs:element ref="cmf:Class"/>
-        <xs:element ref="cmf:Property"/>
-        <xs:element ref="cmf:DataProperty"/>
       </xs:choice>
     </xs:sequence>
     <xs:attribute ref="xml:lang"/>
@@ -371,9 +368,10 @@
       <xs:element ref="cmf:AugmentationRecord" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="cmf:LocalTerm" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
+    <xs:attribute ref="structures:appliesToParent"/>
     <xs:attribute ref="structures:id"/>
-    <xs:attribute ref="structures:uri"/>
     <xs:attribute ref="structures:ref"/>
+    <xs:attribute ref="structures:uri"/>
   </xs:complexType>
   <xs:complexType name="ObjectPropertyType">
     <xs:annotation>
@@ -512,7 +510,7 @@
   </xs:element>
   <xs:element name="AttributeIndicator" type="xs:boolean">
     <xs:annotation>
-      <xs:documentation>True for a property that is represented as an attribute in XML.</xs:documentation>
+      <xs:documentation>True if a property is represented as an attribute in XML; false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="AugmentationIndex" type="xs:integer">
@@ -547,7 +545,7 @@
   </xs:element>
   <xs:element name="CodeListConstrainingIndicator" type="xs:boolean">
     <xs:annotation>
-      <xs:documentation>True when a code list binding constrains the validity of a code list value, false otherwise.</xs:documentation>
+      <xs:documentation>True if a code list binding constrains the validity of a code list value; false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="CodeListURI" type="xs:anyURI">
@@ -572,7 +570,7 @@
   </xs:element>
   <xs:element name="DeprecatedIndicator" type="xs:boolean">
     <xs:annotation>
-      <xs:documentation>True for a deprecated schema component; that is, a component that is provided, but the use of which is not recommended.</xs:documentation>
+      <xs:documentation>True if a schema component is deprecated; that is, a component that is provided, but the use of which is not recommended; false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="DocumentationText" type="nc:TextType">
@@ -687,7 +685,7 @@
   </xs:element>
   <xs:element name="OrderedPropertyIndicator" type="xs:boolean">
     <xs:annotation>
-      <xs:documentation>True if the order of a repeated property within an object is significant.</xs:documentation>
+      <xs:documentation>True if the order of a repeated property within an object is significant; false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="ProcessingCode" type="cmf:ProcessingCodeType">
@@ -702,7 +700,7 @@
   </xs:element>
   <xs:element name="RefAttributeIndicator" type="xs:boolean">
     <xs:annotation>
-      <xs:documentation>True for a property that is a reference attribute property.</xs:documentation>
+      <xs:documentation>True if a property is a reference attribute property; false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="ReferenceCode" type="cmf:ReferenceCodeType">
@@ -712,7 +710,7 @@
   </xs:element>
   <xs:element name="RelationshipIndicator" type="xs:boolean">
     <xs:annotation>
-      <xs:documentation>True for a property that applies to the relationship between its parent and grandparent objects.</xs:documentation>
+      <xs:documentation>True if a property applies to the relationship between its parent and grandparent objects; false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="Restriction" type="cmf:RestrictionType" nillable="true">
@@ -767,7 +765,7 @@
   </xs:element>
   <xs:element name="XSDChoiceIndicator" type="xs:boolean">
     <xs:annotation>
-      <xs:documentation>True for a property that represents a choice in an XSD model representation.</xs:documentation>
+      <xs:documentation>True if a property represents a choice in an XSD model representation; false otherwise.</xs:documentation>
     </xs:annotation>
   </xs:element>
 </xs:schema>
