@@ -381,7 +381,6 @@
   <DataProperty structures:id="cmf.XSDChoiceIndicator">
     <Name>XSDChoiceIndicator</Name>
     <Namespace structures:ref="cmf" xsi:nil="true"/>
-    <DocumentationText>True if a property represents a choice in an XSD model representation; false otherwise.</DocumentationText>
     <Datatype structures:ref="xs.boolean" xsi:nil="true"/>
   </DataProperty>
   <DataProperty structures:id="nc.TextLiteral">
